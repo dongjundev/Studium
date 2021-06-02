@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>join</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" 
+		href="../../css/style.css"></link>
+</head>
+<body>
+	<div class="container">
+		<h2>회원가입</h2>
+		<form id="joinfrm" name="joinfrm" method="post" action="/user/insertMember.do">
+			<table>
+				<tr>
+					<td>아이디</td>
+					<td><input type="text" id="memberId" name="memberId"></td>
+				</tr>
+				<tr>
+					<td>비밀번호</td>
+					<td><input type="password" id="memberPw" name="memberPw"></td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input type="text" id="memberName" name="memberName"></td>
+				</tr>
+			</table>
+			<input type="submit" id="submit" value="저장" class="btn">
+		</form>
+	</div>
+</body>
+</html>

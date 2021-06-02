@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board.mapper.StudyMapper">	<!-- xml파일을 사용할 mapper가 있는 경로 -->
+	
+	<select id="selectStudyList" resultType="board.dto.StudyDto">	<!-- <select> 태그를 이용하여 select 쿼리임을 나타냄. id값과 boardmapper의 함수명 같아야함. -->
+		<![CDATA[
+			SELECT
+				study_id, study_name, study_contents
+			FROM
+				t_study
+		]]>
+	</select>
+	
+</mapper>
