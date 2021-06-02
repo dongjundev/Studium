@@ -1,0 +1,43 @@
+.container .main-image{
+    height: 500px;
+    background-image: url(https://www.lifespace.com/blog/wp-content/uploads/2019/09/CollegeStudyGroups-850x446.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+.main-letter{
+    position: absolute; 
+    text-align: center;
+    top: 40%;
+    left: 40%;
+    color: #fff;
+}
+.main-letter button{
+    padding: 10px; 
+    border-radius: 10px;
+    opacity: 0.7;
+    background-color: #fff700;
+    transition: all, 0.3s;
+}
+.main-letter button:hover{
+    text-decoration: none;
+    opacity: 1;
+    background-color: #fff700;
+    cursor: pointer;
+}
+.content-area{
+    max-width: 1200px; 
+    margin: 50px auto; 
+}
+.content-area .section-title{
+    margin-top: 30px;
+    margin-left: 30px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: -10px;
+}
+.content-area .section-detail{
+    margin-left: 30px;
+    font-size: 15px;
+}

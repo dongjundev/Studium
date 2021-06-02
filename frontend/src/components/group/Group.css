@@ -1,0 +1,40 @@
+.group-thum{
+    display: inline-block;
+    width: 27%;
+    height: 300px;
+    margin: 15px 30px;
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #e1e1e1;
+    transition: all, 0.3s;
+}
+.group-thum:hover{
+    box-shadow: 10px 10px 5px #e1e1e1;
+}
+.group-thum .group-image{
+    height: 150px;
+}
+.group-thum .group-image img{
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    height: 100%;
+}
+.group-thum .group-detail{
+    padding: 10px 20px;
+}
+.group-thum .group-detail > p {
+    width: 100%;
+    text-overflow: ellipsis;  
+    white-space  : nowrap;
+    overflow     : hidden;
+}
+.group-tags{
+    color: #8a8a8a;
+    font-size: 15px;
+    margin: 5px 0;
+}
+.group-name{
+    font-size: 25px;
+    font-weight: 600;
+    margin: 15px 0;
+}
