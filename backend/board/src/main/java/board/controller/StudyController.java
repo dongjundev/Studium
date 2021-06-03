@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import board.dto.StudyDto;
@@ -30,4 +31,31 @@ public class StudyController {
 		return mv;
 	}
 	
+	// ---------------------------------스터디 검색
+	
+	//스터디 검색 화면 출력
+    @RequestMapping("/studyList.do")		
+    public String studyList() throws Exception{
+    	return "/studyList";
+    }
+	
+    //스터디 검색 결과
+    @RequestMapping("/studySearchResult.do")		
+    public ModelAndView searchStudy(@RequestParam(defaultValue="searchCondition") String searchCondition,@RequestParam(defaultValue="searchKeyword") String searchKeyword) throws Exception{
+    	
+    	List<StudyDto> list = studyService.searchStudy(searchCondition,searchKeyword);
+    	ModelAndView mv  = new ModelAndView("studySearchResult");
+    	
+    	/*
+    	Map<String,Object> map = new HashMap<String,Object>();
+    	map.put("list", list);
+    	mv.addObject("map",map);
+		System.out.println(map);
+    	*/
+		mv.addObject("list", list);
+		//System.out.println(list);
+		
+		return mv;
+    }
+
 }

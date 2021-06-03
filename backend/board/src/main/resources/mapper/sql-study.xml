@@ -13,4 +13,31 @@
 		]]>
 	</select>
 	
+	<!-- 스터디 검색 !-->
+	<select id="searchStudy" resultType="board.dto.StudyDto" >
+		<![CDATA[
+			SELECT
+				study_id, study_name, study_contents 
+			FROM t_study
+		]]>
+		<choose>
+			<when test="searchCondition=='studyName'">
+				<![CDATA[
+				WHERE study_name LIKE CONCAT('%', #{searchKeyword} , '%')
+				]]>
+			</when>
+			<when test="searchCondition=='studyContents'">
+				<![CDATA[
+				WHERE study_contents LIKE CONCAT('%', #{searchKeyword} , '%')
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+				WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_contents LIKE CONCAT('%', #{searchKeyword} , '%'))
+				]]>
+			</otherwise>
+		</choose>
+		
+	</select>
+	
 </mapper>
