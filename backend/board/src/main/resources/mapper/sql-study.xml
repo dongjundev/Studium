@@ -40,4 +40,16 @@
 		
 	</select>
 	
+	<!-- 스터디 상세정보 !-->
+	<select id="selectStudyDetail" parameterType="int" resultType="board.dto.StudyDto">
+		<![CDATA[
+			SELECT
+				study_id, study_name, study_contents
+			FROM
+				t_study
+			WHERE
+				study_id=#{studyId}
+		]]>
+	</select>
+	
 </mapper>

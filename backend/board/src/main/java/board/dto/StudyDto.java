@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class StudyDto {
-	private String studyId;
+	private int studyId;
 	private String studyName;
 	private String studyContents;
 }
