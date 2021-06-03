@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import board.dto.BoardDto;
+import board.dto.MemberDto;
 import board.dto.StudyDto;
+import board.mapper.MemberMapper;
 import board.mapper.StudyMapper;
 
 @Service
@@ -16,6 +18,9 @@ public class StudyServiceImpl implements StudyService {
 
 	@Autowired
 	private StudyMapper studyMapper;
+	
+	@Autowired
+	private MemberMapper memberMapper;
 	
 	@Override
 	public List<StudyDto> selectStudyList() throws Exception {
@@ -42,5 +47,10 @@ public class StudyServiceImpl implements StudyService {
 		StudyDto study=studyMapper.selectStudyDetail(studyId);
 		return study;
 	}
-
+	
+	// ---------------------------------스터디 가입
+	@Override
+	public void studyJoin(MemberDto member) throws Exception{
+		memberMapper.studyJoin(member);
+	} 
 }

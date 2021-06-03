@@ -17,6 +17,8 @@ public interface BoardMapper {
 	
 	void updateBoard(BoardDto board) throws Exception;		//업데이트
 	void deleteBoard(int boardIdx) throws Exception;		//삭제
+	
+	
 }
 
 
