@@ -105,13 +105,26 @@ class Main extends React.Component{
                         <p className="section-detail">근처에서 곧 진행될 이벤트를 확인해보세요</p>
                         <div className="event">
                             {isEventsLoading ? "Loading..." : events.map(event => (
-                                <Event
-                                    key = {event.id}
-                                    title = {event.title}
-                                    description = {event.description}
-                                    date = {event.date}
-                                    location = {event.location}
-                                />        
+                                <Link to={{
+                                    pathname: '/event-detail/${id}',
+                                    state: {
+                                        isLoggedIn: this.state.isLoggedIn,
+                                        title: event.title,
+                                        description: event.description,
+                                        date: event.date,
+                                        location: event.location,
+                                        display: "detail"
+                                    }
+                                }}>
+                                    <Event
+                                        key = {event.id}
+                                        title = {event.title}
+                                        description = {event.description}
+                                        date = {event.date}
+                                        location = {event.location}
+                                        display = "thum"
+                                    />
+                                </Link>      
                             ))}
                         </div>
                     </div>
