@@ -104,7 +104,7 @@ class Main extends React.Component{
                         <p className="section-title">내 주변 이벤트</p>
                         <p className="section-detail">근처에서 곧 진행될 이벤트를 확인해보세요</p>
                         <div className="event">
-                            {isEventsLoading ? "Loading.." : events.map(event => (
+                            {isEventsLoading ? "Loading..." : events.map(event => (
                                 <Event
                                     key = {event.id}
                                     title = {event.title}
