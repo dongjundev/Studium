@@ -7,6 +7,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import board.dto.BoardDto;
 import board.dto.StudyDto;
 import board.mapper.StudyMapper;
 
@@ -33,6 +34,13 @@ public class StudyServiceImpl implements StudyService {
 			//System.out.println("서비스단"+searchCondition+searchKeyword);
 			return studyMapper.searchStudy(map);
 		}
-
+		
+	// ---------------------------------검색한 스터디 상세보기
+	@Override
+	public StudyDto selectStudyDetail(int studyId) throws Exception {
+		// TODO Auto-generated method stub
+		StudyDto study=studyMapper.selectStudyDetail(studyId);
+		return study;
+	}
 
 }
