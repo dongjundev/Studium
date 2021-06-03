@@ -34,8 +34,8 @@ public class BoardController {
     }
     
     @RequestMapping("/board/insertBoard.do")		//작성된 게시글 등록
-    public String insertBoard(BoardDto board, MultipartHttpServletRequest MultipartHttpServletRequest) throws Exception{
-    	boardService.insertBoard(board, MultipartHttpServletRequest);
+    public String insertBoard(BoardDto board, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception{
+    	boardService.insertBoard(board, multipartHttpServletRequest);
     	return "redirect:/board/openBoardList.do";	//게시글 리스트로 이동
     }
     
