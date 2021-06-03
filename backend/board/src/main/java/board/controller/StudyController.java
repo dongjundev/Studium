@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import board.dto.BoardDto;
+import board.dto.MemberDto;
 import board.dto.StudyDto;
 import board.service.StudyService;
 
@@ -48,7 +49,6 @@ public class StudyController {
 		System.out.println(map);
     	*/
 		mv.addObject("list", list);
-		//System.out.println(list);
 		
 		return mv;
     }
@@ -65,4 +65,14 @@ public class StudyController {
     	
     	return mv;
     }
+    
+    //-----------------------------------
+    // 스터디 가입
+    @RequestMapping("/studyJoin.do")
+    public String StudyJoin(@ModelAttribute MemberDto member) throws Exception{	
+    	System.out.println("member확인:: "+member);
+    	studyService.studyJoin(member);
+    	return "redirect:/studyDetail.do?studyId="+member.getStudyId();
+    }
+   
 }

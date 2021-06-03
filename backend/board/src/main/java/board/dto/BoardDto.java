@@ -1,7 +1,12 @@
 package board.dto;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import lombok.Data;
 
+@DynamicInsert 
+@DynamicUpdate 
 @Data
 public class BoardDto {
     private int boardIdx;
