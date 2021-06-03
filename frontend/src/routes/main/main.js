@@ -22,8 +22,8 @@ class Main extends React.Component{
             },
             {
                 id: 2,
-                title: "1:1 Language Exchange",
-                description: "This meeting is about...",
+                title: "Awesome language exchange and make good friends in Daegu",
+                description: "Awesome party with international friends, join us and learn languages and make friends!",
                 date: "2021.06.23 SAT 11:00 - 13:00",
                 location: "대구 율하역"
             },
@@ -106,7 +106,7 @@ class Main extends React.Component{
                         <div className="event">
                             {isEventsLoading ? "Loading..." : events.map(event => (
                                 <Link to={{
-                                    pathname: '/event-detail/${id}',
+                                    pathname: '/event-detail',
                                     state: {
                                         isLoggedIn: this.state.isLoggedIn,
                                         title: event.title,

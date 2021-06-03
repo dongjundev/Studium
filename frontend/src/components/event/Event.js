@@ -10,7 +10,7 @@ function Event( {title, description, date, location, display} ) {
     if(display === "thum") {
         return (
             <div className="event-thum">
-                <div className="event-detail">
+                <div className="event-thum-detail">
                     <p className="event-date">{date}</p>
                     <p className="event-title">{title}</p>
                     <p className="event-description">{description}</p>
@@ -21,7 +21,23 @@ function Event( {title, description, date, location, display} ) {
             </div>
         )
     } else if(display === "detail") {
-
+        return (
+            <div className="event-detail">
+                <div className="content-hd">
+                    <p>{date}</p>
+                    <h1>[{title}]</h1>
+                    <div className="event-host">
+                        <div className="event-host-image">
+                            <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"></img>
+                        </div>
+                        <div className="event-host-name">
+                            <p style={{color:"grey"}}>Hosted by</p>
+                            <p>Gunho K. and 4 others</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
     } else {
         return (
             <div>???</div>
