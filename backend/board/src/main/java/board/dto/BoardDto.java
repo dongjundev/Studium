@@ -1,12 +1,9 @@
 package board.dto;
 
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
+import java.util.List;
 
 import lombok.Data;
 
-@DynamicInsert 
-@DynamicUpdate 
 @Data
 public class BoardDto {
     private int boardIdx;
@@ -18,4 +15,5 @@ public class BoardDto {
 	private String createdDatetime;
     private String updaterId;
     private String updatedDatetime;
+    private List<BoardFileDto> fileList;
 }

@@ -20,7 +20,8 @@ public interface BoardMapper {
 	void deleteBoard(int boardIdx) throws Exception;		//삭제
 	
 	void insertBoardFileList(List<BoardFileDto> list) throws Exception;
-
+	
+	List<BoardFileDto> selectBoardFileList(int boardIdx) throws Exception;
 }
 
 
