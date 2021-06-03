@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import board.dto.BoardDto;
+import board.dto.BoardFileDto;
 
 @Mapper		//마이바티스의 매퍼 인터페이스임을 선언
 public interface BoardMapper {
@@ -17,6 +18,8 @@ public interface BoardMapper {
 	
 	void updateBoard(BoardDto board) throws Exception;		//업데이트
 	void deleteBoard(int boardIdx) throws Exception;		//삭제
+	
+	void insertBoardFileList(List<BoardFileDto> list) throws Exception;
 }
 
 
