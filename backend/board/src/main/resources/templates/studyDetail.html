@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>study</title>
+	<link rel="stylesheet" th:href="@{/css/style.css}" 
+		href="../../css/style.css"></link>
+</head>
+<body>
+	<h2>스터디 상세 화면</h2>
+		<table class="board_detail">
+			<tbody>
+				<tr>
+					<th scope="row">글 번호</th>
+					<td th:text="${study.studyId}"></td>
+				</tr>
+				<tr>
+					<th scope="row">스터디 이름</th>
+						<td th:text="${study.studyName}"></td>
+				</tr>
+				<tr>
+					<th scope="row">스터디 이름</th>
+						<td th:text="${study.studyContents}"></td>
+				</tr>
+			</tbody>
+		</table>
+</body>
+</html>

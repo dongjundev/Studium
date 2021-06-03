@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board.mapper.MemberMapper">	<!-- xml파일을 사용할 mapper가 있는 경로 -->
+	
+	<select id="loginCheck" resultType="String">		
+		<![CDATA[
+			SELECT member_name
+			FROM t_member
+			WHERE member_id = #{memberPw} AND member_pw = #{memberPw}
+		]]>
+	</select>
+	
+	<insert id="insertMember" parameterType="board.dto.MemberDto">
+		<![CDATA[
+			INSERT INTO test_member SET member_id=#{memberId}, member_name=#{memberName}, member_pw=#{memberPw}
+		]]>
+	</insert>
+	
+	<select id="idChk" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM test_member
+			WHERE member_id=#{memberId}
+			]]>
+	</select>
+	
+</mapper>

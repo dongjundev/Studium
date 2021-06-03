@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import board.dto.BoardDto;
 import board.dto.StudyDto;
 import board.service.StudyService;
 
@@ -22,12 +23,6 @@ public class StudyController {
 		ModelAndView mv = new ModelAndView("/home");
 		List<StudyDto> list = studyService.selectStudyList();
 		mv.addObject("list", list);
-		return mv;
-	}
-	
-	@RequestMapping("/searchStudyList.do")
-	public ModelAndView searchStudyList() throws Exception{
-		ModelAndView mv = new ModelAndView("/searchStudyList");
 		return mv;
 	}
 	
@@ -57,5 +52,17 @@ public class StudyController {
 		
 		return mv;
     }
-
+    
+    // 검색 결과에서 스터디 상세보기
+    @RequestMapping("/studyDetail.do")
+    public ModelAndView openStudyDetail(@RequestParam(defaultValue="studyId")int studyId) throws Exception{		
+ 
+    	ModelAndView mv = new ModelAndView("/studyDetail");		
+ 
+    	//System.out.println("studyID 확인:: "+studyId);
+    	StudyDto study = studyService.selectStudyDetail(studyId);
+    	mv.addObject("study", study);
+    	
+    	return mv;
+    }
 }
