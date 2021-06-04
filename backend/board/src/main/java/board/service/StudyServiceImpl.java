@@ -24,7 +24,6 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 	public List<StudyDto> selectStudyList() throws Exception {
 		// TODO Auto-generated method stub
-		
 		return studyMapper.selectStudyList();
 	}
 

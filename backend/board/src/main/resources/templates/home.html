@@ -7,7 +7,7 @@
 <body>
 	<div class="container">
 		<h2>스터디 목록</h2>
-		<table class="board_list">
+		<!-- <table class="board_list">
 			<colgroup>
 				<col width="15%"/>
 				<col width="*"/>
@@ -23,21 +23,21 @@
 			<tbody>
 				<tr th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
 					<td th:text="${list.studyName}"></td>
-					<!-- <td th:text="${list.title}"></td> -->
-					<td th:text="${list.studyContents}"></td>
+					<td th:text="${list.title}"></td>
+					<td th:text="${list.studyDescription}"></td>
 				</tr>
 				<tr th:unless="${#lists.size(list)} > 0">
 					<td colspan="4">조회된 결과가 없습니다.</td>
 				</tr>
 			</tbody>
-		</table>
+		</table> -->
 		
 		<table class="board_list" th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
 			<tr>
 				<td th:text="${list.studyName}"></td>
 			</tr>
 			<tr>
-				<td th:text="${list.studyContents}"></td>
+				<td th:text="${list.studyDescription}"></td>
 			</tr>
 		</table>
 		

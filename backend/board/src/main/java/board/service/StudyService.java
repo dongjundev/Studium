@@ -2,8 +2,6 @@ package board.service;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.RequestParam;
-
 import board.dto.MemberDto;
 import board.dto.StudyDto;
 
