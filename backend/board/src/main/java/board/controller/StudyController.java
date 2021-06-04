@@ -16,7 +16,6 @@ import board.service.StudyService;
 @Controller
 public class StudyController {
 	
-	@Autowired
 	private StudyService studyService;
 	
 	@RequestMapping("/home")
