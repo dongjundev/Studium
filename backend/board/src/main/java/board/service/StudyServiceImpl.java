@@ -1,13 +1,12 @@
 package board.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import board.dto.BoardDto;
 import board.dto.MemberDto;
 import board.dto.StudyDto;
 import board.mapper.MemberMapper;
@@ -52,5 +51,12 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 	public void studyJoin(MemberDto member) throws Exception{
 		memberMapper.studyJoin(member);
+	}
+	
+	// ----------------------------------스터디 만들기
+	@Override
+	public void insertStudy(StudyDto study) throws Exception {
+		// TODO Auto-generated method stub
+		studyMapper.insertStudy(study);
 	} 
 }
