@@ -1,10 +1,10 @@
 import React from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
-import Event from "../../components/event/Event"
-import './event-detail.css'
+import './group-detail.css'
+import Group from '../../components/group/Group'
 
-class EventDetail extends React.Component{
+class GroupDetail extends React.Component{
     componentDidMount() {
         const { location, history } = this.props;
         if (location.state === undefined) {
@@ -13,15 +13,15 @@ class EventDetail extends React.Component{
     }
     render() {
         const { location } = this.props;
-
+        
         if(location.state){
             return (
-                <Event
-                title = {location.state.title}
-                description = {location.state.description}
-                date = {location.state.date}
-                location = {location.state.location}
-                display = {location.state.display}
+                <Group
+                    image = {location.state.image}
+                    name = {location.state.name}
+                    numOfMembers = {location.state.numOfMembers}
+                    tags = {location.state.tags}
+                    display = {location.state.display}
                 />
             )
         } else {
@@ -30,4 +30,4 @@ class EventDetail extends React.Component{
     }
 }
 
-export default EventDetail;
+export default GroupDetail;
