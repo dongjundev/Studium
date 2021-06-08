@@ -12,4 +12,6 @@ public interface StudyService {
 	void studyJoin(MemberDto member) throws Exception; //스터디 가입
 	
 	void insertStudy(StudyDto study) throws Exception; //스터디 만들기
+	
+	void insertLocation(StudyDto study) throws Exception; //스터디 장소 예약
 }
