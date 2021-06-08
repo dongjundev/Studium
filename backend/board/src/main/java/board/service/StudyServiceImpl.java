@@ -58,4 +58,11 @@ public class StudyServiceImpl implements StudyService {
 		// TODO Auto-generated method stub
 		studyMapper.insertStudy(study);
 	} 
+	
+	// ---------------------------------스터디 장소 예약
+	@Override
+	public void insertLocation(StudyDto study) throws Exception{
+		studyMapper.insertLocation(study);
+	}
+
 }

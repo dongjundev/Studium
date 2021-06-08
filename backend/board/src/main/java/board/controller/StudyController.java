@@ -74,5 +74,20 @@ public class StudyController {
     	studyService.studyJoin(member);
     	return "redirect:/studyDetail.do?studyId="+member.getStudyId();
     }
-   
+    
+    //-----------------------------------
+    // 스터디 장소 예약 화면
+    @RequestMapping("/studyLocation.do")		//kakao map api 출력
+    public String testMap() throws Exception{
+    	return "/studyLocation";
+    }
+    
+    // 장소 예약 
+    @RequestMapping("/insertLocation.do")		//지도에서 주소 값 반환
+    public String insertLocation(@ModelAttribute StudyDto study) throws Exception{
+    	studyService.insertLocation(study);
+    	//return "redirect:/studyDetail.do?studyId="+study.getStudyId();
+    	return "redirect:/board/openBoardList.do";
+    }
+
 }

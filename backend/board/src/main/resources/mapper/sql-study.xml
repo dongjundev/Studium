@@ -58,4 +58,14 @@
 			VALUES(#{studyName}, #{studyDescription}, #{studyTopics}, #{studyLocation})
 		]]>
 	</insert>
+	
+		<!-- 스터디 장소 예약 !-->
+	<select id="insertLocation" resultType="board.dto.StudyDto">
+		<![CDATA[
+			INSERT INTO t_location
+			SET study_id=#{studyId}, 
+			study_location=#{studyLocation}
+		]]>
+	</select>
+	
 </mapper>
