@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import board.dto.MemberDto;
@@ -32,9 +34,12 @@ public class MemberController {
 		  if(result == null) { 
 			  //mv.setViewName(null);
 			  System.out.println("로그인 실패"); 
-		  }else { System.out.println("로그인 성공"); }
+		  }else { 
+			  System.out.println("로그인 성공"); 
+			  return "redirect:/board/openBoardList.do";
+		  }
 		  
-	return "redirect:/board/openBoardList.do";
+		  return "redirect:/board/login.do";
 	}
 	
 	
@@ -65,4 +70,11 @@ public class MemberController {
 		
 		return "redirect:/board/login.do";
 	}
+	@ResponseBody
+	@RequestMapping(value="user/idChk", method = RequestMethod.POST)
+	public int idChk(MemberDto memberDto) throws Exception {
+		int result = memberService.idChk(memberDto);
+		return result;
+	}
+
 }

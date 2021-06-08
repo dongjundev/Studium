@@ -27,5 +27,45 @@
 			<input type="submit" id="submit" value="저장" class="btn">
 		</form>
 	</div>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			$("#submit").on("click", function(){
+				if($("#memberId").val()==""){
+					alert("아이디를 입력해주세요.");
+					$("#memberId").focus();
+					return false;
+				}
+				if($("#memberPw").val()==""){
+					alert("비밀번호를 입력해주세요.");
+					$("#memberPw").focus();
+					return false;
+				}
+				if($("#memberName").val()==""){
+					alert("성명을 입력해주세요.");
+					$("#memberName").focus();
+					return false;
+				}
+			});
+			fn_idChk();
+		})
+		
+		function fn_idChk(){
+			$.ajax({
+				url : "http://localhost:8080/user/idChk",
+				type : "post",
+				dataType : "json",
+				data : {"memberId" : $("#memberId").val()},
+				success : function(data){
+					if(data == 1){
+						alert("중복된 아이디입니다.");
+					}else if(data == 0){
+						alert("중복된 아이디입니다");
+					}
+				}
+			})
+		}
+	</script>
 </body>
 </html>

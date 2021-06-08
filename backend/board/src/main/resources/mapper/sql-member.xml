@@ -14,13 +14,13 @@
 	
 	<insert id="insertMember" parameterType="board.dto.MemberDto">
 		<![CDATA[
-			INSERT INTO test_member SET member_id=#{memberId}, member_name=#{memberName}, member_pw=#{memberPw}
+			INSERT INTO t_member SET member_id=#{memberId}, member_name=#{memberName}, member_pw=#{memberPw}
 		]]>
 	</insert>
 	
 	<select id="idChk" resultType="int">
 		<![CDATA[
-			SELECT COUNT(*) FROM test_member
+			SELECT COUNT(*) FROM t_member
 			WHERE member_id=#{memberId}
 			]]>
 	</select>
