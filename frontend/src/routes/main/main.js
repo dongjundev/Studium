@@ -63,17 +63,17 @@ class Main extends React.Component{
             categories: [
                 {
                     id: "100",
-                    image: "https://cdn.dribbble.com/users/879147/screenshots/7906715/media/1b1d2ef35dab525ed63b8b5816813132.jpg?compress=1&resize=400x300",
+                    thumbnail: "https://cdn.dribbble.com/users/879147/screenshots/7906715/media/1b1d2ef35dab525ed63b8b5816813132.jpg?compress=1&resize=400x300",
                     name: "기술"
                 },
                 {
                     id: "101",
-                    image: "https://t1.daumcdn.net/liveboard/bookclub/93ff3a3b875349dda49bb3c9581a4532.jpeg",
+                    thumbnail: "https://t1.daumcdn.net/liveboard/bookclub/93ff3a3b875349dda49bb3c9581a4532.jpeg",
                     name: "외국어"
                 },
                 {
                     id: "102",
-                    image: "https://image.freepik.com/free-vector/online-certification-illustration_23-2148575512.jpg",
+                    thumbnail: "https://image.freepik.com/free-vector/online-certification-illustration_23-2148575512.jpg",
                     name: "자격증"
                 }
             ]
@@ -97,7 +97,7 @@ class Main extends React.Component{
                     <div className="main-letter">
                         <h3>직접 만나 공부해볼까~!</h3>
                         <p>원하는 그룹을 찾아 함께 공부하는 경험을 즐겨보세요.</p>
-                        <Link to="/register">
+                        <Link to="/search">
                             <button>STUDIUM 가입하기</button>
                         </Link>
                     </div>
@@ -166,7 +166,7 @@ class Main extends React.Component{
                             {isCategoriesLoading ? "Loading.." : categories.map(category => (
                                 <Category
                                     key = {category.id}
-                                    image = {category.image}
+                                    thumbnail = {category.thumbnail}
                                     name = {category.name}
                                 />
                             ))}
