@@ -26,11 +26,13 @@
     font-size: 15px;
 }
 .event-thum .event-title{
+    color: #000;
     font-size: 25px;
     font-weight: 600;
     margin: 10px 0;
 }
 .event-thum .event-description{
+    color: #000;
     font-size: 17px;
     margin: 0 0;
 }
