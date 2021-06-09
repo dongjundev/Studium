@@ -6,24 +6,29 @@ import './event-detail.css'
 
 class EventDetail extends React.Component{
     componentDidMount() {
-        const { location,history } = this.props;
+        const { location, history } = this.props;
         if (location.state === undefined) {
             history.push("/");
         }
+        console.log(location);
+        console.log(history);
     }
-
     render() {
-        console.log(this.props);
         const { location } = this.props;
-        return (
-            <Event
+
+        if(location.state){
+            return (
+                <Event
                 title = {location.state.title}
                 description = {location.state.description}
                 date = {location.state.date}
                 location = {location.state.location}
-                display = "detail"
-            />
-        )
+                display = {location.state.display}
+                />
+            )
+        } else {
+            return null;
+        }
     }
 }
 
