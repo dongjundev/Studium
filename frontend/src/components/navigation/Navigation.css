@@ -3,7 +3,16 @@
     overflow: hidden; 
     height: 80px;
 }
-.nav .nav-logo{float: left; margin-top: 25px;}
+.nav .nav-logo{
+    float: left; 
+    height: 80px;
+    width: 10%;
+}
+.nav .nav-logo img{
+    width:100%;
+    height: 100%;
+    object-fit: contain;
+}
 .nav .nav-logo a{
     padding: 10px;
     font-size: 25px;

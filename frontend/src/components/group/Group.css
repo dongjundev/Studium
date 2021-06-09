@@ -24,9 +24,14 @@
 }
 .group-thum .group-detail > p {
     width: 100%;
-    text-overflow: ellipsis;  
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*text-overflow: ellipsis;
     white-space  : nowrap;
-    overflow     : hidden;
+    overflow     : hidden;*/
 }
 .group-tags{
     color: #8a8a8a;
@@ -34,7 +39,107 @@
     margin: 5px 0;
 }
 .group-name{
+    height: 64px;
+    color: #000;
     font-size: 25px;
     font-weight: 600;
-    margin: 15px 0;
+    margin: 10px 0;
+}
+.group-numbers{
+    color: #000;
+}
+.group-thum-event{
+    padding: 10px;
+}
+.group-thum-event-image{
+    display: inline-block;
+    width: 35%;
+    height: 75px;
+}
+.group-thum-event-image img{
+    width: 100%;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.group-thum-event-detail{
+    display: inline-block;
+    width: 65%;
+    height: 100%;
+    vertical-align: top;
+}
+.group-thum-event-detail > p{
+    height: auto;
+    margin: 5px 0 0 20px;
+    font-size: 15px;
+}
+
+.group-detail{
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.group-detail .group-detail-content-head{
+    height: 300px;
+    margin: 30px 0;
+}
+.content-head-image{
+    display: inline-block;
+    width: 60%;
+    height: 100%;
+}
+.content-head-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+.content-head-summary{
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
+}
+.content-head-summary > p{
+    margin-left: 30px;
+}
+.content-head-summary > h1{
+    margin: 10px 0 0 30px;
+}
+.group-detail-tabs{
+    padding: 0 0 30px 0;
+    border-bottom: 1px solid #8a8a8a;
+}
+.group-detail-tabs ul{
+    display: inline-block;
+    width: 60%;
+    padding: 0;
+}
+.group-detail-tabs ul li{
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+}
+.group-detail-tabs ul li.on a{
+    color: #a79b00;
+}
+.group-detail-tabs ul li a{
+    color: #000;
+    text-decoration: none;
+}
+.group-detail-tabs ul li a:hover{
+    color: #a79b00;
+}
+.group-detail-tabs button{
+    font-weight: bold;
+    margin-left: 30px;
+    padding: 10px 40px; 
+    border-radius: 10px;
+    opacity: 0.7;
+    background-color: #fff700;
+    transition: all, 0.3s;
+}
+.group-detail-tabs button:hover{
+    text-decoration: none;
+    opacity: 1;
+    background-color: #fff700;
+    cursor: pointer;
 }

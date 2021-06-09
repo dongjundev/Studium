@@ -6,7 +6,9 @@ function Navigation(){
     return (
     <div className="nav">
         <div className="nav-logo">
-            <Link to="/">STUDIUM</Link>
+            <Link to="/">
+                <img src="/images/studium_logo.png"></img>
+            </Link>
         </div>
         <div className="create-group">
                 <Link to="/create-group">새 그룹 시작하기</Link>
