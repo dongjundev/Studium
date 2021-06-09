@@ -11,7 +11,8 @@
 			FROM
 				t_board
 			WHERE
-				deleted_yn = 'N'
+				deleted_yn = 'N' AND
+				study_id=#{studyId}
 			ORDER BY board_idx DESC
 		]]>
 	</select>
