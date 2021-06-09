@@ -1,19 +1,19 @@
-import React from "react"
-import axios from "axios"
-import { Link } from "react-router-dom"
-import Event from "../../components/event/Event"
-import Group from "../../components/group/Group"
-import Category from "../../components/category/Category"
-import './main.css'
+import React from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Event from "../../components/event/Event";
+import Group from "../../components/group/Group";
+import Category from "../../components/category/Category";
+import './main.css';
 
 class Main extends React.Component{
     constructor() {
         super();
         this.state = {
             isLoggedIn: false,
-            isEventsLoading: true,
-            isGroupsLoading: true,
-            isCategoriesLoading: true,
+            isEventsLoading: false,
+            isGroupsLoading: false,
+            isCategoriesLoading: false,
             events: [
                 {
                     id: 1,
@@ -41,7 +41,7 @@ class Main extends React.Component{
                 {
                     id: 999,
                     image: "https://awssofia.com/wp-content/uploads/2020/01/cropped-AWS-Website-Banner.jpg",
-                    name: "AWS Korea Community",
+                    name: "AWS Korea Community dfsdfffe",
                     numOfMembers: 240,
                     tags: "기술"
                 },
@@ -95,9 +95,9 @@ class Main extends React.Component{
             <div className="container">
                 <div className="main-image">
                     <div className="main-letter">
-                        <h3>직접 만나 공부해볼까~!</h3>
-                        <p>원하는 그룹을 찾아 함께 공부하는 경험을 즐겨보세요.</p>
-                        <Link to="/search">
+                        <h3>달라지고 싶은가요?</h3>
+                        <p>원하는 스터디 그룹을 찾아 함께 공부하는 경험을 즐겨보세요.</p>
+                        <Link to="/register">
                             <button>STUDIUM 가입하기</button>
                         </Link>
                     </div>
@@ -111,7 +111,7 @@ class Main extends React.Component{
                                 <Link to={{
                                     pathname: '/event-detail',
                                     state: {
-                                        isLoggedIn: this.state.isLoggedIn,
+                                        isLoggedIn: isLoggedIn,
                                         title: event.title,
                                         description: event.description,
                                         date: event.date,
@@ -164,11 +164,19 @@ class Main extends React.Component{
                         <p className="section-detail">관심 있는 주제로 그룹을 찾아보세요.</p>
                         <div className="category">
                             {isCategoriesLoading ? "Loading.." : categories.map(category => (
-                                <Category
-                                    key = {category.id}
-                                    thumbnail = {category.thumbnail}
-                                    name = {category.name}
-                                />
+                                <Link to={{
+                                    pathname: '/search',
+                                    state: {
+                                        isLoggedIn: this.state.isLoggedIn,
+                                        keyword: category.name
+                                    }
+                                }}>
+                                    <Category
+                                        key = {category.id}
+                                        thumbnail = {category.thumbnail}
+                                        name = {category.name}
+                                    />
+                                </Link>
                             ))}
                         </div>
                     </div>
@@ -178,13 +186,15 @@ class Main extends React.Component{
     }
 
     componentWillUnmount(){
-        this.setState( {isEventsLoading: false } );
-        this.setState( {isGroupsLoading: false } );
+        this.setState( {isEventsLoading: true } );
+        this.setState( {isGroupsLoading: true } );
+        this.setState( {isCategoriesLoading: true} );
     }
     //Methods below are not fully implemented yet
 
     //Get events from DB
-    getEvents = async () => {
+    //getEvents = async () => {
+    getEvents(){
         /*
         const {
             data : {
@@ -198,7 +208,8 @@ class Main extends React.Component{
     }
 
     //Get groups from DB
-    getGroups = async () => {
+    //getGroups = async () => {
+    getGroups(){
         /*
         const {
             data : {
@@ -211,15 +222,16 @@ class Main extends React.Component{
     }
 
     //Get categories from server
-    getCategories = async () => {
+    //getCategories = async () => {
+    getCategories(){
         this.setState( {isCategoriesLoading: false} )
     }
 
-    componentDidMount() {
-        this.getEvents();
-        this.getGroups();
-        this.getCategories();
-    }
+    // componentDidMount() {
+    //     this.getEvents();
+    //     this.getGroups();
+    //     this.getCategories();
+    // }
     
 }
 

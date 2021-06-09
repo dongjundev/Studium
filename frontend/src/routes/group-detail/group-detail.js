@@ -13,7 +13,7 @@ class GroupDetail extends React.Component{
     }
     render() {
         const { location } = this.props;
-        
+        console.log(location);
         if(location.state){
             return (
                 <Group

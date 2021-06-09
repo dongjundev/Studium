@@ -10,6 +10,8 @@ class EventDetail extends React.Component{
         if (location.state === undefined) {
             history.push("/");
         }
+        console.log(location);
+        console.log(history);
     }
     render() {
         const { location } = this.props;

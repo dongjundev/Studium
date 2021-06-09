@@ -7,9 +7,7 @@ function Category( {thumbnail, name} ) {
     return (
         <div className="category-thum">
             <div className="category-thumbnail">
-                <Link to="none">
-                    <img src={thumbnail}></img>
-                </Link>
+                <img src={thumbnail} alt="category-thumnail"></img>
             </div>
             <p>{name}</p>
         </div>

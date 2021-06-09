@@ -46,7 +46,7 @@
 
 .event-detail .content-hd{
     max-width: 1000px;
-    margin: 20px auto;
+    margin: 10px auto;
 }
 .content-hd p{
     margin: 0;
@@ -143,12 +143,12 @@
     padding: 10px 40px; 
     border-radius: 10px;
     opacity: 0.7;
-    background-color: #fff700;
+    background-color: #febf00;
     transition: all, 0.3s;
 }
 .main-join-right button:hover{
     text-decoration: none;
     opacity: 1;
-    background-color: #fff700;
+    background-color: #febf00;
     cursor: pointer;
 }

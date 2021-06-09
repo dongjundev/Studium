@@ -1,6 +1,6 @@
 .container .main-image{
     height: 500px;
-    background-image: url(https://www.lifespace.com/blog/wp-content/uploads/2019/09/CollegeStudyGroups-850x446.jpg);
+    background-image: url("https://spiritualityhealth.com/assets/images/Articles/_articleSummaryImage/bestbooks.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -9,26 +9,82 @@
 .main-letter{
     position: absolute; 
     text-align: center;
-    top: 40%;
+    top: 20%;
     left: 40%;
-    color: #fff;
+    color: #000;
 }
 .main-letter button{
+    background-color: #febf00;
+    border: none;
+    border-radius: 10px;
+    color: #000;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1em;
+    font-size: 22px;
+    line-height: 1em;
+    margin: 15px 40px;
+    outline: none;
+    padding: 12px 40px 10px;
+    position: relative;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.main-letter button::before, .main-letter button::after{
+    border-color: transparent;
+    -webkit-transition: all 0.25s;
+    transition: all 0.25s;
+    border-style: solid;
+    border-width: 0;
+    content: "";
+    height: 24px;
+    position: absolute;
+    width: 24px;
+}
+.main-letter button::before{
+    border-color: #febf00;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-top-right-radius: 10px;
+    right: -5px;
+    top: -5px;
+}
+.main-letter button::after{
+    border-bottom-width: 2px;
+    border-color: #febf00;
+    border-left-width: 2px;
+    border-bottom-left-radius: 10px;
+    bottom: -5px;
+    left: -5px;
+}
+.main-letter button:hover{
+    background-color: #febf00;
+}
+.main-letter button:hover::before,
+.main-letter button:hover::after{
+    height: 100%;
+    width: 100%;
+}
+/*.main-letter button{
     padding: 10px 40px; 
     border-radius: 10px;
     opacity: 0.7;
     background-color: #fff700;
     transition: all, 0.3s;
-}
-.main-letter button:hover{
+}*/
+/* .main-letter button:hover{
     text-decoration: none;
     opacity: 1;
     background-color: #fff700;
     cursor: pointer;
+} */
+.container{
+    background-color: #fffaeb;
 }
 .content-area{
     max-width: 1000px; 
-    margin: 50px auto; 
+    padding: 50px 0; 
+    margin: 0 auto;
 }
 .content-area .section-title{
     margin-top: 30px;

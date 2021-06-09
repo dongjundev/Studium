@@ -80,7 +80,7 @@ Group.propTypes = {
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     numOfMembers: PropTypes.number.isRequired,
-    tags: PropTypes.string.isRequired
+    tags: PropTypes.string
 }
 
 export default Group;
