@@ -30,10 +30,10 @@ public class StudyController {
 	// ---------------------------------스터디 검색
 	
 	//스터디 검색 화면 출력
-    @RequestMapping("/studyList.do")		
-    public String studyList() throws Exception{
-    	return "/studyList";
-    }
+//    @RequestMapping("/studyList.do")		
+//    public String studyList() throws Exception{
+//    	return "/studyList";
+//    }
 	
     //스터디 검색 결과
     @RequestMapping("/studySearchResult.do")		
@@ -57,7 +57,7 @@ public class StudyController {
     @RequestMapping("/studyDetail.do")
     public ModelAndView openStudyDetail(@RequestParam(defaultValue="studyId")int studyId) throws Exception{		
  
-    	ModelAndView mv = new ModelAndView("/studyDetail");		
+    	ModelAndView mv = new ModelAndView("studyDetail");		
  
     	//System.out.println("studyID 확인:: "+studyId);
     	StudyDto study = studyService.selectStudyDetail(studyId);

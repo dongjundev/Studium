@@ -56,6 +56,7 @@ public class MakeStudyController {
     	System.out.println("스터디 장소 : " + studyDto.getStudyLocation());
     	studyService.insertStudy(studyDto);
     	studyDto = null;
-    	return "/makeStudy/complete";
+    	//return "/makeStudy/complete";
+    	return "redirect:/home";
     }
 }

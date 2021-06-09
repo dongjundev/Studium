@@ -17,7 +17,7 @@
 	<select id="searchStudy" resultType="board.dto.StudyDto" >
 		<![CDATA[
 			SELECT
-				study_id, study_name, study_contents 
+				study_id, study_name, study_description
 			FROM t_study
 		]]>
 		<choose>
@@ -33,7 +33,7 @@
 			</when>
 			<otherwise>
 				<![CDATA[
-				WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_contents LIKE CONCAT('%', #{searchKeyword} , '%'))
+				WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_description LIKE CONCAT('%', #{searchKeyword} , '%'))
 				]]>
 			</otherwise>
 		</choose>
@@ -44,7 +44,7 @@
 	<select id="selectStudyDetail" parameterType="int" resultType="board.dto.StudyDto">
 		<![CDATA[
 			SELECT
-				study_id, study_name, study_desciption
+				study_id, study_name, study_description
 			FROM
 				t_study
 			WHERE
