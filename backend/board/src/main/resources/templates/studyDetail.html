@@ -20,16 +20,17 @@
 				</tr>
 				<tr>
 					<th scope="row">스터디 이름</th>
-						<td th:text="${study.studyContents}"></td>
+						<td th:text="${study.studyDescription}"></td>
 				</tr>
 			</tbody>
 		</table>
-	<form id="sjoinfrm" name="sjoinfrm" method="get" action="/studyJoin.do">
-		<input type="hidden" name="memberId" value="hong">
-		<!-- 나중에 value 부분 바꿔주어야 함. 지금은 임시로 "hong" 넣음 -->
-		<input type="hidden" name="studyId" th:value="${study.studyId}">
-		<input type="submit" id="submit" value="스터디 가입" class="btn">
-	</form>
+	<div th:if="${session.loginUser != null}">
+		<form id="sjoinfrm" name="sjoinfrm" method="get" action="/studyJoin.do">
+			<input type="hidden" name="memberId" th:value="${session.loginUser.memberId}">
+			<input type="hidden" name="studyId" th:value="${study.studyId}">
+			<input type="submit" id="submit" value="스터디 가입" class="btn">
+		</form>
+	</div>
 	
 </body>
 </html>
