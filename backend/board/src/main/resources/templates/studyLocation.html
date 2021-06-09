@@ -19,7 +19,7 @@
 	<form method="post" id="mapfrm" name="mapfrm" action="/insertLocation.do">
 		<input type="hidden" name="studyLocation" id="studyLocation" value=""/>
 		<!-- 임의의 studyId 값 설정함! 나중에 바꿔야함 -->
-		<input type="hidden" name="studyId" value=1>
+		<input type="hidden" name="studyId" th:value="${studyId}">
 		<input type="submit" id="submit" value="장소 등록" class="btn" />
 	</form>
 	<div class="map_wrap">

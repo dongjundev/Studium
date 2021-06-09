@@ -25,9 +25,9 @@ public class BoardServiceImpl implements BoardService{
 	private BoardMapper boardMapper;	//데이터베이스에 접근하는 dao빈 선언
 	
 	@Override
-	public List<BoardDto> selectBoardList() throws Exception {
+	public List<BoardDto> selectBoardList(int studyId) throws Exception {
 		// TODO Auto-generated method stub
-		return boardMapper.selectBoardList();
+		return boardMapper.selectBoardList(studyId);
 	}
 
 	@Override

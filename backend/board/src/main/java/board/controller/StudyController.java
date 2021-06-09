@@ -29,12 +29,6 @@ public class StudyController {
 	
 	// ---------------------------------스터디 검색
 	
-	//스터디 검색 화면 출력
-//    @RequestMapping("/studyList.do")		
-//    public String studyList() throws Exception{
-//    	return "/studyList";
-//    }
-	
     //스터디 검색 결과
     @RequestMapping("/studySearchResult.do")		
     public ModelAndView searchStudy(@RequestParam(defaultValue="searchCondition") String searchCondition,@RequestParam(defaultValue="searchKeyword") String searchKeyword) throws Exception{
@@ -78,16 +72,22 @@ public class StudyController {
     //-----------------------------------
     // 스터디 장소 예약 화면
     @RequestMapping("/studyLocation.do")		//kakao map api 출력
-    public String testMap() throws Exception{
-    	return "/studyLocation";
+    public ModelAndView testMap(@RequestParam(defaultValue="studyId")int studyId) throws Exception{
+    	ModelAndView mv = new ModelAndView("studyLocation");		
+    	mv.addObject("studyId", studyId);
+    	System.out.println("확인:: "+mv);
+    	
+    	return mv;
     }
     
     // 장소 예약 
     @RequestMapping("/insertLocation.do")		//지도에서 주소 값 반환
     public String insertLocation(@ModelAttribute StudyDto study) throws Exception{
+    	System.out.println("insertLoaction StudyId 확인:: "+study.getStudyId());
     	studyService.insertLocation(study);
-    	//return "redirect:/studyDetail.do?studyId="+study.getStudyId();
-    	return "redirect:/board/openBoardList.do";
+    	
+    	System.out.println("::장소 등록 완료::");
+    	return "redirect:/studyDetail.do?studyId="+study.getStudyId();
     }
 
 }
