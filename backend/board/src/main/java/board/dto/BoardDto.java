@@ -16,4 +16,6 @@ public class BoardDto {
     private String updaterId;
     private String updatedDatetime;
     private List<BoardFileDto> fileList;
+    
+    private int studyId;
 }

@@ -21,7 +21,8 @@ public class ReactController {
 	// get all board 
 	@GetMapping("/board")
 	public List<BoardDto> getAllBoards() throws Exception {
-		
-		return boardService.selectBoardList();
+		// 임시로 넣어둔 studyId 값
+		int studyId=1;
+		return boardService.selectBoardList(studyId);
 	}
 }
