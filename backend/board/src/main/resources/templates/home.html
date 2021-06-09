@@ -6,6 +6,16 @@
 </head>
 <body>
 	<div class="container">
+		<div style="text-align:center;">
+			<!-- session -->
+			<a th:if="${session.loginUser == null}" href="http://localhost:8080/user/join.do">Join</a>
+			<a th:if="${session.loginUser == null}" href="http://localhost:8080/user/login.do">Login</a>
+			<!-- session 값 확인
+			<span th:text="${session.loginUser}"></span>
+			-->
+			<a th:if="${session.loginUser != null}"><span th:text="${session.loginUser.memberId}"></span>님 안녕하세요!</a>
+			<a th:if="${session.loginUser != null}" href="http://localhost:8080/user/logout.do">Logout</a>
+		</div>
 		<h2>스터디 목록</h2>
 		<!-- <table class="board_list">
 			<colgroup>
@@ -42,6 +52,7 @@
 		</table>
 		
 		<a href="/board/openBoardWrite.do" class="btn">글 쓰기</a>
+		<a href="/board/openBoardList.do" class="btn">게시판 목록</a>
 	</div>
 </body>
 </html>
