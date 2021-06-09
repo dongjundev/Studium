@@ -19,7 +19,7 @@ public class StudyController {
 	@Autowired
 	private StudyService studyService;
 	
-	@RequestMapping("/home")
+	@RequestMapping(value = {"/home", "/"})
 	public ModelAndView selectStudyList() throws Exception{
 		ModelAndView mv = new ModelAndView("/home");
 		List<StudyDto> list = studyService.selectStudyList();

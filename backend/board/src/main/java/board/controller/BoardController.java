@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import board.dto.BoardDto;
 import board.dto.BoardFileDto;
+import board.dto.MemberDto;
 import board.service.BoardService;
 
 @Controller //①
@@ -36,7 +38,15 @@ public class BoardController {
     }
     
     @RequestMapping("/board/openBoardWrite.do")		//게시글 작성화면 호출
-    public String openBoardWrite() throws Exception{
+    public String openBoardWrite(HttpSession session) throws Exception{
+    	
+    	// 로그인 한 사용자만 글 등록할 수 있게 
+    	MemberDto member=(MemberDto) session.getAttribute("loginUser");
+    	
+    	if (member==null) {
+    		System.out.println("로그인 해주세요.");
+    		return "redirect:/board/openBoardList.do";
+    	}
     	return "/boardWrite";
     }
     

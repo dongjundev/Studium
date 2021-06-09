@@ -1,5 +1,7 @@
 package board.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,12 @@ public class MemberServicempl implements MemberService{
 		// TODO Auto-generated method stub
 		int result=memberMapper.idChk(member);
 		return result;
+	}
+	
+	@Override
+	public String login(String MemberId) throws Exception{
+		String dbPwd=memberMapper.login(MemberId);
+		return dbPwd;
 	}
 
 }

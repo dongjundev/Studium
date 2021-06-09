@@ -31,5 +31,22 @@
 			INSERT INTO s_host SET member_id=#{memberId}, study_id=#{studyId}
 		]]>
 	</insert>
+	
+	<!-- 로그인 -->
+	<select id="login" resultType="String">		
+		<![CDATA[
+			SELECT member_pw
+			FROM t_member
+			WHERE member_id = #{memberPw}
+		]]>
+	</select>
+	
+	<select id="selectMemberList" parameterType="board.dto.MemberDto">		
+		<![CDATA[
+			SELECT member_id, member_name, member_pw
+			FROM t_member
+			WHERE member_id = #{memberId}
+		]]>
+	</select>
 
 </mapper>
