@@ -59,5 +59,13 @@
 		]]>
 	</select>
 	
+	<!-- 스터디 멤버 상세 -->
+	<select id="selectStudyMemberDetail" resultType="board.dto.MemberDto">
+		<![CDATA[
+			SELECT member_name, member_id
+			FROM t_member
+			WHERE member_id='${memberId}';
+		]]>
+	</select>
 
 </mapper>

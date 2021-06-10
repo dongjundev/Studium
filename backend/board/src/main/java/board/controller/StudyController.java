@@ -17,6 +17,8 @@ import board.service.StudyService;
 @Controller
 public class StudyController {
 	
+	int glo_studyId;
+	
 	@Autowired
 	private StudyService studyService;
 	
@@ -51,7 +53,7 @@ public class StudyController {
 		return mv;
     }
     
-    // 검색 결과에서 스터디 상세보기
+    // 스터디 상세보기
     @RequestMapping("/studyDetail.do")
     public ModelAndView openStudyDetail(@RequestParam(defaultValue="studyId")int studyId) throws Exception{		
  
@@ -59,6 +61,8 @@ public class StudyController {
  
     	//System.out.println("studyID 확인:: "+studyId);
     	StudyDto study = studyService.selectStudyDetail(studyId);
+    	
+    	glo_studyId=studyId;
     	
     	//스터디 이벤트
     	List<StudyDto> event= studyService.selectStudyEvent(studyId);
@@ -103,6 +107,22 @@ public class StudyController {
     	
     	System.out.println("::장소 등록 완료::");
     	return "redirect:/studyDetail.do?studyId="+study.getStudyId();
+    }
+    
+    //-----------------------------------
+    // 스터디 멤버 상세보기
+    @RequestMapping("/studyMemberDetail.do")		//지도에서 주소 값 반환
+    public ModelAndView StudyMemberDetail(String memberId) throws Exception{
+    	
+    	ModelAndView mv=new ModelAndView("studyMemberDetail");
+    	MemberDto member=memberService.selectStudyMemberDetail(memberId);
+    	List<MemberDto> memberList= memberService.selectStudyMember(glo_studyId);
+    	
+    	//System.out.println("memberList 확인:: "+memberList);
+    	mv.addObject("member",member);
+    	mv.addObject("memberList",memberList);
+    	
+    	return mv;
     }
 
 }

@@ -52,5 +52,12 @@ public class MemberServicempl implements MemberService{
 		List<MemberDto> studyMember=memberMapper.selectStudyMember(studyId);
 		return studyMember;
 	}
+	
+	//
+	@Override
+	public MemberDto selectStudyMemberDetail(String memberId) throws Exception{
+		MemberDto member=memberMapper.selectStudyMemberDetail(memberId);
+		return member;
+	}
 
 }
