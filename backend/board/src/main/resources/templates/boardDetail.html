@@ -52,7 +52,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#list").on("click", function(){
-				location.href = "openBoardList.do";
+				history.back();
 			});
 
 			$("#edit").on("click", function(){		//frm이라는 이름의 <form>을 이용하여 "updateBoard.do"라는 주소로 데이터 전송
@@ -63,7 +63,7 @@
 			
 			$("#delete").on("click", function(){
 				var frm = $("frm")[0];
-				frm.action = "deleteBoard.do"
+				frm.action = "deleteBoard"
 				frm.submit();
 			});
 		});
