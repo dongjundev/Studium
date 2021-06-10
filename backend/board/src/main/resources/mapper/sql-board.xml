@@ -42,14 +42,15 @@
 		<![CDATA[
 			INSERT INTO t_board
 			(
-				title, contents, created_datetime, creator_id
+				title, contents, created_datetime, creator_id, study_id
 			)
 			VALUES
 			(
 				#{title},
 				#{contents},
 				NOW(),
-				'admin'
+				'admin',
+				#{studyId}
 			)
 		]]>
 	</insert>

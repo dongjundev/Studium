@@ -1,9 +1,12 @@
 package board.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import board.dto.MemberDto;
 import board.dto.StudyDto;
 import board.service.StudyService;
 
@@ -18,7 +21,15 @@ public class MakeStudyController {
 	StudyService studyService;
 	
 	@RequestMapping("")
-	public String start() throws Exception{
+	public String start(HttpSession session) throws Exception{
+    	// 로그인 한 사용자만 글 등록할 수 있게 
+    	MemberDto member=(MemberDto) session.getAttribute("loginUser");
+    	
+    	if (member==null) {
+    		System.out.println("로그인 해주세요.");
+    		return "redirect:/";
+    	}
+    	
 		return "/makeStudy/start";
 	}
 	

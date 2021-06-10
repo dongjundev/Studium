@@ -2,6 +2,8 @@ package board.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -84,18 +86,26 @@ public class StudyController {
     //-----------------------------------
     // 스터디 가입
     @RequestMapping("/studyJoin.do")
-    public String StudyJoin(@ModelAttribute MemberDto member) throws Exception{	
-    	System.out.println("member확인:: "+member);
-    	int result=memberService.studyJoinChk(member);
+    public String StudyJoin(@ModelAttribute MemberDto member,HttpSession session) throws Exception{	
+    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
     	
-    	if (result==0) {
-    		studyService.studyJoin(member);
-    		System.out.println("스터디 가입 완료");
-        	
-    	}else {
-    		System.out.println("중복 가입입니다.");
+    	if (mem==null) {
+    		System.out.println("로그인 해주세요.");
+    		return "redirect:/studyDetail.do?studyId="+member.getStudyId();
     	}
-    	return "redirect:/studyDetail.do?studyId="+member.getStudyId();
+    	else {
+	    	System.out.println("member확인:: "+member);
+	    	int result=memberService.studyJoinChk(member);
+	    	
+	    	if (result==0) {
+	    		studyService.studyJoin(member);
+	    		System.out.println("스터디 가입 완료");
+	        	
+	    	}else {
+	    		System.out.println("중복 가입입니다.");
+	    	}
+	    	return "redirect:/studyDetail.do?studyId="+member.getStudyId();
+    	}
     }
     
     // 스터디 가입 중복 체크
@@ -110,12 +120,21 @@ public class StudyController {
     //-----------------------------------
     // 스터디 장소 예약 화면
     @RequestMapping("/studyLocation.do")		//kakao map api 출력
-    public ModelAndView testMap(@RequestParam(defaultValue="studyId")int studyId) throws Exception{
-    	ModelAndView mv = new ModelAndView("studyLocation");		
-    	mv.addObject("studyId", studyId);
-    	System.out.println("확인:: "+mv);
+    public ModelAndView testMap(@RequestParam(defaultValue="studyId")int studyId, HttpSession session) throws Exception{
+    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
     	
-    	return mv;
+    	if (mem==null) {
+    		System.out.println("로그인 해주세요.");
+    		ModelAndView mv = new ModelAndView("login");
+    		return mv;
+    	}
+    	else {
+    		ModelAndView mv = new ModelAndView("studyLocation");		
+        	mv.addObject("studyId", studyId);
+        	System.out.println("확인:: "+mv);
+        	
+        	return mv;
+    	}
     }
     
     // 장소 예약 
