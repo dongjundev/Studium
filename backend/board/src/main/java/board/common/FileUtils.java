@@ -60,7 +60,7 @@ public class FileUtils {
 					}
 					
 					newFileName = Long.toString(System.nanoTime()) + originalFileExtension;
-					BoardFileDto boardFile = new BoardFileDto();
+					BoardFileDto boardFile = new BoardFileDto();				// db에 저장할 파일을 만듬.
 					boardFile.setBoardIdx(boardIdx);
 					boardFile.setFileSize(multipartFile.getSize());
 					boardFile.setOriginalFileName(multipartFile.getOriginalFilename());

@@ -59,6 +59,7 @@
 			INSERT INTO t_file(board_idx, original_file_name, stored_file_path, file_size, creator_id, created_datetime)
 			VALUES	
 		]]>
+		<!-- collection : 전달받은 인자 -->
 		<foreach collection="list" item="item" separator=",">
 			(
 				#{item.boardIdx},
