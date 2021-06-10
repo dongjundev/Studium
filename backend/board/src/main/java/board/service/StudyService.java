@@ -14,4 +14,7 @@ public interface StudyService {
 	void insertStudy(StudyDto study) throws Exception; //스터디 만들기
 	
 	void insertLocation(StudyDto study) throws Exception; //스터디 장소 예약
+	
+	List<StudyDto> selectStudyEvent(int studyId) throws Exception; //스터디 이벤트
+	
 }

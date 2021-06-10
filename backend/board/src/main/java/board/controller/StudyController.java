@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import board.dto.MemberDto;
 import board.dto.StudyDto;
+import board.service.MemberService;
 import board.service.StudyService;
 
 @Controller
@@ -18,6 +19,9 @@ public class StudyController {
 	
 	@Autowired
 	private StudyService studyService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping(value = {"/home", "/"})
 	public ModelAndView selectStudyList() throws Exception{
@@ -55,7 +59,18 @@ public class StudyController {
  
     	//System.out.println("studyID 확인:: "+studyId);
     	StudyDto study = studyService.selectStudyDetail(studyId);
+    	
+    	//스터디 이벤트
+    	List<StudyDto> event= studyService.selectStudyEvent(studyId);
+    	
+    	//스터디 멤버
+    	List<MemberDto> member= memberService.selectStudyMember(studyId);
+    	
     	mv.addObject("study", study);
+    	mv.addObject("event", event);
+    	mv.addObject("member", member);
+    	
+    	//System.out.println("studyDetail member 출력 :: "+member);
     	
     	return mv;
     }

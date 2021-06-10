@@ -64,5 +64,12 @@ public class StudyServiceImpl implements StudyService {
 	public void insertLocation(StudyDto study) throws Exception{
 		studyMapper.insertLocation(study);
 	}
+	
+	// ---------------------------------스터디 이벤트
+	@Override
+	public List<StudyDto> selectStudyEvent(int studyId) throws Exception{
+		List<StudyDto> studyEvent=studyMapper.selectStudyEvent(studyId);
+		return studyEvent;
+	}
 
 }

@@ -48,5 +48,16 @@
 			WHERE member_id = #{memberId}
 		]]>
 	</select>
+	
+	<!-- 스터디 상세 - 스터디 멤버 -->
+	<select id="selectStudyMember" resultType="board.dto.MemberDto">
+		<![CDATA[
+			SELECT tm.member_name, tm.member_id 
+			FROM t_member AS tm LEFT OUTER JOIN s_host AS sh
+			ON tm.member_id=sh.member_id
+			WHERE sh.study_id=${studyId};
+		]]>
+	</select>
+	
 
 </mapper>
