@@ -3,6 +3,7 @@ package board.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import board.dto.MemberDto;
+import board.dto.StudyDto;
 
 @Mapper
 public interface MemberMapper {
@@ -15,5 +16,7 @@ public interface MemberMapper {
 	void studyJoin(MemberDto member) throws Exception;		//스터디 가입
 	
 	String login(String MemberId) throws Exception;
+	
+	List<MemberDto> selectStudyMember(int studyId) throws Exception; //스터디 멤버
 
 }

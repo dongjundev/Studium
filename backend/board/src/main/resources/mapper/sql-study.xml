@@ -68,4 +68,13 @@
 		]]>
 	</select>
 	
+	<!-- 스터디 이벤트 !-->
+	<select id="selectStudyEvent" resultType="board.dto.StudyDto">
+		<![CDATA[
+			SELECT event_name,event_description
+			FROM t_event
+			WHERE study_id=${studyId}
+		]]>
+	</select>
+
 </mapper>
