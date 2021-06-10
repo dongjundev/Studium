@@ -17,4 +17,5 @@ public interface StudyMapper {
 	void insertLocation(StudyDto study) throws Exception; //스터디 장소 예약
 	List<StudyDto> selectStudyEvent(int studyId) throws Exception; //스터디 이벤트
 	List<StudyDto> selectStudyMember(int studyId) throws Exception; //스터디 멤버
+	
 }

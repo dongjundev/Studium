@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import board.dto.MemberDto;
@@ -84,9 +86,26 @@ public class StudyController {
     @RequestMapping("/studyJoin.do")
     public String StudyJoin(@ModelAttribute MemberDto member) throws Exception{	
     	System.out.println("member확인:: "+member);
-    	studyService.studyJoin(member);
+    	int result=memberService.studyJoinChk(member);
+    	
+    	if (result==0) {
+    		studyService.studyJoin(member);
+    		System.out.println("스터디 가입 완료");
+        	
+    	}else {
+    		System.out.println("중복 가입입니다.");
+    	}
     	return "redirect:/studyDetail.do?studyId="+member.getStudyId();
     }
+    
+    // 스터디 가입 중복 체크
+	@ResponseBody
+	@RequestMapping(value="user/studyJoinChk", method = RequestMethod.POST)
+	public int studyJoinChk(MemberDto memberDto) throws Exception {
+		int result = memberService.studyJoinChk(memberDto);
+		return result;
+	}
+	
     
     //-----------------------------------
     // 스터디 장소 예약 화면
