@@ -21,6 +21,7 @@
 					</td>
 				</tr>
 			</table>
+			<input type="hidden" id="creatorId" name="creatorId" th:value="${session.loginUser.memberId}">
 			<input type="file" id="files" name="files" multiple="multiple">
 			<input type="submit" id="submit" value="저장" class="btn">
 		</form>

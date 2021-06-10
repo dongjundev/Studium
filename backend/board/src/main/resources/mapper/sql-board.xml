@@ -49,7 +49,7 @@
 				#{title},
 				#{contents},
 				NOW(),
-				'admin',
+				#{creatorId},
 				#{studyId}
 			)
 		]]>
