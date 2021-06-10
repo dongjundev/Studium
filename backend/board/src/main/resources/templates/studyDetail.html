@@ -64,9 +64,10 @@
 			</tbody>
 		</table>
 		
-	<div th:if="${session.loginUser != null}">
 		<form id="sjoinfrm" name="sjoinfrm" method="get" action="/studyJoin.do">
-			<input type="hidden" name="memberId" th:value="${session.loginUser.memberId}">
+			<div th:if="${session.loginUser != null}">
+				<input type="hidden" name="memberId" th:value="${session.loginUser.memberId}">
+			</div>
 			<input type="hidden" name="studyId" th:value="${study.studyId}">
 			<input type="submit" id="submit" value="스터디 가입" class="btn">
 		</form>
@@ -75,7 +76,7 @@
 			<input type="hidden" name="studyId" th:value="${study.studyId}">
 			<input type="submit" id="submit" value="장소 예약" class="btn">
 		</form>
-	</div>
+	
 	
 	<form id="sbfrm" name="sbfrm" method="get" action="/board/openBoardList.do">
 			<input type="hidden" name="studyId" th:value="${study.studyId}">
