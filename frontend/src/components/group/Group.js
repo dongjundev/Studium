@@ -77,9 +77,9 @@ function Group( {image, name, numOfMembers, tags, display} ) {
 }
 
 Group.propTypes = {
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
     name: PropTypes.string.isRequired,
-    numOfMembers: PropTypes.number.isRequired,
+    numOfMembers: PropTypes.number,
     tags: PropTypes.string
 }
 
