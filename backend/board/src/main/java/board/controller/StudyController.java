@@ -96,7 +96,7 @@ public class StudyController {
     	else {
 	    	System.out.println("member확인:: "+member);
 	    	int result=memberService.studyJoinChk(member);
-	    	System.out.println("result :: "+result);
+
 	    	if (result==0) {
 	    		studyService.studyJoin(member);
 	    		System.out.println("스터디 가입 완료");
