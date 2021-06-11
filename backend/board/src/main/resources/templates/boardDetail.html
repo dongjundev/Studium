@@ -26,12 +26,18 @@
 				<tr>
 					<th scope="row">제목</th>
 						<td colspan="3">
-							<input type="test" id="title" name="title"
+							<input type="text" id="title" name="title"
 								th:value="${board.title}">
 							</input>
 						</td>
 				</tr>
 				<tr>
+					<td>
+						<!--  <img src="../images/20210611/151084587730700.png" />-->
+						<img th:src="${boardFile.storedFilePath}" />
+						<p th:text='${boardFile.storedFilePath}'></p>
+					</td>
+					
 					<td colspan="4" class="view_test">
 						<textarea title="내용" id="contents" name="contents"
 							th:text="${board.contents}"></textarea>
@@ -42,7 +48,7 @@
 		<input type="hidden" name="boardIdx" th:value="${board.boardIdx}">
 	</form>
 	<div class="file_list">
-		<a th:each="list : ${board.fileList}" th:href="@{/board/downloadBoardFile.do(idx=${list.idx}, boardIdx=${list.boardIdx})}" 
+		<a th:each="list : ${board.fileList}" th:href="@{/board/downloadBoardFile.do(boardIdx=${list.boardIdx})}" 
 			th:text="|${list.originalFileName} (${list.fileSize} kb)|"></a>
 	</div>
 	<input type="button" id="list" value="목록으로">

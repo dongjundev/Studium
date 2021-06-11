@@ -19,7 +19,7 @@
 	
 	<select id="selectBoardFileList" parameterType="int" resultType="board.dto.BoardFileDto">
 		<![CDATA[
-			SELECT idx, board_idx, original_file_name, FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			SELECT board_idx, original_file_name, original_file_path, FORMAT(ROUND(file_size / 1024), 0) AS file_size
 			FROM t_file
 			WHERE 
 				board_idx = #{boardIdx}
@@ -29,11 +29,10 @@
 	
 	<select id="selectBoardFileInformation" parameterType="map" resultType="board.dto.BoardFileDto">
 		<![CDATA[
-			SELECT original_file_name, stored_file_path, file_size
+			SELECT board_idx, original_file_name, stored_file_path, file_size,original_file_path
 			FROM t_file
 			WHERE 
-				idx = #{idx}
-				AND board_idx = #{boardIdx}
+				board_idx = #{boardIdx}
 				AND deleted_yn = 'N'
 		]]>
 	</select>
@@ -57,13 +56,14 @@
 	
 	<insert id="insertBoardFileList" parameterType="board.dto.BoardFileDto">
 		<![CDATA[
-			INSERT INTO t_file(board_idx, original_file_name, stored_file_path, file_size, creator_id, created_datetime)
+			INSERT INTO t_file(board_idx, original_file_name,original_file_path, stored_file_path, file_size, creator_id, created_datetime)
 			VALUES	
 		]]>
 		<foreach collection="list" item="item" separator=",">
 			(
 				#{item.boardIdx},
 				#{item.originalFileName},
+				#{item.originalFilePath},
 				#{item.storedFilePath},
 				#{item.fileSize},
 				'admin',
