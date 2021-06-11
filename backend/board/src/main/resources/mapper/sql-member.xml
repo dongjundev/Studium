@@ -14,15 +14,66 @@
 	
 	<insert id="insertMember" parameterType="board.dto.MemberDto">
 		<![CDATA[
-			INSERT INTO test_member SET member_id=#{memberId}, member_name=#{memberName}, member_pw=#{memberPw}
+			INSERT INTO t_member SET member_id=#{memberId}, member_name=#{memberName}, member_pw=#{memberPw}
 		]]>
 	</insert>
 	
 	<select id="idChk" resultType="int">
 		<![CDATA[
-			SELECT COUNT(*) FROM test_member
+			SELECT COUNT(*) FROM t_member
 			WHERE member_id=#{memberId}
 			]]>
 	</select>
 	
+	<!-- 스터디 가입 -->
+	<insert id="studyJoin" parameterType="board.dto.MemberDto">
+		<![CDATA[
+			INSERT INTO s_host SET member_id=#{memberId}, study_id=#{studyId}
+		]]>
+	</insert>
+	
+	<!-- 스터디 가입 중복 방지 -->
+	<select id="studyJoinChk" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM s_host
+			WHERE member_id='${memberId}' and study_id=#{studyId}
+		]]>
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="login" resultType="String">		
+		<![CDATA[
+			SELECT member_pw
+			FROM t_member
+			WHERE member_id = #{memberPw}
+		]]>
+	</select>
+	
+	<select id="selectMemberList" parameterType="board.dto.MemberDto">		
+		<![CDATA[
+			SELECT member_id, member_name, member_pw
+			FROM t_member
+			WHERE member_id = #{memberId}
+		]]>
+	</select>
+	
+	<!-- 스터디 상세 - 스터디 멤버 -->
+	<select id="selectStudyMember" resultType="board.dto.MemberDto">
+		<![CDATA[
+			SELECT tm.member_name, tm.member_id 
+			FROM t_member AS tm LEFT OUTER JOIN s_host AS sh
+			ON tm.member_id=sh.member_id
+			WHERE sh.study_id=${studyId};
+		]]>
+	</select>
+	
+	<!-- 스터디 멤버 상세 -->
+	<select id="selectStudyMemberDetail" resultType="board.dto.MemberDto">
+		<![CDATA[
+			SELECT member_name, member_id
+			FROM t_member
+			WHERE member_id='${memberId}';
+		]]>
+	</select>
+
 </mapper>

@@ -7,7 +7,7 @@
 	<select id="selectStudyList" resultType="board.dto.StudyDto">	<!-- <select> 태그를 이용하여 select 쿼리임을 나타냄. id값과 boardmapper의 함수명 같아야함. -->
 		<![CDATA[
 			SELECT
-				study_id, study_name, study_contents
+				study_id, study_name, study_description
 			FROM
 				t_study
 		]]>
@@ -17,7 +17,7 @@
 	<select id="searchStudy" resultType="board.dto.StudyDto" >
 		<![CDATA[
 			SELECT
-				study_id, study_name, study_contents 
+				study_id, study_name, study_description
 			FROM t_study
 		]]>
 		<choose>
@@ -33,11 +33,48 @@
 			</when>
 			<otherwise>
 				<![CDATA[
-				WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_contents LIKE CONCAT('%', #{searchKeyword} , '%'))
+				WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_description LIKE CONCAT('%', #{searchKeyword} , '%'))
 				]]>
 			</otherwise>
 		</choose>
 		
 	</select>
 	
+	<!-- 스터디 상세정보 !-->
+	<select id="selectStudyDetail" parameterType="int" resultType="board.dto.StudyDto">
+		<![CDATA[
+			SELECT
+				study_id, study_name, study_description
+			FROM
+				t_study
+			WHERE
+				study_id=#{studyId}
+		]]>
+	</select>
+	
+	<insert id="insertStudy" parameterType="board.dto.StudyDto">
+		<![CDATA[
+			INSERT INTO t_study(study_name, study_description, study_topics, study_location)
+			VALUES(#{studyName}, #{studyDescription}, #{studyTopics}, #{studyLocation})
+		]]>
+	</insert>
+	
+		<!-- 스터디 장소 예약 !-->
+	<select id="insertLocation" resultType="board.dto.StudyDto">
+		<![CDATA[
+			INSERT INTO t_location
+			SET study_id=#{studyId}, 
+			study_location=#{studyLocation}
+		]]>
+	</select>
+	
+	<!-- 스터디 이벤트 !-->
+	<select id="selectStudyEvent" resultType="board.dto.StudyDto">
+		<![CDATA[
+			SELECT event_name,event_description
+			FROM t_event
+			WHERE study_id=${studyId}
+		]]>
+	</select>
+
 </mapper>

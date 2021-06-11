@@ -11,25 +11,65 @@
 			FROM
 				t_board
 			WHERE
-				deleted_yn = 'N'
+				deleted_yn = 'N' AND
+				study_id=#{studyId}
 			ORDER BY board_idx DESC
 		]]>
 	</select>
 	
-	<insert id="insertBoard" parameterType="board.dto.BoardDto">
+	<select id="selectBoardFileList" parameterType="int" resultType="board.dto.BoardFileDto">
+		<![CDATA[
+			SELECT board_idx, original_file_name, original_file_path, FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			FROM t_file
+			WHERE 
+				board_idx = #{boardIdx}
+				AND deleted_yn = 'N'
+		]]>
+	</select>
+	
+	<select id="selectBoardFileInformation" parameterType="map" resultType="board.dto.BoardFileDto">
+		<![CDATA[
+			SELECT board_idx, original_file_name, stored_file_path, file_size,original_file_path
+			FROM t_file
+			WHERE 
+				board_idx = #{boardIdx}
+				AND deleted_yn = 'N'
+		]]>
+	</select>
+		
+	<insert id="insertBoard" parameterType="board.dto.BoardDto" useGeneratedKeys="true" keyProperty="boardIdx">
 		<![CDATA[
 			INSERT INTO t_board
 			(
-				title, contents, created_datetime, creator_id
+				title, contents, created_datetime, creator_id, study_id
 			)
 			VALUES
 			(
 				#{title},
 				#{contents},
 				NOW(),
-				'admin'
+				#{creatorId},
+				#{studyId}
 			)
 		]]>
+	</insert>
+	
+	<insert id="insertBoardFileList" parameterType="board.dto.BoardFileDto">
+		<![CDATA[
+			INSERT INTO t_file(board_idx, original_file_name,original_file_path, stored_file_path, file_size, creator_id, created_datetime)
+			VALUES	
+		]]>
+		<foreach collection="list" item="item" separator=",">
+			(
+				#{item.boardIdx},
+				#{item.originalFileName},
+				#{item.originalFilePath},
+				#{item.storedFilePath},
+				#{item.fileSize},
+				'admin',
+				NOW()
+			)
+		</foreach>
 	</insert>
 	
 	<update id="updateHitCount" parameterType="int">

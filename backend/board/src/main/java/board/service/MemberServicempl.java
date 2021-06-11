@@ -1,9 +1,12 @@
 package board.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import board.dto.MemberDto;
+import board.dto.StudyDto;
 import board.mapper.MemberMapper;
 
 @Service
@@ -34,6 +37,33 @@ public class MemberServicempl implements MemberService{
 	public int idChk(MemberDto member) throws Exception {
 		// TODO Auto-generated method stub
 		int result=memberMapper.idChk(member);
+		return result;
+	}
+	
+	@Override
+	public String login(String MemberId) throws Exception{
+		String dbPwd=memberMapper.login(MemberId);
+		return dbPwd;
+	}
+	
+	// ---------------------------------스터디 멤버
+	@Override
+	public List<MemberDto> selectStudyMember(int studyId) throws Exception{
+		List<MemberDto> studyMember=memberMapper.selectStudyMember(studyId);
+		return studyMember;
+	}
+	
+	//
+	@Override
+	public MemberDto selectStudyMemberDetail(String memberId) throws Exception{
+		MemberDto member=memberMapper.selectStudyMemberDetail(memberId);
+		return member;
+	}
+	
+	@Override
+	public int studyJoinChk(MemberDto member) throws Exception {
+		// TODO Auto-generated method stub
+		int result=memberMapper.studyJoinChk(member);
 		return result;
 	}
 
