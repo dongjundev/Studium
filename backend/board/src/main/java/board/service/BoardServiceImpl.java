@@ -81,8 +81,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public BoardFileDto selectBoardFileInformation(int idx, int boardIdx) throws Exception {
+	public BoardFileDto selectBoardFileInformation(int boardIdx) throws Exception {
 		// TODO Auto-generated method stub
-		return boardMapper.selectBoardFileInformation(idx, boardIdx);
+		return boardMapper.selectBoardFileInformation(boardIdx);
 	}
 }

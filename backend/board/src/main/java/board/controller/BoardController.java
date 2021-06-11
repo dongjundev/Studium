@@ -35,7 +35,7 @@ public class BoardController {
         
     	MemberDto member=(MemberDto) session.getAttribute("loginUser");
     	
-    	// 로그인 한 사용자만 게시판 진입 가능
+    	// 로그인 한 사용자
     	if (member==null) {
     		System.out.println("로그인 해주세요.");
     		ModelAndView mv = new ModelAndView("login");
@@ -77,8 +77,13 @@ public class BoardController {
     	//public ModelAndView openBoardDetail(@RequestParam("boardIdx")Integer boardIdx) throws Exception{		//이것도 가능
     	ModelAndView mv = new ModelAndView("/boardDetail");		//templates에서 바로 찾음
     	
+    	// 이미지파일 출력
+    	BoardFileDto boardFile = boardService.selectBoardFileInformation(boardIdx);
     	BoardDto board = boardService.selectBoardDetail(boardIdx);
     	mv.addObject("board", board);
+    	mv.addObject("boardFile", boardFile);
+    	
+    	System.out.println("파일 정보 :: "+boardFile);
     	
     	return mv;
     }
@@ -112,13 +117,13 @@ public class BoardController {
     }
     
     @RequestMapping("/board/downloadBoardFile.do")
-    public void downloadBoardFile(@RequestParam int idx, @RequestParam int boardIdx, HttpServletResponse response) throws Exception{
+    public void downloadBoardFile(@RequestParam int boardIdx, HttpServletResponse response) throws Exception{
     	System.out.println("들어옴");
-    	BoardFileDto boardFile = boardService.selectBoardFileInformation(idx, boardIdx);
+    	BoardFileDto boardFile = boardService.selectBoardFileInformation(boardIdx);
     	if(ObjectUtils.isEmpty(boardFile) == false) {
     		String fileName = boardFile.getOriginalFileName();
     		
-    		byte[] files = FileUtils.readFileToByteArray(new File(boardFile.getStoredFilePath()));
+    		byte[] files = FileUtils.readFileToByteArray(new File(boardFile.getOriginalFilePath()));
     		
     		response.setContentType("application/octet-stream");
     		response.setContentLength(files.length);

@@ -26,7 +26,7 @@ public class FileUtils {
 		
 		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
 		ZonedDateTime current = ZonedDateTime.now();
-		String path = "images/"+current.format(format);
+		String path = "src/main/resources/static/images/"+current.format(format);
 		File file = new File(path);
 		if(file.exists() == false) {
 			file.mkdirs();
@@ -64,9 +64,11 @@ public class FileUtils {
 					boardFile.setBoardIdx(boardIdx);
 					boardFile.setFileSize(multipartFile.getSize());
 					boardFile.setOriginalFileName(multipartFile.getOriginalFilename());
-					boardFile.setStoredFilePath(path + "/" + newFileName);
+					boardFile.setStoredFilePath("../images/"+current.format(format)+"/" + newFileName);
+					boardFile.setOriginalFilePath(path+"/" + newFileName);
 					fileList.add(boardFile);
 					
+					System.out.println("ori파일경로 :: "+boardFile.getOriginalFilePath());
 					file = new File(path + "/" + newFileName);
 					multipartFile.transferTo(file);
 				}
