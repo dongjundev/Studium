@@ -94,8 +94,13 @@ class Main extends React.Component{
         return (
             <div className="container">
                 <div className="main-image">
+                    <video autoPlay muted loop id="myVideo">
+                        <source src="/images/video.mp4" type="video/mp4" />
+                        <source src="/images/video.webm" type="video/webm" />
+                        <strong>Your browser does not support the video tag.</strong>
+                    </video>
                     <div className="main-letter">
-                        <h3>달라지고 싶은가요?</h3>
+                        <h3>저희가 도와드릴게요.</h3>
                         <p>원하는 스터디 그룹을 찾아 함께 공부하는 경험을 즐겨보세요.</p>
                         <Link to="/register">
                             <button>STUDIUM 가입하기</button>
