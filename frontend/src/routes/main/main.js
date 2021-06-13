@@ -102,9 +102,9 @@ class Main extends React.Component{
                     <div className="main-letter">
                         <h3>저희가 도와드릴게요.</h3>
                         <p>원하는 스터디 그룹을 찾아 함께 공부하는 경험을 즐겨보세요.</p>
-                        <Link to="/register">
-                            <button>STUDIUM 가입하기</button>
-                        </Link>
+                        {/* <Link to="/register"> */}
+                            <button onClick={this.doAction}>STUDIUM 가입하기</button>
+                        {/* </Link> */}
                     </div>
                 </div>
                 <div className="content-area">
@@ -188,6 +188,13 @@ class Main extends React.Component{
                 </div>
             </div>
         )
+    }
+    
+    doAction = async () => {
+        const url = "http://localhost:8080/api/test.do";
+        const res = await axios.get(url);
+        console.log(JSON.stringify(res));
+        window.location.href = res.toString();
     }
 
     componentWillUnmount(){

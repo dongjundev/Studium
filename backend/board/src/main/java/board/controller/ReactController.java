@@ -38,4 +38,10 @@ public class ReactController {
 		return studyService.selectStudyList();
 		
 	}
+	@GetMapping("/test.do")
+	public String testReturnUrl() throws Exception{
+		System.out.println("request recieved");
+		return "http://localhost:3000/search";
+		
+	}
 }
