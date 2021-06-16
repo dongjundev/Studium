@@ -8,10 +8,14 @@ public class StudyDto {
 	private String studyName;
 	private String studyDescription;
 	private String studyLocation;
-	private String studyTopics;
 	
 	//스터디 이벤트
 	private int eventId;
 	private String eventName;
 	private String eventDescription;
+	
+	//추가
+	private String studyTag;
+	private String memberId;
+	//private String eventId;
 }
