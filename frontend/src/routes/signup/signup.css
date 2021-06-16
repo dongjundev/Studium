@@ -1,0 +1,115 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap'); */
+
+.container input{
+  border: 2px solid #febf00;
+  border-radius: 10px;
+}
+
+.container input:focus{
+  outline: #febf00;
+}
+
+.body{
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.signup-form{
+  width: 800px;
+  margin: 0 auto;
+  padding: 80px 0;
+  border-radius: 10px;
+  height: 100%;
+  text-align: center;
+}
+
+.signup-form #signup-header{
+  color:#febf00;
+  text-align: center;
+}
+
+.signup-text-center{
+  padding: 20px;
+  color:black;
+}
+
+
+.signup-container{
+  display: block;
+  overflow: hidden;
+  width:100%;
+  position: relative;
+}
+
+.signup-form #signup-id-area{
+  width: 50%;
+  height: 50px;
+}
+
+.signup-form #signup-password-area{
+  width: 50%;
+  height: 50px;
+}
+.signup-form #signup-passwordCheck-area{
+  width: 50%;
+  height: 50px;
+}
+
+.signup-form #signup-birthday{
+  width: 50%;
+  height: 50px;;
+}
+
+.signup-form #signup-email{
+  width: 50%;
+  height: 50px;
+}
+
+.signup-form #signup-account{
+  width: 50%;
+  height: 50px;
+}
+
+.signup-form #signup-checkGender{
+  display: inline-block;
+  overflow: hidden;
+  padding:10px;
+  color: black;
+}
+
+.signup-form .signup-inputarea{
+  display: block;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+
+.signup-form .btn-lg{
+  position: relative;
+  overflow: hidden;
+  transition: 400ms;
+  width: 150px;
+  height: 50px;
+  color: black;
+  background-color: #febf00;
+  border: 1px solid #febf00;
+}
+
+.signup-form .btn-lg:hover{
+  position: relative;
+  overflow: hidden;
+  transition: 400ms;
+  width: 150px;
+  height: 50px;
+  color: black;
+  background-color: #febf00;
+  border-radius: 20px;
+  border: 1px solid #febf00;
+  border-radius: 50px;
+}
+
+
