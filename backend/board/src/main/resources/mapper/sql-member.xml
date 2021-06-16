@@ -14,7 +14,8 @@
 	
 	<insert id="insertMember" parameterType="board.dto.MemberDto">
 		<![CDATA[
-			INSERT INTO t_member SET member_id=#{memberId}, member_name=#{memberName}, member_pw=#{memberPw}
+			INSERT INTO t_member SET member_id=#{memberId}, member_name=#{memberName}, member_password=#{memberPassword}
+			, member_address=#{memberAddress}, member_gender=#{memberGender}
 		]]>
 	</insert>
 	
@@ -43,7 +44,7 @@
 	<!-- 로그인 -->
 	<select id="login" resultType="String">		
 		<![CDATA[
-			SELECT member_pw
+			SELECT member_password
 			FROM t_member
 			WHERE member_id = #{memberPw}
 		]]>

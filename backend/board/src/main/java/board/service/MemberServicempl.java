@@ -34,9 +34,9 @@ public class MemberServicempl implements MemberService{
 	}
 
 	@Override
-	public int idChk(MemberDto member) throws Exception {
+	public int idChk(String memberId) throws Exception {
 		// TODO Auto-generated method stub
-		int result=memberMapper.idChk(member);
+		int result=memberMapper.idChk(memberId);
 		return result;
 	}
 	

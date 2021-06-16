@@ -44,7 +44,7 @@
 	<select id="selectStudyDetail" parameterType="int" resultType="board.dto.StudyDto">
 		<![CDATA[
 			SELECT
-				study_id, study_name, study_description
+				*
 			FROM
 				t_study
 			WHERE

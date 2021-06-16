@@ -18,4 +18,5 @@ public class StudyDto {
 	private String studyTag;
 	private String memberId;
 	//private String eventId;
+	private int memberCnt;
 }
