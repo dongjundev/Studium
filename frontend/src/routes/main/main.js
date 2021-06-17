@@ -38,27 +38,27 @@ class Main extends React.Component{
                     }
             ],
             groups: [
-                {
-                    id: 999,
-                    image: "https://awssofia.com/wp-content/uploads/2020/01/cropped-AWS-Website-Banner.jpg",
-                    name: "AWS Korea Community dfsdfffe",
-                    numOfMembers: 240,
-                    tags: "기술"
-                },
-                {
-                    id: 998,
-                    image: "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1200,h_630,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/xfarkb2lvobut3c5jugs/%20Language%20Exchange%20Experience%20in%20Seoul.jpg",
-                    name: "영어회화 배우기",
-                    numOfMembers: 338,
-                    tags: "외국어"
-                },
-                {
-                    id: 997,
-                    image: "https://pacificenglishschool.com/wp-content/uploads/2020/06/banner_study-scaled.jpg",
-                    name: "정보처리기사 필기",
-                    numOfMembers: 102,
-                    tags: "자격증"
-                }
+                // {
+                //     id: 999,
+                //     image: "https://awssofia.com/wp-content/uploads/2020/01/cropped-AWS-Website-Banner.jpg",
+                //     name: "AWS Korea Community dfsdfffe",
+                //     numOfMembers: 240,
+                //     tags: "기술"
+                // },
+                // {
+                //     id: 998,
+                //     image: "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1200,h_630,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/xfarkb2lvobut3c5jugs/%20Language%20Exchange%20Experience%20in%20Seoul.jpg",
+                //     name: "영어회화 배우기",
+                //     numOfMembers: 338,
+                //     tags: "외국어"
+                // },
+                // {
+                //     id: 997,
+                //     image: "https://pacificenglishschool.com/wp-content/uploads/2020/06/banner_study-scaled.jpg",
+                //     name: "정보처리기사 필기",
+                //     numOfMembers: 102,
+                //     tags: "자격증"
+                // }
             ],
             categories: [
                 {
@@ -102,12 +102,43 @@ class Main extends React.Component{
                     <div className="main-letter">
                         <h3>저희가 도와드릴게요.</h3>
                         <p>원하는 스터디 그룹을 찾아 함께 공부하는 경험을 즐겨보세요.</p>
-                        <Link to="/register">
-                            <button>STUDIUM 가입하기</button>
-                        </Link>
+                        {/* <Link to="/register"> */}
+                            <button onClick={this.doAction}>STUDIUM 가입하기</button>
+                        {/* </Link> */}
                     </div>
                 </div>
                 <div className="content-area">
+                    <div className="groups-wrap">
+                        <p className="section-title">추천 스터디</p>
+                        <p className="section-detail">나랑 같이 공부할 그룹 찾기</p>
+                        <button>더보기</button>
+                        <div className="group">
+                            {isGroupsLoading ? "Loading.." : groups.map(group => (
+                                <Link to={{
+                                    pathname: '/group-detail',
+                                    state: {
+                                        isLoggedIn: this.state.isLoggedIn,
+                                        image: group.studyImage,
+                                        name: group.studyName,
+                                        description: group.studyDescription,
+                                        numOfMembers: group.numOfMembers,
+                                        tags: group.studyTag,
+                                        display : "group-detail"
+                                    }
+                                }}>
+                                    <Group
+                                        key = {group.studyId}
+                                        image = {group.studyImage}
+                                        name = {group.studyName}
+                                        description = {group.studyDescription}
+                                        numOfMembers = {group.numOfMembers}
+                                        tags = {group.studyTag}
+                                        display = "thum-main"
+                                    />    
+                                </Link>    
+                            ))}
+                        </div>
+                    </div>
                     <div className="events-wrap">
                         <p className="section-title">내 주변 이벤트</p>
                         <p className="section-detail">근처에서 곧 진행될 이벤트를 확인해보세요</p>
@@ -136,34 +167,6 @@ class Main extends React.Component{
                             ))}
                         </div>
                     </div>
-                    <div className="groups-wrap">
-                        <p className="section-title">내 주변 그룹</p>
-                        <p className="section-detail">나랑 같이 공부할 그룹 찾기</p>
-                        <div className="group">
-                            {isGroupsLoading ? "Loading.." : groups.map(group => (
-                                <Link to={{
-                                    pathname: '/group-detail',
-                                    state: {
-                                        isLoggedIn: this.state.isLoggedIn,
-                                        image: group.image,
-                                        name: group.studyName,
-                                        numOfMembers: group.numOfMembers,
-                                        tags: group.tags,
-                                        display : "group-detail"
-                                    }
-                                }}>
-                                    <Group
-                                        key = {group.id}
-                                        image = {group.image}
-                                        name = {group.studyName}
-                                        numOfMembers = {group.numOfMembers}
-                                        tags = {group.tags}
-                                        display = "thum-main"
-                                    />    
-                                </Link>    
-                            ))}
-                        </div>
-                    </div>
                     <div className="category-wrap">
                         <p className="section-title">카테고리</p>
                         <p className="section-detail">관심 있는 주제로 그룹을 찾아보세요.</p>
@@ -188,6 +191,13 @@ class Main extends React.Component{
                 </div>
             </div>
         )
+    }
+    
+    doAction = async () => {
+        const url = "http://localhost:8080/api/test.do";
+        const res = await axios.get(url);
+        console.log(JSON.stringify(res));
+        window.location.href = res.toString();
     }
 
     componentWillUnmount(){
@@ -215,7 +225,7 @@ class Main extends React.Component{
     //Get groups from DB
     getGroups = async () => {
     //getGroups(){
-        const url = "http://localhost:8080/api/home.do";
+        const url = "http://localhost:8080/home.do";
         // const {
         //     data : {
         //         data : {groups}

@@ -11,7 +11,7 @@ function Navigation(){
             </Link>
         </div>
         <div className="create-group">
-                <Link to="/create-group">새 그룹 시작하기</Link>
+                <Link to="/create-group">스터디 만들기</Link>
         </div>
         <div className="nav-login">
             <Link to="/login">로그인</Link>

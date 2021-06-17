@@ -104,6 +104,14 @@
     margin-bottom: -10px;
 }
 .content-area .section-detail{
+    display: inline-block;
     margin-left: 30px;
     font-size: 15px;
+}
+.content-area .groups-wrap button{
+    float: right;
+    margin: 10px 35px 0 0;
+    padding: 5px;
+    border: none;
+    
 }

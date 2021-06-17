@@ -19,6 +19,7 @@ class GroupDetail extends React.Component{
                 <Group
                     image = {location.state.image}
                     name = {location.state.name}
+                    description = {location.state.description}
                     numOfMembers = {location.state.numOfMembers}
                     tags = {location.state.tags}
                     display = {location.state.display}
