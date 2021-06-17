@@ -82,8 +82,6 @@ public class ReactController {
 		member.setMemberGender(memberGender);
 		
 		int result=memberService.idChk(memberId);
-		
-		System.out.println("memberDto 내용 :: " + member);
 	
 		if(result==1) {
 			// 아이디가 중복이면 
@@ -146,8 +144,8 @@ public class ReactController {
 
 	
 	// StudyDetail----------------------------
-	@GetMapping("/study")
-    public ArrayList<Object> StudyDetail(@RequestParam(defaultValue="studyId")int studyId) throws Exception{		
+	@GetMapping("/study/{studyId}")
+    public ArrayList<Object> StudyDetail(@PathVariable(name = "studyId") int studyId) throws Exception{		
  
 		ArrayList<Object> studyDetail=new ArrayList<>();
 		ArrayList<MemberDto> memberList = new ArrayList<>();
@@ -331,14 +329,44 @@ public class ReactController {
     	
     	return "ok";
     }
-	
-	
+ 	
+ 	// 카테고리 검색---------------------------
+ 	@GetMapping("/search")
+    public List<StudyDto> CategorySearch(@RequestParam(defaultValue="tagId")int tagId) throws Exception{
+ 		List<StudyDto> list = studyService.selectStudyList();
+ 		List<StudyDto> result= new ArrayList<>();
+ 		
+		for(int i=0; i<list.size(); i++) {
+			System.out.println("search 확인 :: "+list.get(i));
+			
+			if (list.get(i).getStudyTag()==null) {
+				continue;
+			}
+			String[] TagList = list.get(i).getStudyTag().split(",");
+			System.out.println("TagList 확인 :: "+Arrays.toString(TagList));
+			
+			for (int j=0; j<TagList.length; j++) {
+				if (Integer.parseInt(TagList[j])==tagId) {
+					int studyId=list.get(i).getStudyId();
+					result.add(studyService.selectStudyDetail(studyId));
+				}
+				else {
+					continue;
+				}
+			}
+		}
+		
+		return result;
+    }
+ 	
 //	@GetMapping("/study")
 //	public List<StudyDto> seletTest(@RequestParam("no") int no) throws Exception{
 //		System.out.println("받은 값 :: "+no);
 //		return null;
 //		
 //	}
+ 	
+ 	
 	
 
 }
