@@ -44,7 +44,7 @@
 	<select id="selectStudyDetail" parameterType="int" resultType="board.dto.StudyDto">
 		<![CDATA[
 			SELECT
-				study_id, study_name, study_description
+				*
 			FROM
 				t_study
 			WHERE
@@ -71,9 +71,34 @@
 	<!-- 스터디 이벤트 !-->
 	<select id="selectStudyEvent" resultType="board.dto.StudyDto">
 		<![CDATA[
-			SELECT event_name,event_description
+			SELECT *
 			FROM t_event
 			WHERE study_id=${studyId}
+		]]>
+	</select>
+	
+	<!-- 이벤트 상세정보 !-->
+	<select id="selectEventDetail" resultType="board.dto.StudyDto">
+		<![CDATA[
+			SELECT *
+			FROM t_event
+			WHERE event_id=${eventId}
+		]]>
+	</select>
+	
+	<!-- 스터디 가입 -->
+	<insert id="studyJoin" parameterType="map">
+		<![CDATA[
+			UPDATE t_study SET member_id = CONCAT(member_id,'${memberId}') WHERE study_id=#{studyId};
+		]]>
+	</insert>
+	
+	<!-- 스터디 가입 중복 방지 -->
+	<select id="studyJoinChk" resultType="String">
+		<![CDATA[
+			SELECT member_id
+			FROM t_study
+			WHERE study_id=#{studyId}
 		]]>
 	</select>
 

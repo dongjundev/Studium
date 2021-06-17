@@ -48,8 +48,12 @@ public class StudyServiceImpl implements StudyService {
 	
 	// ---------------------------------스터디 가입
 	@Override
-	public void studyJoin(MemberDto member) throws Exception{
-		memberMapper.studyJoin(member);
+	public void studyJoin(String memberId,int studyId) throws Exception{
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("memberId", memberId);
+		map.put("studyId", studyId);
+		System.out.println("서비스단"+memberId+studyId);
+		studyMapper.studyJoin(map);
 	}
 	
 	// ----------------------------------스터디 만들기
@@ -71,5 +75,19 @@ public class StudyServiceImpl implements StudyService {
 		List<StudyDto> studyEvent=studyMapper.selectStudyEvent(studyId);
 		return studyEvent;
 	}
-
+	
+	// ---------------------------------이벤트 상세
+	@Override
+	public StudyDto selectEventDetail(int eventId) throws Exception{
+		StudyDto eventDetail=studyMapper.selectEventDetail(eventId);
+		return eventDetail;
+	}
+	
+	// ---------------------------------스터디 중복 체크
+	@Override
+	public String studyJoinChk(int studyId) throws Exception {
+		// TODO Auto-generated method stub
+		String result=studyMapper.studyJoinChk(studyId);
+		return result;
+	}
 }
