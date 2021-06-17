@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +17,7 @@ import board.service.StudyService;
 
 @CrossOrigin(origins="http://localhost:3000")
 @RestController
-@RequestMapping("/api")
+//@RequestMapping("/api")
 public class ReactController {
 	@Autowired
 	private BoardService boardService;
@@ -34,14 +35,26 @@ public class ReactController {
 	
 	@GetMapping("/home.do")
 	public List<StudyDto> selectStudyList() throws Exception{
-		System.out.println("값 :: "+studyService.selectStudyList());
-		return studyService.selectStudyList();
+		
+		List<StudyDto> studies = studyService.selectStudyList();
+		
+		for(int i=0; i<studies.size(); i++) {
+			String[] memberIds = studies.get(i).getMemberId().split(",");
+			studies.get(i).setNumOfMembers(memberIds.length);
+		}
+		return studies;
 		
 	}
 	@GetMapping("/test.do")
 	public String testReturnUrl() throws Exception{
 		System.out.println("request recieved");
 		return "http://localhost:3000/search";
+		
+	}
+	@GetMapping("/test/?{no}/{keyword}")
+	public List<StudyDto> selectTest(@PathVariable int no,@PathVariable String keyword) throws Exception{
+		System.out.println("recieved " + no+keyword);
+		return null;
 		
 	}
 }

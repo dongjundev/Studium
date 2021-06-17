@@ -1,4 +1,15 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+.body{
+    margin-bottom: 360px
+}
 .footer{
+    position: relative;
+    bottom: 0;
+    height: 360px;
+    width: 100%;
     background-color: #000;
     color: #b5b5b5;
 }

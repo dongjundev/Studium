@@ -47,7 +47,7 @@ public class MakeStudyController {
     
     @RequestMapping("/topics.do")
     public String MakeStudyTopics(StudyDto study) throws Exception{
-    	studyDto.setStudyTopics(study.getStudyTopics());
+    	studyDto.setStudyTag(study.getStudyTag());
     	return "/makeStudy/name";
     }
     
@@ -63,7 +63,7 @@ public class MakeStudyController {
     	
     	System.out.println("스터디 이름 : " + studyDto.getStudyName());
     	System.out.println("스터디 상세설명 : " + studyDto.getStudyDescription());
-    	System.out.println("스터디 토픽 : " + studyDto.getStudyTopics());
+    	System.out.println("스터디 토픽 : " + studyDto.getStudyTag());
     	System.out.println("스터디 장소 : " + studyDto.getStudyLocation());
     	studyService.insertStudy(studyDto);
     	studyDto = null;

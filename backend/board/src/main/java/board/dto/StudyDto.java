@@ -7,11 +7,10 @@ public class StudyDto {
 	private int studyId;
 	private String studyName;
 	private String studyDescription;
+	private String studyImage;
 	private String studyLocation;
-	private String studyTopics;
-	
-	//스터디 이벤트
+	private String studyTag;
+	private String memberId;
+	private int numOfMembers;
 	private int eventId;
-	private String eventName;
-	private String eventDescription;
 }
