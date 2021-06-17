@@ -19,4 +19,11 @@ public class StudyDto {
 	private String memberId;
 	//private String eventId;
 	private int memberCnt;
+	
+	//스터디이벤트 추가
+
+	private String eventDate;
+	private String eventLocation;
+	private String eventHostId;
+	private String eventAttendentId;
 }

@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -139,9 +140,9 @@ public class ReactController {
 	
 	// StudyDetail----------------------------
 	@GetMapping("/study")
-    public ArrayList StudyDetail(@RequestParam(defaultValue="studyId")int studyId) throws Exception{		
+    public ArrayList<Object> StudyDetail(@RequestParam(defaultValue="studyId")int studyId) throws Exception{		
  
-		ArrayList studyDetail=new ArrayList();
+		ArrayList<Object> studyDetail=new ArrayList<>();
 		ArrayList<MemberDto> memberList = new ArrayList<>();
 
     	StudyDto study = studyService.selectStudyDetail(studyId);
@@ -167,6 +168,80 @@ public class ReactController {
     	return studyDetail;
     }
 	
+    // StudyJoin----------------------------
+    @RequestMapping("/study/{studyId}/join.do")
+    public String StudyJoin(@PathVariable(name = "studyId") int studyId,@ModelAttribute MemberDto member,HttpSession session) throws Exception{	
+    	
+    	
+    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+    	System.out.println("member확인:: "+mem);
+
+    	if (mem==null) {
+    		System.out.println("로그인 해주세요.");
+    		return "404";
+    	}
+    	else {
+	    	System.out.println("member확인:: "+studyId);
+	    	// studyService.studyJoinChk(studyId) = 1,2,3,4
+	    	
+	    	String[] result_list=studyService.studyJoinChk(studyId).split(",");
+	    	String memberId=mem.getMemberId();
+	
+	    	for (int i=0;i<result_list.length;i++) {
+	    		if (result_list[i].equals(memberId)) {
+	    			System.out.println("중복 가입입니다.");
+	    			return "404";
+	    		}
+	    	}
+	    	if (memberId==null){
+	    		studyService.studyJoin(memberId,studyId);
+	    	}
+	    	else {
+	    		memberId=','+memberId;
+	    		studyService.studyJoin(memberId,studyId);
+	    	}
+	    	System.out.println("스터디 가입 완료");
+    		return "ok";
+    	}
+    }
+	
+	// EventList----------------------------
+	@GetMapping("/study/{studyId}/event")
+    public List<StudyDto> EventList(@PathVariable(name = "studyId") int studyId) throws Exception{		
+ 
+		List<StudyDto> event = studyService.selectStudyEvent(studyId);
+		
+    	//System.out.println("이벤트 리스트 :: "+event);
+    	
+    	return event;
+    }
+	
+	// EventDetail----------------------------
+	@GetMapping("/event")
+    public List<StudyDto> EventDetail(@RequestParam(defaultValue="eventId")int eventId) throws Exception{		
+		
+		List<StudyDto> eventDetail=new ArrayList<>();
+		
+		//이벤트 정보
+		StudyDto event = studyService.selectEventDetail(eventId);
+
+		//이벤트가 속한 스터디 정보
+		StudyDto study=studyService.selectStudyDetail(event.getStudyId());
+		
+		eventDetail.add(event);
+		eventDetail.add(study);
+				
+    	return eventDetail;
+    }
+	
+	// GalleryList----------------------------
+	@GetMapping("/study/{studyId}/gallery")
+    public List<BoardDto> GalleryList(@PathVariable(name = "studyId") int studyId,HttpSession session) throws Exception{		
+ 
+		List<BoardDto> board = boardService.selectBoardList(studyId);
+		
+    	return board;
+    }
 	
 	
 	

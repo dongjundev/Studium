@@ -12,7 +12,7 @@ public interface MemberService {
 	// -------------- 은지
 	void insertMember(MemberDto member) throws Exception;
 	int idChk(String memberId) throws Exception;	
-	int studyJoinChk(MemberDto member) throws Exception; //스터디 가입 중복 체크
+	int studyJoinChk(String memberId,int studyId) throws Exception; //스터디 가입 중복 체크
 	
 	public String login(String MemberId) throws Exception;
 	

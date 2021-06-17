@@ -61,9 +61,9 @@ public class MemberServicempl implements MemberService{
 	}
 	
 	@Override
-	public int studyJoinChk(MemberDto member) throws Exception {
+	public int studyJoinChk(String memberId,int studyId) throws Exception {
 		// TODO Auto-generated method stub
-		int result=memberMapper.studyJoinChk(member);
+		int result=memberMapper.studyJoinChk(memberId,studyId);
 		return result;
 	}
 
