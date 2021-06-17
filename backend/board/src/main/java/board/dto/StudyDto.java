@@ -25,5 +25,9 @@ public class StudyDto {
 	private String eventDate;
 	private String eventLocation;
 	private String eventHostId;
-	private String eventAttendentId;
+	private String eventAttandentId;
+	
+	//tage 추가
+	private int tagId;
+	private String tagName;
 }

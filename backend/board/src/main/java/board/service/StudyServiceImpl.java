@@ -90,4 +90,20 @@ public class StudyServiceImpl implements StudyService {
 		String result=studyMapper.studyJoinChk(studyId);
 		return result;
 	}
+	// ---------------------------------이벤트 참석 체크
+	@Override
+	public String eventJoinChk(int eventId) throws Exception{
+		String result=studyMapper.eventJoinChk(eventId);
+		return result;
+	}
+	
+	// ---------------------------------이벤트 참석
+	@Override
+	public void eventJoin(int eventId,String memberId) throws Exception{
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("eventId",eventId);
+		map.put("memberId", memberId);
+		System.out.println("서비스단"+memberId+eventId);
+		studyMapper.eventJoin(map);
+	}
 }
