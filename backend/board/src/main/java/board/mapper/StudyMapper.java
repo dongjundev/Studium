@@ -20,4 +20,6 @@ public interface StudyMapper {
 	StudyDto selectEventDetail(int eventId) throws Exception; //이벤트 디테일
 	void studyJoin(Map<String,Object> map) throws Exception;		//스터디 가입
 	String studyJoinChk(int studyId) throws Exception; //스터디 중복가입 체크
+	String eventJoinChk(int eventId) throws Exception; //이벤트 참석 체크
+	void eventJoin(Map<String,Object> map) throws Exception; //이벤트 참석
 }

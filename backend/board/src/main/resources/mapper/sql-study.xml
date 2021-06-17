@@ -101,5 +101,30 @@
 			WHERE study_id=#{studyId}
 		]]>
 	</select>
+	
+	<!-- 이벤트 참석자 확인 -->
+	<select id="eventJoinChk" resultType="String">
+		<![CDATA[
+			SELECT event_attandent_id
+			FROM t_event
+			WHERE event_id=#{eventId}
+		]]>
+	</select>
+	
+	<!-- 스터디 가입자 확인 -->
+	<select id="studyJoinChkEvent" resultType="int">
+		<![CDATA[
+			SELECT study_id
+			FROM t_event
+			WHERE event_id=#{eventId}
+		]]>
+	</select>
+	
+	<!-- 이벤트 참석 -->
+	<select id="eventJoin" parameterType="map">
+		<![CDATA[
+			UPDATE t_event SET event_attandent_id = CONCAT(event_attandent_id ,',${memberId}') WHERE event_id=#{eventId};
+		]]>
+	</select>
 
 </mapper>
