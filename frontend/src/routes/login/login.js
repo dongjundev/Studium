@@ -19,12 +19,12 @@ class Login extends Component{
 
           <div>
             <div className="login-inputarea">
-              <input id="login-id-area" type="ID" placeholder="Enter your Id"></input>
+              <input id="login-id-area" type="ID" placeholder="Enter your Id" name="memberId"></input>
             </div>
           </div>
           <div>
             <div className="login-inputarea">
-              <input id="login-password-area" type="Password" placeholder="Enter your Password"></input>
+              <input id="login-password-area" type="Password" placeholder="Enter your Password" name="memberPassword"></input>
             </div>
           </div>
           <div>

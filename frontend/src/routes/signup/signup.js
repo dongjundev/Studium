@@ -11,13 +11,13 @@ class signup extends Component {
     super(props);
     this.state = {
       msg : '',
-      memberid : "",
-      memberpassword : "",
-      memberrepassword : "",
-      memberbirth : "",
-      membergender : "",
-      memberemail : "",
-      memberaccount : "",
+      memberId : "",
+      memberPassword : "",
+      memberRePassword : "",
+      memberBirth : "",
+      memberGender : "",
+      memberEmail : "",
+      memberAccount : "",
       pMessage:'',
       usableId : false
     }
@@ -31,12 +31,12 @@ class signup extends Component {
 
   clickSignup = (e) => {
     e.preventDefault();
-    const {memberid, memberpassword, memberbirth, memberemail, memberaccount, usableId} = this.state;
+    const {memberId, memberPassword, memberBirth, memberEmail, memberAccount, usableId} = this.state;
 
       if( usableId === false){
         alert("아이디 중복체크를 해주세요.")
       }
-      else if(!memberid || !memberpassword || memberbirth || memberemail || memberaccount){
+      else if(!memberId || !memberPassword || memberBirth || memberEmail || memberAccount){
         alert("필수 항목 모두 작성해주세요.")
       }
       else{
@@ -47,11 +47,11 @@ class signup extends Component {
             "Content-Type" : "application/json"
           },
           body: JSON.stringify({
-            user_id : this.state.memberid,
-            user_password : this.state.memberpassword,
-            user_birth : this.state.memberbirth,
-            user_email : this.state.memberemail,
-            user_account : this.state.memberaccount
+            user_id : this.state.memberId,
+            user_password : this.state.memberPassword,
+            user_birth : this.state.memberBirth,
+            user_email : this.state.memberEmail,
+            user_account : this.state.memberAccount
           })// 이 컴포넌트에 저장된 state값중에 필요한 항목들만 POST
         }).then(res => {if(res.status === 400){
           alert("다시 한 번 확인해주세요.");
@@ -72,7 +72,7 @@ class signup extends Component {
         headers: {
           "Content-Type" : "application/json"
         },
-        body: JSON.stringify({usableId: this.state.memberid})
+        body: JSON.stringify({usableId: this.state.memberId})
       })
       .then(response => {if(response.status === 200){
         alert("사용 가능한 아이디 입니다.");
@@ -110,7 +110,7 @@ class signup extends Component {
     this.setState({
       [e.target.name]: e.target.value
     })
-    if (e.target.value !== this.state.memberpassword) {
+    if (e.target.value !== this.state.memberPassword) {
       this.setState({
         pMessage: "❌ 비밀번호가 일치하지 않습니다 :("
       })
@@ -120,7 +120,7 @@ class signup extends Component {
         pMessage: ''
       })
     }
-    else if (e.target.value === this.state.memberpassword) {
+    else if (e.target.value === this.state.memberPassword) {
       this.setState({
         pMessage: "✅비밀번호가 일치합니다 :)"
       })
@@ -139,7 +139,7 @@ class signup extends Component {
         <div className="signup-container">
           <div>
             <div className="signup-inputarea-id">
-              <input id="signup-id-area" type="ID" placeholder="Enter your Id" onChange={this.inputId} name="memberid"></input>
+              <input id="signup-id-area" type="ID" placeholder="Enter your Id" onChange={this.inputId} name="memberId"></input>
                 <div className="id-check">
                   <button className="btn-id-check">중복체크</button>
                 </div>
@@ -147,13 +147,13 @@ class signup extends Component {
             </div>
           </div>
             <div className="signup-inputarea">
-              <input id="signup-password-area" type="Password" placeholder="Enter your Password" name="memberpassword" value={this.state.memberpassword}
+              <input id="signup-password-area" type="Password" placeholder="Enter your Password" name="memberPassword" value={this.state.memberpassword}
 				          onChange={this.handleConfirmPassword}></input>
             </div>
           </div>
           <div>
             <div className="signup-inputarea">
-              <input id="signup-passwordCheck-area" type="Password" placeholder="Enter your Password one more" name="memberrepassword" value={this.state.memberrepassword}
+              <input id="signup-passwordCheck-area" type="Password" placeholder="Enter your Password one more" name="memberRePassword" value={this.state.memberrepassword}
 				          onChange={this.handleConfirmrePassword}></input><p className="checktext">{this.state.pMessage}</p>
             </div>
           </div>
@@ -169,7 +169,7 @@ class signup extends Component {
           </div>
           <div>
             <div className="signup-inputarea">
-              <input id="signup-birthday" type="text" placeholder="Enter your birthday"></input>
+              <input id="signup-birthday" type="text" placeholder="Enter your birthday" name="memberBirth"></input>
             </div>
           </div>
           <div>
@@ -187,12 +187,12 @@ class signup extends Component {
           </div>
           <div>
             <div className="signup-inputarea">
-              <input id="signup-email" type="text" placeholder="Enter your email"></input>
+              <input id="signup-email" type="text" placeholder="Enter your email" name="memberEmail"></input>
             </div>
           </div>
           <div>
             <div className="signup-inputarea">
-              <input id="signup-account" type="text" placeholder="Enter your account"></input>
+              <input id="signup-account" type="text" placeholder="Enter your account" name="memberAccount"></input>
             </div>
           </div>
           <div>
