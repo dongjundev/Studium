@@ -29,13 +29,13 @@ public class StudyController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping(value = {"/home", "/"})
-	public ModelAndView selectStudyList() throws Exception{
-		ModelAndView mv = new ModelAndView("/home");
-		List<StudyDto> list = studyService.selectStudyList();
-		mv.addObject("list", list);
-		return mv;
-	}
+//	@RequestMapping(value = {"/home", "/"})
+//	public ModelAndView selectStudyList() throws Exception{
+//		ModelAndView mv = new ModelAndView("/home");
+//		List<StudyDto> list = studyService.selectStudyList();
+//		mv.addObject("list", list);
+//		return mv;
+//	}
 	
 	// ---------------------------------스터디 검색
 	
@@ -58,63 +58,63 @@ public class StudyController {
     }
     
     // 스터디 상세보기
-    @RequestMapping("/studyDetail.do")
-    public ModelAndView openStudyDetail(@RequestParam(defaultValue="studyId")int studyId) throws Exception{		
- 
-    	ModelAndView mv = new ModelAndView("studyDetail");		
- 
-    	//System.out.println("studyID 확인:: "+studyId);
-    	StudyDto study = studyService.selectStudyDetail(studyId);
-    	
-    	glo_studyId=studyId;
-    	
-    	//스터디 이벤트
-    	List<StudyDto> event= studyService.selectStudyEvent(studyId);
-    	
-    	//스터디 멤버
-    	List<MemberDto> member= memberService.selectStudyMember(studyId);
-    	
-    	mv.addObject("study", study);
-    	mv.addObject("event", event);
-    	mv.addObject("member", member);
-    	
-    	//System.out.println("studyDetail member 출력 :: "+member);
-    	
-    	return mv;
-    }
+//    @RequestMapping("/studyDetail.do")
+//    public ModelAndView openStudyDetail(@RequestParam(defaultValue="studyId")int studyId) throws Exception{		
+// 
+//    	ModelAndView mv = new ModelAndView("studyDetail");		
+// 
+//    	//System.out.println("studyID 확인:: "+studyId);
+//    	StudyDto study = studyService.selectStudyDetail(studyId);
+//    	
+//    	glo_studyId=studyId;
+//    	
+//    	//스터디 이벤트
+//    	List<StudyDto> event= studyService.selectStudyEvent(studyId);
+//    	
+//    	//스터디 멤버
+//    	List<MemberDto> member= memberService.selectStudyMember(studyId);
+//    	
+//    	mv.addObject("study", study);
+//    	mv.addObject("event", event);
+//    	mv.addObject("member", member);
+//    	
+//    	//System.out.println("studyDetail member 출력 :: "+member);
+//    	
+//    	return mv;
+//    }
     
     //-----------------------------------
     // 스터디 가입
-    @RequestMapping("/studyJoin.do")
-    public String StudyJoin(@ModelAttribute MemberDto member,HttpSession session) throws Exception{	
-    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
-    	
-    	if (mem==null) {
-    		System.out.println("로그인 해주세요.");
-    		return "redirect:/studyDetail.do?studyId="+member.getStudyId();
-    	}
-    	else {
-	    	System.out.println("member확인:: "+member);
-	    	int result=memberService.studyJoinChk(member);
-
-	    	if (result==0) {
-	    		studyService.studyJoin(member);
-	    		System.out.println("스터디 가입 완료");
-	        	
-	    	}else {
-	    		System.out.println("중복 가입입니다.");
-	    	}
-	    	return "redirect:/studyDetail.do?studyId="+member.getStudyId();
-    	}
-    }
+//    @RequestMapping("/studyJoin.do")
+//    public String StudyJoin(@ModelAttribute MemberDto member,HttpSession session) throws Exception{	
+//    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+//    	
+//    	if (mem==null) {
+//    		System.out.println("로그인 해주세요.");
+//    		return "redirect:/studyDetail.do?studyId="+member.getStudyId();
+//    	}
+//    	else {
+//	    	System.out.println("member확인:: "+member);
+//	    	int result=memberService.studyJoinChk(member);
+//
+//	    	if (result==0) {
+//	    		studyService.studyJoin(member);
+//	    		System.out.println("스터디 가입 완료");
+//	        	
+//	    	}else {
+//	    		System.out.println("중복 가입입니다.");
+//	    	}
+//	    	return "redirect:/studyDetail.do?studyId="+member.getStudyId();
+//    	}
+//    }
     
     // 스터디 가입 중복 체크
-	@ResponseBody
-	@RequestMapping(value="user/studyJoinChk", method = RequestMethod.POST)
-	public int studyJoinChk(MemberDto memberDto) throws Exception {
-		int result = memberService.studyJoinChk(memberDto);
-		return result;
-	}
+//	@ResponseBody
+//	@RequestMapping(value="user/studyJoinChk", method = RequestMethod.POST)
+//	public int studyJoinChk(MemberDto memberDto) throws Exception {
+//		int result = memberService.studyJoinChk(memberDto);
+//		return result;
+//	}
 	
     
     //-----------------------------------
