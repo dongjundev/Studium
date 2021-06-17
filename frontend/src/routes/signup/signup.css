@@ -56,9 +56,19 @@
   height: 50px;
 }
 
+.signup-form #signup-name{
+  width: 50%;
+  height: 50px;
+}
+
+.signup-form #signup-address{
+  width: 50%;
+  height: 50px;
+}
+
 .signup-form #signup-birthday{
   width: 50%;
-  height: 50px;;
+  height: 50px;
 }
 
 .signup-form #signup-email{
@@ -87,6 +97,17 @@
   padding-bottom: 20px;
 }
 
+.signup-form .signup-inputarea-id{
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  width:800px;
+  left: 45px;
+}
+
 
 .signup-form .btn-lg{
   position: relative;
@@ -107,9 +128,27 @@
   height: 50px;
   color: black;
   background-color: #febf00;
-  border-radius: 20px;
   border: 1px solid #febf00;
   border-radius: 50px;
 }
 
+.id-check{
+  display: inline-block;
+  padding: 10px;
+}
+.btn-id-check{
+  color: black;
+  background-color: #febf00;
+  border: 1px solid #febf00;
+  transition: 400ms;
+}
+
+.btn-id-check:hover{
+  color: black;
+  background-color: #febf00;
+  border-radius: 20px;
+  border: 1px solid #febf00;
+  transition: 400ms;
+  border-radius: 50px;
+}
 
