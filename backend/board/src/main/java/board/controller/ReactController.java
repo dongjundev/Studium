@@ -34,7 +34,8 @@ import board.service.StudyService;
 @CrossOrigin(origins="http://localhost:3000")
 @RestController
 public class ReactController {
-	
+	MemberDto memberDto=null;
+
 	int glo_studyId;
 	
 	@Autowired
@@ -71,8 +72,15 @@ public class ReactController {
 	@RequestMapping("/signup.do") 
 	public String signUp(@RequestParam(defaultValue="memberId")String memberId,@RequestParam(defaultValue="memberPassword")String memberPassword,
 			@RequestParam(defaultValue="memberName")String memberName,@RequestParam(defaultValue="memberAddress")String memberAddress,
-			@RequestParam(defaultValue="memberGender")String memberGender,MemberDto member) throws Exception {
-
+			@RequestParam(defaultValue="memberGender")String memberGender) throws Exception {
+	
+		MemberDto member = new MemberDto();
+		
+		member.setMemberId(memberId);
+		member.setMemberName(memberName);
+		member.setMemberAddress(memberAddress);
+		member.setMemberGender(memberGender);
+		
 		int result=memberService.idChk(memberId);
 		
 		System.out.println("memberDto 내용 :: " + member);
@@ -291,7 +299,38 @@ public class ReactController {
 	    	return "404";
     	}
     }
-	
+    
+    // MemberDetail----------------------------
+ 	@GetMapping("/member")
+     public ArrayList<MemberDto> MemberDetail(@RequestParam(defaultValue="memberId")String memberId) throws Exception{		
+  
+ 		ArrayList<MemberDto> memberDetail = new ArrayList<>();
+     	MemberDto member = memberService.selectStudyMemberDetail(memberId);
+     	memberDetail.add(member);
+     	
+     	return memberDetail;
+     }
+ 	
+ 	// Study 생성----------------------------
+ 	@GetMapping("/create-study.do")
+    public String MakeStudyDescription(@RequestParam(defaultValue="studyName")String studyName,@RequestParam(defaultValue="studyDescription")String studyDescription,
+			@RequestParam(defaultValue="studyTag")String studyTag,@RequestParam(defaultValue="memberId")String memberId,
+			@RequestParam(defaultValue="studyLocation")String studyLocation) throws Exception{
+ 		
+ 		StudyDto studyDto=null;
+ 		studyDto = new StudyDto();
+ 		
+ 		studyDto.setStudyName(studyName);
+ 		studyDto.setStudyDescription(studyDescription);
+ 		studyDto.setStudyTag(studyTag);
+ 		studyDto.setMemberId(memberId);
+ 		studyDto.setStudyLocation(studyLocation);
+
+    	studyService.insertStudy(studyDto);
+    	studyDto = null;
+    	
+    	return "ok";
+    }
 	
 	
 //	@GetMapping("/study")

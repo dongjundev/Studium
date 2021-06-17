@@ -149,18 +149,18 @@ public class StudyController {
     
     //-----------------------------------
     // 스터디 멤버 상세보기
-    @RequestMapping("/studyMemberDetail.do")		//지도에서 주소 값 반환
-    public ModelAndView StudyMemberDetail(String memberId) throws Exception{
-    	
-    	ModelAndView mv=new ModelAndView("studyMemberDetail");
-    	MemberDto member=memberService.selectStudyMemberDetail(memberId);
-    	List<MemberDto> memberList= memberService.selectStudyMember(glo_studyId);
-    	
-    	//System.out.println("memberList 확인:: "+memberList);
-    	mv.addObject("member",member);
-    	mv.addObject("memberList",memberList);
-    	
-    	return mv;
-    }
+//    @RequestMapping("/studyMemberDetail.do")
+//    public ModelAndView StudyMemberDetail(String memberId) throws Exception{
+//    	
+//    	ModelAndView mv=new ModelAndView("studyMemberDetail");
+//    	MemberDto member=memberService.selectStudyMemberDetail(memberId);
+//    	List<MemberDto> memberList= memberService.selectStudyMember(glo_studyId);
+//    	
+//    	//System.out.println("memberList 확인:: "+memberList);
+//    	mv.addObject("member",member);
+//    	mv.addObject("memberList",memberList);
+//    	
+//    	return mv;
+//    }
 
 }
