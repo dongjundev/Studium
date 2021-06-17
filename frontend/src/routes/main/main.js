@@ -146,7 +146,7 @@ class Main extends React.Component{
                                     state: {
                                         isLoggedIn: this.state.isLoggedIn,
                                         image: group.image,
-                                        name: group.name,
+                                        name: group.studyName,
                                         numOfMembers: group.numOfMembers,
                                         tags: group.tags,
                                         display : "group-detail"
@@ -155,7 +155,7 @@ class Main extends React.Component{
                                     <Group
                                         key = {group.id}
                                         image = {group.image}
-                                        name = {group.name}
+                                        name = {group.studyName}
                                         numOfMembers = {group.numOfMembers}
                                         tags = {group.tags}
                                         display = "thum-main"
@@ -213,17 +213,18 @@ class Main extends React.Component{
     }
 
     //Get groups from DB
-    //getGroups = async () => {
-    getGroups(){
-        /*
-        const {
-            data : {
-                data : {groups}
-            }
-        } = await axios.get("request url")
-        this.setState( {groups: groups, isGroupsLoading: false} )
-        */
-        this.setState( {isGroupsLoading: false} )
+    getGroups = async () => {
+    //getGroups(){
+        const url = "http://localhost:8080/api/home.do";
+        // const {
+        //     data : {
+        //         data : {groups}
+        //     }
+        const data = await axios.get(url);
+        //const data = await axios.get(url);
+        console.log("data : " + JSON.stringify(data));
+        this.setState( {groups: data.data, isGroupsLoading: false} );
+        //this.setState( {isGroupsLoading: false} )
     }
 
     //Get categories from server
@@ -232,11 +233,11 @@ class Main extends React.Component{
         this.setState( {isCategoriesLoading: false} )
     }
 
-    // componentDidMount() {
+     componentDidMount() {
     //     this.getEvents();
-    //     this.getGroups();
+         this.getGroups();
     //     this.getCategories();
-    // }
+    }
     
 }
 
