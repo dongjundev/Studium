@@ -64,7 +64,9 @@ public class ReactController {
 	
 	// Main ----------------------------
 	@GetMapping(value = {"/home", "/"})
-	public List<StudyDto> selectStudyList() throws Exception{
+	public List<Object> selectStudyList() throws Exception{
+		
+		List<Object> result=new ArrayList<>();
 		
 		List<StudyDto> list = studyService.selectStudyList();
 		
@@ -75,9 +77,13 @@ public class ReactController {
 			String[] memberList = list.get(i).getMemberId().split(",");
 			int memberCount = memberList.length;
 			list.get(i).setMemberCnt(memberCount);
-	}
+		}
+		List<StudyDto> eventList=studyService.selectEventList();
 		
-		return list;
+		result.add(list);
+		result.add(eventList);
+		
+		return result;
 	}
 	
 	// 회원가입 ----------------------------

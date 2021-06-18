@@ -106,4 +106,11 @@ public class StudyServiceImpl implements StudyService {
 		System.out.println("서비스단"+memberId+eventId);
 		studyMapper.eventJoin(map);
 	}
+	
+	// ---------------------------------이벤트 리스트
+	@Override
+	public List<StudyDto> selectEventList() throws Exception {
+		// TODO Auto-generated method stub
+		return studyMapper.selectEventList();
+	}
 }
