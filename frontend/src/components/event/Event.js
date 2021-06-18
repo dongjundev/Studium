@@ -21,6 +21,18 @@ function Event( {title, description, date, location, display} ) {
                 </div>
             </div>
         )
+    } else if(display === "thum-group"){
+        return (
+            <div>
+                <div className="thum-group">
+                    <p className="event-date">{date}</p>
+                    <p className="event-title">{title}</p>
+                    <p className="event-location">
+                        <FontAwesomeIcon icon={faThumbtack} /> {location}
+                    </p>
+                </div>
+            </div>
+        )
     } else if(display === "event-detail") {
         return (
             <div className="event-detail">
@@ -139,7 +151,7 @@ function Event( {title, description, date, location, display} ) {
 
 Event.propTypes = {
     title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.string,
     date: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
     display: PropTypes.string.isRequired

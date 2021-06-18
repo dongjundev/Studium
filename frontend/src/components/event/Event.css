@@ -152,3 +152,25 @@
     background-color: #febf00;
     cursor: pointer;
 }
+
+.thum-group-wrap{
+    display: inline-block;
+    width: 20%;
+    margin: 10px;
+    text-align: center;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #e1e1e1;
+    transition: all, 0.3s;
+}
+.thum-group-wrap a{
+    text-decoration: none;
+    color: #000;
+}
+.thum-group-wrap:hover{
+    box-shadow: 10px 10px 5px #e1e1e1;
+}
+.thum-group p{
+    text-decoration: none;
+    color: #000;
+}

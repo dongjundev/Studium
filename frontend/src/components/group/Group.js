@@ -3,19 +3,21 @@ import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faTags, faUsers } from "@fortawesome/free-solid-svg-icons";
+import Member from '../member/Member'
+import Event from '../event/Event'
 import './Group.css'
 
-function Group( {image, name, description, numOfMembers, tags, display} ) {
+function Group ( {id, image, name, description, memberCnt, tag, display, members, events} ) {
     if(display === "thum-main") {
         return (
-            <div className="group-thum">
+            <div>
                 <div className="group-image">
                     <img src={image}></img>
                 </div>
                 <div className="group-detail">
-                    <p className="group-tags">{tags}</p>
+                    <p className="group-tags">{tag}</p>
                     <p className="group-name">{name}</p>
-                    <p className="group-numbers">{numOfMembers} 명의 회원이 있습니다.</p>
+                    <p className="group-numbers">{memberCnt} 명의 회원이 있습니다.</p>
                 </div>
             </div>
         )
@@ -27,46 +29,87 @@ function Group( {image, name, description, numOfMembers, tags, display} ) {
                 </div>
                 <div className="group-thum-event-detail">
                     <p className="group-name">{name}</p>
-                    <p className="group-numbers">{numOfMembers} 명의 회원이 있습니다.</p>
+                    <p className="group-numbers">{memberCnt} 명의 회원이 있습니다.</p>
                     <p>가입하고 함께 공부해보세요!</p>
                 </div>
             </div>
         )
     } else if(display === "group-detail") {
         return (
-            <div className="group-detail">
+            <div>
                 <div className="group-detail-content-head">
                     <div className="content-head-image">
                         <img src={image}></img>
                     </div>
                     <div className="content-head-summary">
                         <h1>{name}</h1>
-                        <p><FontAwesomeIcon icon={faTags} /> {tags}</p>
-                        <p><FontAwesomeIcon icon={faUsers} /> 회원 {numOfMembers}명</p>
+                        <p><FontAwesomeIcon icon={faTags} /> {tag}</p>
+                        <p><FontAwesomeIcon icon={faUsers} /> 회원 {memberCnt}명</p>
+                        <button>이 그룹에 가입하기</button>
                     </div>
                 </div>
-                <div className="group-detail-tabs">
+                {/* <div className="group-detail-tabs">
                     <ul>
-                        <li className="on"><a href="#none">정보</a></li>
-                        <li><a href="#none">이벤트</a></li>
-                        <li><a href="#none">사진</a></li>
+                        <li id="inof" className="on" onClick={this.showInfo}><a href="#">정보</a></li>
+                        <li id="events"><Link to={id+"/events"}>이벤트</Link></li>
+                        <li id="photos"><Link to={id+"/photos"}>사진</Link></li>
                     </ul>
                     <button>이 그룹에 가입하기</button>
-                </div>
+                </div> */}
                 <div className="group-detail-content-body">
                     <div className="group-detail-overview">
                         <h3>스터디 소개</h3>
                         <p>{description}</p>
                     </div>
-                    {/* <div className="group-detail-upcomingEvents">
-                        <h3>예정된 이벤트</h3>
+                    <div className="group-members">
+                        <h3>스터디 멤버</h3>
+                        <div className="members-thum">
+                            {members.map(member => (
+                                <div className="thum-group-member" key={member.memberId}>
+                                    <Link to={{
+                                        pathname: id + '/member/' + member.memberId,
+                                        state: {
+                                            image: member.memberImage,
+                                            name: member.memberName,
+                                            gender: member.memberGender,
+                                            city: member.memberAddress,
+                                            display: "detail-inGroup"
+                                        }
+                                    }}>
+                                        <Member
+                                            image = {member.memberImage}
+                                            name = {member.memberName}
+                                            display = "thum-group"
+                                        />
+                                    </Link>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                    <div className="group-detail-passedEvents">
-                        <h3>지난 이벤트</h3>
+                    <div className="group-detail-upcomingEvents">
+                        <h3>이벤트</h3>
+                        {events.map(event => (
+                                <div className="thum-group-wrap" key={event.eventId}>
+                                <Link to={{
+                                    pathname: '/event-detail/' + event.eventId,
+                                    state: {
+                                        display: "event-detail"
+                                    }
+                                }}>
+                                    <Event
+                                        title = {event.eventName}
+                                        date = {event.eventDate}
+                                        location = {event.eventLocation}
+                                        description = {event.description}
+                                        display = "thum-group"
+                                    />
+                                </Link>
+                            </div>
+                            ))}
                     </div>
                     <div className="group-detail-photos">
                         <h3>사진</h3>
-                    </div> */}
+                    </div>
                 </div>
             </div>
         )
@@ -77,9 +120,11 @@ function Group( {image, name, description, numOfMembers, tags, display} ) {
 
 Group.propTypes = {
     image: PropTypes.string,
-    name: PropTypes.string.isRequired,
-    numOfMembers: PropTypes.number,
-    tags: PropTypes.string
+    name: PropTypes.string,
+    memberCnt: PropTypes.number,
+    tag: PropTypes.string,
+    display: PropTypes.string,
+    members: PropTypes.array
 }
 
 export default Group;

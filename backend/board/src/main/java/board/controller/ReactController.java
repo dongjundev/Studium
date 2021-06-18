@@ -33,7 +33,7 @@ import board.service.StudyService;
 
 @CrossOrigin(origins="http://localhost:3000")
 @RestController
-@RequestMapping("/api")
+//@RequestMapping("/api")
 public class ReactController {
 	
 	int glo_studyId;
@@ -139,12 +139,12 @@ public class ReactController {
 
 	
 	// StudyDetail----------------------------
-	@GetMapping("/study")
-    public ArrayList<Object> StudyDetail(@RequestParam(defaultValue="studyId")int studyId) throws Exception{		
+	@GetMapping("/study/{studyId}")
+    public ArrayList<Object> StudyDetail(@PathVariable(name="studyId")int studyId) throws Exception{		
  
 		ArrayList<Object> studyDetail=new ArrayList<>();
 		ArrayList<MemberDto> memberList = new ArrayList<>();
-
+		List<StudyDto> eventList = new ArrayList<>();
     	StudyDto study = studyService.selectStudyDetail(studyId);
     	
     	//현재 스터디 전역변수로 저장
@@ -152,7 +152,7 @@ public class ReactController {
     	
     	//멤버 리스트
     	String[] member=study.getMemberId().split(",");
-
+    	study.setMemberCnt(member.length);
     	//System.out.println("멤버 리스트 :: "+Arrays.toString(memberList));
     	//System.out.println("멤버 리스트 길이 :: "+memberList.length);
     	
@@ -165,6 +165,8 @@ public class ReactController {
     	studyDetail.add(study);
     	studyDetail.add(memberList);
     	
+    	eventList = studyService.selectStudyEvent(studyId);
+    	studyDetail.add(eventList);
     	return studyDetail;
     }
 	

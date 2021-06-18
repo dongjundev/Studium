@@ -52,7 +52,7 @@
 	
 	<select id="selectMemberList" parameterType="board.dto.MemberDto">		
 		<![CDATA[
-			SELECT member_id, member_name, member_pw
+			SELECT *
 			FROM t_member
 			WHERE member_id = #{memberId}
 		]]>
@@ -71,7 +71,7 @@
 	<!-- 스터디 멤버 상세 -->
 	<select id="selectStudyMemberDetail" resultType="board.dto.MemberDto">
 		<![CDATA[
-			SELECT member_name, member_id
+			SELECT *
 			FROM t_member
 			WHERE member_id='${memberId}';
 		]]>

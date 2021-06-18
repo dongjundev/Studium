@@ -5,16 +5,31 @@ import Event from "../../components/event/Event"
 import './event-detail.css'
 
 class EventDetail extends React.Component{
+    constructor(){
+        super();
+        this.state = {event: [], attendents: [], study: []}
+    }
+
+    getEventDetail = async () => {
+        console.log(this.props);
+        const url = "http://localhost:8080" + this.props.match.url;
+        console.log(url);
+        const data = await axios.get(url);
+        console.log(JSON.stringify(data.data));
+        this.setState({
+            
+        });
+    }
     componentDidMount() {
         const { location, history } = this.props;
         if (location.state === undefined) {
             history.push("/");
         }
-        console.log(location);
-        console.log(history);
+        this.getEventDetail();
     }
     render() {
         const { location } = this.props;
+        
 
         if(location.state){
             return (

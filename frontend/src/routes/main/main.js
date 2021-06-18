@@ -37,29 +37,7 @@ class Main extends React.Component{
                     location: "대구 동성로"
                     }
             ],
-            groups: [
-                // {
-                //     id: 999,
-                //     image: "https://awssofia.com/wp-content/uploads/2020/01/cropped-AWS-Website-Banner.jpg",
-                //     name: "AWS Korea Community dfsdfffe",
-                //     numOfMembers: 240,
-                //     tags: "기술"
-                // },
-                // {
-                //     id: 998,
-                //     image: "https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1200,h_630,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/xfarkb2lvobut3c5jugs/%20Language%20Exchange%20Experience%20in%20Seoul.jpg",
-                //     name: "영어회화 배우기",
-                //     numOfMembers: 338,
-                //     tags: "외국어"
-                // },
-                // {
-                //     id: 997,
-                //     image: "https://pacificenglishschool.com/wp-content/uploads/2020/06/banner_study-scaled.jpg",
-                //     name: "정보처리기사 필기",
-                //     numOfMembers: 102,
-                //     tags: "자격증"
-                // }
-            ],
+            groups: [],
             categories: [
                 {
                     id: "100",
@@ -115,26 +93,23 @@ class Main extends React.Component{
                         <div className="group">
                             {isGroupsLoading ? "Loading.." : groups.map(group => (
                                 <Link to={{
-                                    pathname: '/group-detail',
+                                    pathname: '/study/'+ (group.studyId),
+                                     
                                     state: {
                                         isLoggedIn: this.state.isLoggedIn,
-                                        image: group.studyImage,
-                                        name: group.studyName,
-                                        description: group.studyDescription,
-                                        numOfMembers: group.numOfMembers,
-                                        tags: group.studyTag,
                                         display : "group-detail"
                                     }
                                 }}>
-                                    <Group
-                                        key = {group.studyId}
-                                        image = {group.studyImage}
-                                        name = {group.studyName}
-                                        description = {group.studyDescription}
-                                        numOfMembers = {group.numOfMembers}
-                                        tags = {group.studyTag}
-                                        display = "thum-main"
-                                    />    
+                                    <div className="group-thum" key={group.studyId}>
+                                        <Group
+                                            image = {group.studyImage}
+                                            name = {group.studyName}
+                                            description = {group.studyDescription}
+                                            memberCnt = {group.memberCnt}
+                                            tag = {group.studyTag}
+                                            display = "thum-main"
+                                        />
+                                    </div>    
                                 </Link>    
                             ))}
                         </div>
@@ -193,13 +168,6 @@ class Main extends React.Component{
         )
     }
     
-    doAction = async () => {
-        const url = "http://localhost:8080/api/test.do";
-        const res = await axios.get(url);
-        console.log(JSON.stringify(res));
-        window.location.href = res.toString();
-    }
-
     componentWillUnmount(){
         this.setState( {isEventsLoading: true } );
         this.setState( {isGroupsLoading: true } );
@@ -225,7 +193,7 @@ class Main extends React.Component{
     //Get groups from DB
     getGroups = async () => {
     //getGroups(){
-        const url = "http://localhost:8080/home.do";
+        const url = "http://localhost:8080/";
         // const {
         //     data : {
         //         data : {groups}
