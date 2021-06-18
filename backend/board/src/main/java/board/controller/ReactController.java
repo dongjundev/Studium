@@ -33,9 +33,9 @@ import board.service.StudyService;
 
 @CrossOrigin(origins="http://localhost:3000")
 @RestController
-//@RequestMapping("/api")
 public class ReactController {
-	
+	MemberDto memberDto=null;
+
 	int glo_studyId;
 	
 	@Autowired
@@ -72,11 +72,16 @@ public class ReactController {
 	@RequestMapping("/signup.do") 
 	public String signUp(@RequestParam(defaultValue="memberId")String memberId,@RequestParam(defaultValue="memberPassword")String memberPassword,
 			@RequestParam(defaultValue="memberName")String memberName,@RequestParam(defaultValue="memberAddress")String memberAddress,
-			@RequestParam(defaultValue="memberGender")String memberGender,MemberDto member) throws Exception {
-
-		int result=memberService.idChk(memberId);
+			@RequestParam(defaultValue="memberGender")String memberGender) throws Exception {
+	
+		MemberDto member = new MemberDto();
 		
-		System.out.println("memberDto 내용 :: " + member);
+		member.setMemberId(memberId);
+		member.setMemberName(memberName);
+		member.setMemberAddress(memberAddress);
+		member.setMemberGender(memberGender);
+		
+		int result=memberService.idChk(memberId);
 	
 		if(result==1) {
 			// 아이디가 중복이면 
@@ -140,11 +145,11 @@ public class ReactController {
 	
 	// StudyDetail----------------------------
 	@GetMapping("/study/{studyId}")
-    public ArrayList<Object> StudyDetail(@PathVariable(name="studyId")int studyId) throws Exception{		
+    public ArrayList<Object> StudyDetail(@PathVariable(name = "studyId") int studyId) throws Exception{		
  
 		ArrayList<Object> studyDetail=new ArrayList<>();
 		ArrayList<MemberDto> memberList = new ArrayList<>();
-		List<StudyDto> eventList = new ArrayList<>();
+
     	StudyDto study = studyService.selectStudyDetail(studyId);
     	
     	//현재 스터디 전역변수로 저장
@@ -152,7 +157,7 @@ public class ReactController {
     	
     	//멤버 리스트
     	String[] member=study.getMemberId().split(",");
-    	study.setMemberCnt(member.length);
+
     	//System.out.println("멤버 리스트 :: "+Arrays.toString(memberList));
     	//System.out.println("멤버 리스트 길이 :: "+memberList.length);
     	
@@ -165,8 +170,6 @@ public class ReactController {
     	studyDetail.add(study);
     	studyDetail.add(memberList);
     	
-    	eventList = studyService.selectStudyEvent(studyId);
-    	studyDetail.add(eventList);
     	return studyDetail;
     }
 	
@@ -207,41 +210,34 @@ public class ReactController {
     	}
     }
 	
-    // EventDetail----------------------------
-    @GetMapping("/event/{eventId}")
-     public List<Object> EventDetail(@PathVariable(name = "eventId") int eventId) throws Exception{      
-       
-       List<Object> eventDetail=new ArrayList<>();
-       List<MemberDto> memberList=new ArrayList<>();
-       
-       //이벤트 정보
-       StudyDto event = studyService.selectEventDetail(eventId);
-
-       //이벤트가 속한 스터디 정보
-       StudyDto study=studyService.selectStudyDetail(event.getStudyId());
-       
-       eventDetail.add(event);
-       eventDetail.add(study);
-       //참석자
-       //멤버 리스트
-       String[] member=event.getEventAttandentId().split(",");
-
-		//System.out.println("멤버 리스트 :: "+Arrays.toString(memberList));
-		//System.out.println("멤버 리스트 길이 :: "+memberList.length);
+	// EventList----------------------------
+	@GetMapping("/study/{studyId}/event")
+    public List<StudyDto> EventList(@PathVariable(name = "studyId") int studyId) throws Exception{		
+ 
+		List<StudyDto> event = studyService.selectStudyEvent(studyId);
 		
-		for (int i=0; i<member.length; i++) {
-		   //스터디 멤버
-		    MemberDto mem= memberService.selectStudyMemberDetail(String.valueOf(member[i]));
-		    System.out.println("멤버 리스트 :: "+mem);
-		    memberList.add(mem);
-		}
-		//멤버 count
-	    int memberCount = member.length;
-	    study.setMemberCnt(memberCount); 
-	    
-	    eventDetail.add(memberList);      
-        return eventDetail;
-     }
+    	//System.out.println("이벤트 리스트 :: "+event);
+    	
+    	return event;
+    }
+	
+	// EventDetail----------------------------
+	@GetMapping("/event")
+    public List<StudyDto> EventDetail(@RequestParam(defaultValue="eventId")int eventId) throws Exception{		
+		
+		List<StudyDto> eventDetail=new ArrayList<>();
+		
+		//이벤트 정보
+		StudyDto event = studyService.selectEventDetail(eventId);
+
+		//이벤트가 속한 스터디 정보
+		StudyDto study=studyService.selectStudyDetail(event.getStudyId());
+		
+		eventDetail.add(event);
+		eventDetail.add(study);
+				
+    	return eventDetail;
+    }
 	
 	// GalleryList----------------------------
 	@GetMapping("/study/{studyId}/gallery")
@@ -252,14 +248,125 @@ public class ReactController {
     	return board;
     }
 	
-	
-	
+	// EventJoin------------------------------
+    @RequestMapping("/event/{eventId}/join.do")
+    public String EventJoin(@PathVariable(name = "eventId") int eventId,HttpSession session) throws Exception{	
+    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+    	System.out.println("member확인:: "+mem);
+    	
+    	if (mem==null) {
+    		System.out.println("로그인 해주세요.");
+    		return "404";
+    	}
+    	else {
+        	String memberId=mem.getMemberId();
+        	
+        	//이벤트 정보
+    		StudyDto event = studyService.selectEventDetail(eventId);
+
+    		//이벤트가 속한 스터디 정보
+    		StudyDto study=studyService.selectStudyDetail(event.getStudyId());
+    		String[] study_member_list=study.getMemberId().split(",");
+    		System.out.println("study_member_list :: "+Arrays.toString(study_member_list));
+    		
+    		//이벤트 참석자 리스트
+        	String[] event_attendent_list=studyService.eventJoinChk(eventId).split(",");
+        	System.out.println("event_attendent_list :: "+Arrays.toString(event_attendent_list));
+        	
+        	//1.이벤트가 속한 스터디의 참여자인지 확인
+        	//1-1.만약 참여자라면, 이 이벤트에 참여해있는지 확인
+        	//2.이벤트에 참여되어있는지 확인
+        	//2-1.이벤트에 참여되어있지 않다면 event_attendant_id에 memberId 추가
+        	
+	    	for (int i=0; i<study_member_list.length; i++) {
+	    		System.out.println("for문 :: "+i);
+	    		if (study_member_list[i].equals(memberId)) {
+	    			System.out.println("스터디에 속해 있습니다.");
+	    			
+	    			for (int j=0; j<event_attendent_list.length; j++) {
+	    				if (event_attendent_list[j].equals(memberId)) {
+	    					System.out.println("이미 이벤트에 참여중입니다.");
+	    					return "404";
+	    				}
+	    			}
+	    			studyService.eventJoin(eventId,memberId);
+	        		return "ok";
+	    		}
+	    	}
+	    	System.out.println("스터디에 가입해주세요!");
+	    	return "404";
+    	}
+    }
+    
+    // MemberDetail----------------------------
+ 	@GetMapping("/member")
+     public ArrayList<MemberDto> MemberDetail(@RequestParam(defaultValue="memberId")String memberId) throws Exception{		
+  
+ 		ArrayList<MemberDto> memberDetail = new ArrayList<>();
+     	MemberDto member = memberService.selectStudyMemberDetail(memberId);
+     	memberDetail.add(member);
+     	
+     	return memberDetail;
+     }
+ 	
+ 	// Study 생성----------------------------
+ 	@GetMapping("/create-study.do")
+    public String MakeStudyDescription(@RequestParam(defaultValue="studyName")String studyName,@RequestParam(defaultValue="studyDescription")String studyDescription,
+			@RequestParam(defaultValue="studyTag")String studyTag,@RequestParam(defaultValue="memberId")String memberId,
+			@RequestParam(defaultValue="studyLocation")String studyLocation) throws Exception{
+ 		
+ 		StudyDto studyDto=null;
+ 		studyDto = new StudyDto();
+ 		
+ 		studyDto.setStudyName(studyName);
+ 		studyDto.setStudyDescription(studyDescription);
+ 		studyDto.setStudyTag(studyTag);
+ 		studyDto.setMemberId(memberId);
+ 		studyDto.setStudyLocation(studyLocation);
+
+    	studyService.insertStudy(studyDto);
+    	studyDto = null;
+    	
+    	return "ok";
+    }
+ 	
+ 	// 카테고리 검색---------------------------
+ 	@GetMapping("/search")
+    public List<StudyDto> CategorySearch(@RequestParam(defaultValue="tagId")int tagId) throws Exception{
+ 		List<StudyDto> list = studyService.selectStudyList();
+ 		List<StudyDto> result= new ArrayList<>();
+ 		
+		for(int i=0; i<list.size(); i++) {
+			System.out.println("search 확인 :: "+list.get(i));
+			
+			if (list.get(i).getStudyTag()==null) {
+				continue;
+			}
+			String[] TagList = list.get(i).getStudyTag().split(",");
+			System.out.println("TagList 확인 :: "+Arrays.toString(TagList));
+			
+			for (int j=0; j<TagList.length; j++) {
+				if (Integer.parseInt(TagList[j])==tagId) {
+					int studyId=list.get(i).getStudyId();
+					result.add(studyService.selectStudyDetail(studyId));
+				}
+				else {
+					continue;
+				}
+			}
+		}
+		
+		return result;
+    }
+ 	
 //	@GetMapping("/study")
 //	public List<StudyDto> seletTest(@RequestParam("no") int no) throws Exception{
 //		System.out.println("받은 값 :: "+no);
 //		return null;
 //		
 //	}
+ 	
+ 	
 	
 
 }
