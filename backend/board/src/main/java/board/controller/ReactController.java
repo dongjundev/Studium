@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,9 +33,11 @@ import org.springframework.web.servlet.ModelAndView;
 import board.dto.BoardDto;
 import board.dto.BoardFileDto;
 import board.dto.MemberDto;
+import board.dto.ReportDto;
 import board.dto.StudyDto;
 import board.service.BoardService;
 import board.service.MemberService;
+import board.service.ReportService;
 import board.service.StudyService;
 
 @CrossOrigin(origins="http://localhost:3000")
@@ -52,6 +55,9 @@ public class ReactController {
 	
 	@Autowired
 	private StudyService studyService;
+	
+	@Autowired
+	private ReportService reportService;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -104,22 +110,25 @@ public class ReactController {
 			memberService.insertMember(member);
 		}
 		
+		member=null;
 		//return "redirect:/user/login.do";
 		return "ok";
 	}
 
 	// 로그인 ----------------------------
-	@GetMapping("/login.do")
-	public String login(@RequestParam(defaultValue="memberId")String memberId,@RequestParam(defaultValue="memberPassword")String memberPassword,
-			MemberDto member,HttpServletRequest request) throws Exception{
-		
-		  String DBPassword = memberService.login(memberId); 
-		  System.out.println(memberId+memberPassword); 
+	@ResponseBody
+	@PostMapping(value="/login.do")
+	public String login(@RequestBody MemberDto memberDto,HttpServletRequest request) throws Exception{
+		  System.out.println("들어옴"+memberDto.getMemberId()+memberDto.getMemberPassword()); 
+		  //memberDto.getMemberId();
+		  //memberDto.getMemberPassword();
+		 
+		  String DBPassword = memberService.login(memberDto.getMemberId()); 
 		  
 		  //사용자에게 받은 값:: member.getMemberPw()
 		  //db에서 받은 값:: dbPwd
 		  if (DBPassword !=null) {
-			  if (BCrypt.checkpw(memberPassword, DBPassword) == true) {
+			  if (BCrypt.checkpw(memberDto.getMemberPassword(), DBPassword) == true) {
 				  System.out.println("로그인 성공"); 
 				  
 				  // 서버에 세션 id 발급, 서버에서 받은 세션을 클라이언트 브라우저의 쿠키가 저장하여 가지고 있어야 함
@@ -127,12 +136,14 @@ public class ReactController {
 				  //requestAttribute.setAttribute("login", null, RequestAttributes.SCOPE_SESSION);
 				  
 				  HttpSession session = (HttpSession)request.getSession();
-				  session.setAttribute("loginUser", member);
+				  session.setAttribute("loginUser", memberDto);
 
 				  // 세션 아이디 가져오기
 				  //System.out.println("세션 아이디 :: "+requestAttribute.getSessionId());
 				  System.out.println("세션 아이디2 :: "+session.getId());
 				  //return "redirect:/home";
+				  
+				  
 				  return "ok";
 			  }
 			  else {
@@ -444,14 +455,39 @@ public class ReactController {
     		response.getOutputStream().close();
     	}
     }
-//	@GetMapping("/study")
-//	public List<StudyDto> seletTest(@RequestParam("no") int no) throws Exception{
-//		System.out.println("받은 값 :: "+no);
-//		return null;
-//		
-//	}
- 	
- 	
-	
+    
+    // 스터디 신고
+    @ResponseBody
+	@PostMapping(value="/report-study.do")
+	public String reportStudy(@RequestBody StudyDto studyDto,@RequestBody ReportDto reportDto,HttpServletRequest request,HttpSession session) throws Exception{	
+    	// 스터디 아이디, 신고자 신원, 신고 이유 
+    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+    	System.out.println("member확인:: "+mem);
+    	
+    	System.out.println("스터디 아이디 :: "+studyDto.getStudyId());
+    	System.out.println("신고자 신원 :: "+mem.getMemberId());
+    	System.out.println("신고 이유 :: "+reportDto.getReportDescription());
+    	
+    	reportService.reportStudy(studyDto.getStudyId(),mem.getMemberId(),reportDto.getReportDescription());
+ 		
+     	return "ok";
+     }
+    
+    // 멤버 신고
+    @ResponseBody
+	@PostMapping(value="/report-member.do")
+	public String reportMember(@RequestBody MemberDto memberDto,@RequestBody ReportDto reportDto,HttpServletRequest request,HttpSession session) throws Exception{	
+    	// 멤버 아이디, 신고자 신원, 신고 이유 
+    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+    	System.out.println("member확인:: "+mem);
+    	
+    	System.out.println("멤버 아이디 :: "+memberDto.getMemberId());
+    	System.out.println("신고자 신원 :: "+mem.getMemberId());
+    	System.out.println("신고 이유 :: "+reportDto.getReportDescription());
+    	
+    	reportService.reportMember(memberDto.getMemberId(),mem.getMemberId(),reportDto.getReportDescription());
+ 		
+     	return "ok";
+     }
 
 }
