@@ -25,7 +25,7 @@ class signup extends Component {
 
   inputId = (e) => {
     this.setState({
-         user_id : e.target.value    
+        memberId : e.target.value    
       })
   }
 

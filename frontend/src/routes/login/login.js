@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import './login.css';
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import axios from "axios";
 // import { Button, Form, FormGroup, Label, Input }
 //     from 'reactstrap';
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,6 +9,40 @@ import './login.css';
 
 
 class Login extends Component{
+
+  constructor(props){
+    super(props);
+    this.state ={
+        MemberID : '',
+        MemberPassWord : ''
+    };
+
+    this.handleRequest = this.handleRequest.bind(this);
+  }
+  handleRequest = async () =>{
+    const response = await axios({
+      method: 'post',
+      url: 'http://localhost:8080/login.do',
+      data: {
+        MemberID : this.state.MemberID,
+        MemberPassWord : this.state.MemberPassWord
+      }
+    });
+    console.log(response);
+  }
+
+  // inputId = (e) =>{
+  //   this.setState({
+  //     memverID : e.target.value
+  //   })
+  // }
+
+  // inputPassword = (e) =>{
+  //   this.setState({
+  //     memverPassword : e.target.value
+  //   })
+  // }
+
   render() {
     return (
       <div className="container">
@@ -19,17 +55,22 @@ class Login extends Component{
 
           <div>
             <div className="login-inputarea">
-              <input id="login-id-area" type="ID" placeholder="Enter your Id" name="memberId"></input>
+              <input id="login-id-area" type="ID" placeholder="Enter your Id" name={'MemberID'} 
+                    value={this.state.MemberID} 
+                    onChange={(e) => this.setState({MemberID : e.target.value})} ></input>
             </div>
           </div>
           <div>
             <div className="login-inputarea">
-              <input id="login-password-area" type="Password" placeholder="Enter your Password" name="memberPassword"></input>
+              <input id="login-password-area" type="Password" placeholder="Enter your Password" name={'MemberPassWord'} 
+                    value={this.state.MemberPassWord} 
+                    onChange={(e) => this.setState({MemberPassWord : e.target.value})}
+              ></input>
             </div>
           </div>
           <div>
             <div className="login-btn-login-area">
-              <button className="btn-lg">Log in</button>
+              <button className="btn-lg" onClick={this.handleRequest}>Log in</button>
             </div>
           </div>
             <div className="login-text-center"> 
