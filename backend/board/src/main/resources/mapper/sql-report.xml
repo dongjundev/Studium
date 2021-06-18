@@ -19,5 +19,23 @@
 			, report_date=NOW(), report_member_id=#{reportMemberId}
 		]]>
 	</insert>
+	
+	<!-- 스터디 카운팅 --> 
+	<select id="reportStudyCount" parameterType="board.dto.ReportDto">
+		<![CDATA[
+			SELECT count(*)
+			FROM t_report
+			WHERE study_id=#{studyId}
+		]]>
+	</select>
+	
+	<!-- 멤버 카운팅 --> 
+	<select id="reportMemberCount" parameterType="board.dto.ReportDto">
+		<![CDATA[
+			SELECT count(*)
+			FROM t_report
+			WHERE member_id=#{memberId}
+		]]>
+	</select>
 
 </mapper>

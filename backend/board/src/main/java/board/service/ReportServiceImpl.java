@@ -32,4 +32,18 @@ public class ReportServiceImpl implements ReportService{
 		reportMapper.reportMember(memberId,reportMemberId,reportDescription);
 	}
 
+	@Override
+	public int reportStudyCount(int studyId) throws Exception {
+		// TODO Auto-generated method stub
+		int result=reportMapper.reportStudyCount(studyId);
+		return result;
+	}
+
+	@Override
+	public int reportMemberCount(String memberId) throws Exception {
+		// TODO Auto-generated method stub
+		int result=reportMapper.reportMemberCount(memberId);
+		return result;
+	}
+
 }

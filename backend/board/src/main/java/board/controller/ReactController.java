@@ -81,20 +81,27 @@ public class ReactController {
 	}
 	
 	// 회원가입 ----------------------------
-	@RequestMapping("/signup.do") 
-	public String signUp(@RequestParam(defaultValue="memberId")String memberId,@RequestParam(defaultValue="memberPassword")String memberPassword,
-			@RequestParam(defaultValue="memberName")String memberName,@RequestParam(defaultValue="memberAddress")String memberAddress,
-			@RequestParam(defaultValue="memberGender")String memberGender) throws Exception {
+	@ResponseBody
+	@PostMapping(value="/signup.do")
+	public String signUp(@RequestBody MemberDto memberDto,HttpServletRequest request) throws Exception {
 	
 		MemberDto member = new MemberDto();
 		
-		member.setMemberId(memberId);
-		member.setMemberName(memberName);
-		member.setMemberAddress(memberAddress);
-		member.setMemberGender(memberGender);
+		System.out.println(memberDto.getMemberId());
+		System.out.println(memberDto.getMemberName());
+		System.out.println(memberDto.getMemberAddress());
+		System.out.println(memberDto.getMemberGender());
 		
-		int result=memberService.idChk(memberId);
-	
+		member.setMemberId(memberDto.getMemberId());
+		member.setMemberName(memberDto.getMemberName());
+		member.setMemberAddress(memberDto.getMemberAddress());
+		member.setMemberGender(memberDto.getMemberGender());
+		
+		
+		int result=memberService.idChk(memberDto.getMemberId());
+		
+		System.out.println(result);
+		
 		if(result==1) {
 			// 아이디가 중복이면 
 			System.out.println("아이디가 중복입니다.");
@@ -104,7 +111,7 @@ public class ReactController {
 		else if (result==0){
 			// 아이디가 중복이 아니면 db에 insert
 			
-			String password=passwordEncoder.encode(memberPassword);
+			String password=passwordEncoder.encode(memberDto.getMemberPassword());
 			
 			member.setMemberPassword(password);
 			memberService.insertMember(member);
@@ -112,6 +119,7 @@ public class ReactController {
 		
 		member=null;
 		//return "redirect:/user/login.do";
+		System.out.println("가입완료");
 		return "ok";
 	}
 
@@ -461,6 +469,7 @@ public class ReactController {
 	@PostMapping(value="/report-study.do")
 	public String reportStudy(@RequestBody StudyDto studyDto,@RequestBody ReportDto reportDto,HttpServletRequest request,HttpSession session) throws Exception{	
     	// 스터디 아이디, 신고자 신원, 신고 이유 
+    	System.out.println("들어옴 :: ");
     	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
     	System.out.println("member확인:: "+mem);
     	
@@ -477,7 +486,7 @@ public class ReactController {
     @ResponseBody
 	@PostMapping(value="/report-member.do")
 	public String reportMember(@RequestBody MemberDto memberDto,@RequestBody ReportDto reportDto,HttpServletRequest request,HttpSession session) throws Exception{	
-    	// 멤버 아이디, 신고자 신원, 신고 이유 
+    	// 멤버 아이디, 신고자 신원, 신고 이유  
     	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
     	System.out.println("member확인:: "+mem);
     	
@@ -488,6 +497,23 @@ public class ReactController {
     	reportService.reportMember(memberDto.getMemberId(),mem.getMemberId(),reportDto.getReportDescription());
  		
      	return "ok";
+     }
+    
+    // Mypage
+    @ResponseBody
+	@PostMapping(value="/mypage")
+	public List<MemberDto> myPage(HttpServletRequest request,HttpSession session) throws Exception{	
+
+    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+    	System.out.println("member확인:: "+mem);
+    	System.out.println("member Id 확인 :: "+mem.getMemberId());
+    	
+    	ArrayList<MemberDto> memberDetail = new ArrayList<>();
+    	
+     	MemberDto member = memberService.selectStudyMemberDetail(mem.getMemberId());
+     	memberDetail.add(member);
+     	
+     	return memberDetail;
      }
 
 }
