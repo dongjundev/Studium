@@ -3,14 +3,19 @@ package board.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.io.File;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import board.dto.BoardDto;
@@ -167,8 +173,12 @@ public class ReactController {
         	memberList.add(mem);
     	}
     	
+    	//이벤트 리스트
+    	List<StudyDto> eventList = studyService.selectStudyEvent(studyId);
+    	
     	studyDetail.add(study);
     	studyDetail.add(memberList);
+    	studyDetail.add(eventList);
     	
     	return studyDetail;
     }
@@ -331,10 +341,21 @@ public class ReactController {
     }
  	
  	// 카테고리 검색---------------------------
- 	@GetMapping("/search")
-    public List<StudyDto> CategorySearch(@RequestParam(defaultValue="tagId")int tagId) throws Exception{
+ 	@GetMapping("/search/{tagId}")
+    public List<StudyDto> CategorySearch(@PathVariable(name = "tagId") int tagId) throws Exception{
  		List<StudyDto> list = studyService.selectStudyList();
  		List<StudyDto> result= new ArrayList<>();
+ 		
+ 		String stagId=null;
+ 		if (tagId==1) {
+ 			stagId="외국어";
+ 			}
+ 		else if(tagId==2) {
+ 			stagId="운동";
+ 		}
+ 		else {
+ 			stagId="기타";
+ 		}
  		
 		for(int i=0; i<list.size(); i++) {
 			System.out.println("search 확인 :: "+list.get(i));
@@ -346,7 +367,9 @@ public class ReactController {
 			System.out.println("TagList 확인 :: "+Arrays.toString(TagList));
 			
 			for (int j=0; j<TagList.length; j++) {
-				if (Integer.parseInt(TagList[j])==tagId) {
+				System.out.println("Tag 확인 :: "+TagList[j]);
+				
+				if (TagList[j].equals(stagId)) {
 					int studyId=list.get(i).getStudyId();
 					result.add(studyService.selectStudyDetail(studyId));
 				}
@@ -359,6 +382,68 @@ public class ReactController {
 		return result;
     }
  	
+ 	// 키워드검색---------------------------
+ 	@GetMapping("/search")
+    public List<StudyDto> KeywordSearch(@RequestParam(defaultValue="keyword")String keyword,@RequestParam(defaultValue="searchCondition")String searchCondition) throws Exception{
+ 		
+ 		List<StudyDto> searchList = studyService.searchStudy(searchCondition,keyword);
+ 		//List<StudyDto> result= new ArrayList<>();
+		
+		return searchList;
+    }
+    
+ 	// GalleryDetail----------------------------
+ 	@GetMapping("/gallery/{boardIdx}")
+     public List<Object> GalleryDetail(@PathVariable(name = "boardIdx") int boardIdx,HttpSession session) throws Exception{		
+ 
+ 		BoardFileDto boardFile = boardService.selectBoardFileInformation(boardIdx);
+ 		BoardDto board = boardService.selectBoardDetail(boardIdx);
+ 		System.out.println("파일 정보 :: "+boardFile);
+ 		
+ 		List<Object> gallery = new ArrayList<>();
+ 		gallery.add(boardFile);
+ 		gallery.add(board);
+ 		
+     	return gallery;
+     }
+ 	
+// 	// GalleryInsert----------------------------
+// 	@RequestMapping("/gallery/insertBoard.do")	//작성된 게시글 등록
+//    public String GalleryInsert(@RequestParam(defaultValue="title")String title,@RequestParam(defaultValue="content")String content, MultipartHttpServletRequest multipartHttpServletRequest,HttpSession session) throws Exception{
+//    	BoardDto board=null;
+//    	board = new BoardDto();
+//    	
+//    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+//    	
+// 		board.setStudyId(glo_studyId);
+// 		board.setContents(content);
+// 		board.setCreatorId(mem.getMemberId());
+// 		board.setTitle(title);
+// 		
+//    	boardService.insertBoard(board, multipartHttpServletRequest);
+//    	return "ok";
+//    }
+ 	
+ 	// GalleryFileDownload----------------------------
+    @GetMapping("/gallery/downloadBoardFile.do")
+    public void downloadBoardFile(@RequestParam int boardIdx, HttpServletResponse response) throws Exception{
+    	System.out.println("들어옴");
+    	BoardFileDto boardFile = boardService.selectBoardFileInformation(boardIdx);
+    	if(ObjectUtils.isEmpty(boardFile) == false) {
+    		String fileName = boardFile.getOriginalFileName();
+    		
+    		byte[] files = FileUtils.readFileToByteArray(new File(boardFile.getOriginalFilePath()));
+    		
+    		response.setContentType("application/octet-stream");
+    		response.setContentLength(files.length);
+    		response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(fileName, "UTF-8")+"\";");
+    		response.setHeader("Content-Transfer-Encoding", "binary");
+    		
+    		response.getOutputStream().write(files);
+    		response.getOutputStream().flush();
+    		response.getOutputStream().close();
+    	}
+    }
 //	@GetMapping("/study")
 //	public List<StudyDto> seletTest(@RequestParam("no") int no) throws Exception{
 //		System.out.println("받은 값 :: "+no);

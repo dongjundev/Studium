@@ -13,7 +13,7 @@
 		]]>
 	</select>
 	
-	<!-- 스터디 검색 !-->
+	<!-- 스터디 검색 !
 	<select id="searchStudy" resultType="board.dto.StudyDto" >
 		<![CDATA[
 			SELECT
@@ -33,6 +33,34 @@
 			</when>
 			<otherwise>
 				<![CDATA[
+				WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_description LIKE CONCAT('%', #{searchKeyword} , '%'))
+				]]>
+			</otherwise>
+		</choose>
+		
+	</select>-->
+	
+	<!-- react 스터디 검색 !-->
+	<select id="searchStudy" resultType="board.dto.StudyDto" >
+		<![CDATA[
+			SELECT *
+		]]>
+		<choose>
+			<when test="searchCondition=='study'">
+				<![CDATA[
+				FROM t_study
+				WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_description LIKE CONCAT('%', #{searchKeyword} , '%'))
+				]]>
+			</when>
+			<when test="searchCondition=='event'">
+				<![CDATA[
+				FROM t_event
+				WHERE (event_name LIKE CONCAT('%', #{searchKeyword} , '%') OR event_description LIKE CONCAT('%', #{searchKeyword} , '%'))
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+				FROM t_study
 				WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_description LIKE CONCAT('%', #{searchKeyword} , '%'))
 				]]>
 			</otherwise>
