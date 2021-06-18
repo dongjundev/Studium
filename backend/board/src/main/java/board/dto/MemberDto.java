@@ -17,4 +17,5 @@ public class MemberDto {
 	private String memberImage;
 	private String memberAddress;
 	private String memberGender;
+	private String memberRePassword;
 }

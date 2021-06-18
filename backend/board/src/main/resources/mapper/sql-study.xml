@@ -13,7 +13,7 @@
 		]]>
 	</select>
 	
-	<!-- 스터디 검색 !-->
+	<!-- 스터디 검색 !
 	<select id="searchStudy" resultType="board.dto.StudyDto" >
 		<![CDATA[
 			SELECT
@@ -33,6 +33,34 @@
 			</when>
 			<otherwise>
 				<![CDATA[
+				WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_description LIKE CONCAT('%', #{searchKeyword} , '%'))
+				]]>
+			</otherwise>
+		</choose>
+		
+	</select>-->
+	
+	<!-- react 스터디 검색 !-->
+	<select id="searchStudy" resultType="board.dto.StudyDto" >
+		<![CDATA[
+			SELECT *
+		]]>
+		<choose>
+			<when test="searchCondition=='study'">
+				<![CDATA[
+				FROM t_study
+				WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_description LIKE CONCAT('%', #{searchKeyword} , '%'))
+				]]>
+			</when>
+			<when test="searchCondition=='event'">
+				<![CDATA[
+				FROM t_event
+				WHERE (event_name LIKE CONCAT('%', #{searchKeyword} , '%') OR event_description LIKE CONCAT('%', #{searchKeyword} , '%'))
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+				FROM t_study
 				WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_description LIKE CONCAT('%', #{searchKeyword} , '%'))
 				]]>
 			</otherwise>
@@ -124,6 +152,14 @@
 	<select id="eventJoin" parameterType="map">
 		<![CDATA[
 			UPDATE t_event SET event_attandent_id = CONCAT(event_attandent_id ,',${memberId}') WHERE event_id=#{eventId};
+		]]>
+	</select>
+	
+	<!-- 이벤트 리스트 !-->
+	<select id="selectEventList" resultType="board.dto.StudyDto">
+		<![CDATA[
+			SELECT *
+			FROM t_event
 		]]>
 	</select>
 
