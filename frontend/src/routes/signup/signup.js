@@ -126,6 +126,7 @@ class signup extends Component {
     else if (e.target.value === this.state.memberRepassWord) {
       this.setState({
         pMessage: "✅ 비밀번호가 일치합니다 :)"
+        
       }) // 사용자가 입력한 비밀번호가 두개 다 일치하면 보여주는 메시지.
     }
   }
@@ -182,7 +183,7 @@ class signup extends Component {
           </div>
           <div>
             <div className="signup-inputarea">
-              <input id="signup-passwordCheck-area" type="Password" placeholder="Enter your Password one more" name="memberRepassWord" 
+              <input id="signup-passwordCheck-area" type="Password" placeholder="Enter your Password one more" name={'memberRepassWord'} 
                   value={this.state.memberRepassWord}
 				          onChange={this.handleConfirmrePassword}></input>
                   <p className="checktext">{this.state.pMessage}</p>

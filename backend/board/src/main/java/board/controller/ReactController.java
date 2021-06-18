@@ -91,6 +91,7 @@ public class ReactController {
 		System.out.println(memberDto.getMemberName());
 		System.out.println(memberDto.getMemberAddress());
 		System.out.println(memberDto.getMemberGender());
+		System.out.println(memberDto.getMemberRePassword());
 		
 		member.setMemberId(memberDto.getMemberId());
 		member.setMemberName(memberDto.getMemberName());
@@ -109,12 +110,17 @@ public class ReactController {
 			return "404";
 		}
 		else if (result==0){
-			// 아이디가 중복이 아니면 db에 insert
-			
-			String password=passwordEncoder.encode(memberDto.getMemberPassword());
-			
-			member.setMemberPassword(password);
-			memberService.insertMember(member);
+			// 아이디가 중복이 아니면 && 비밀번호가 일치하면 db에 insert
+			if (memberDto.getMemberRePassword().equals(memberDto.getMemberPassword())) {
+				String password=passwordEncoder.encode(memberDto.getMemberPassword());
+				
+				member.setMemberPassword(password);
+				memberService.insertMember(member);
+			}
+			else {
+				System.out.println("비밀번호가 맞지 않습니다.");
+				return "404";
+			}
 		}
 		
 		member=null;
@@ -191,7 +197,11 @@ public class ReactController {
         	MemberDto mem= memberService.selectStudyMemberDetail(String.valueOf(member[i]));
         	memberList.add(mem);
     	}
-    	
+		
+    	//멤버 count
+		int memberCount = member.length;
+		study.setMemberCnt(memberCount);
+
     	//이벤트 리스트
     	List<StudyDto> eventList = studyService.selectStudyEvent(studyId);
     	
