@@ -5,13 +5,13 @@ import './Member.css'
 function Member( {image, name, city, gender, display} ){
     if(display === "thum-event"){
         return (
-            <div className="thum-event-member">
+            <div>
                 <div className="thum-event-member-image">
                         <img src={image}></img>
                 </div>
                 <div className="thum-event-member-name">
                         <p className="member-name">{name}</p>
-                        <p className="member-city">From {city}</p>
+                        <p className="member-city">{city}</p>
                 </div>
             </div>
         )

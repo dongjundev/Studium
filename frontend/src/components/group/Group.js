@@ -45,7 +45,9 @@ function Group ( {id, image, name, description, memberCnt, tag, display, members
                         <h1>{name}</h1>
                         <p><FontAwesomeIcon icon={faTags} /> {tag}</p>
                         <p><FontAwesomeIcon icon={faUsers} /> 회원 {memberCnt}명</p>
-                        <button>이 그룹에 가입하기</button>
+                        {members.some(member => (
+                            member.memberId === "test"
+                        )) ? <button id="create-event">이벤트 만들기</button> : <button id="join">스터디 가입하기</button>}
                     </div>
                 </div>
                 {/* <div className="group-detail-tabs">
@@ -67,7 +69,7 @@ function Group ( {id, image, name, description, memberCnt, tag, display, members
                             {members.map(member => (
                                 <div className="thum-group-member" key={member.memberId}>
                                     <Link to={{
-                                        pathname: id + '/member/' + member.memberId,
+                                        pathname: '/member/' + member.memberId,
                                         state: {
                                             image: member.memberImage,
                                             name: member.memberName,
@@ -91,7 +93,7 @@ function Group ( {id, image, name, description, memberCnt, tag, display, members
                         {events.map(event => (
                                 <div className="thum-group-wrap" key={event.eventId}>
                                 <Link to={{
-                                    pathname: '/event-detail/' + event.eventId,
+                                    pathname: '/event/' + event.eventId,
                                     state: {
                                         display: "event-detail"
                                     }

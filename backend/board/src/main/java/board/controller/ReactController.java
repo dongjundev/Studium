@@ -207,34 +207,41 @@ public class ReactController {
     	}
     }
 	
-	// EventList----------------------------
-	@GetMapping("/study/{studyId}/event")
-    public List<StudyDto> EventList(@PathVariable(name = "studyId") int studyId) throws Exception{		
- 
-		List<StudyDto> event = studyService.selectStudyEvent(studyId);
-		
-    	//System.out.println("이벤트 리스트 :: "+event);
-    	
-    	return event;
-    }
-	
-	// EventDetail----------------------------
-	@GetMapping("/event")
-    public List<StudyDto> EventDetail(@RequestParam(defaultValue="eventId")int eventId) throws Exception{		
-		
-		List<StudyDto> eventDetail=new ArrayList<>();
-		
-		//이벤트 정보
-		StudyDto event = studyService.selectEventDetail(eventId);
+    // EventDetail----------------------------
+    @GetMapping("/event/{eventId}")
+     public List<Object> EventDetail(@PathVariable(name = "eventId") int eventId) throws Exception{      
+       
+       List<Object> eventDetail=new ArrayList<>();
+       List<MemberDto> memberList=new ArrayList<>();
+       
+       //이벤트 정보
+       StudyDto event = studyService.selectEventDetail(eventId);
 
-		//이벤트가 속한 스터디 정보
-		StudyDto study=studyService.selectStudyDetail(event.getStudyId());
+       //이벤트가 속한 스터디 정보
+       StudyDto study=studyService.selectStudyDetail(event.getStudyId());
+       
+       eventDetail.add(event);
+       eventDetail.add(study);
+       //참석자
+       //멤버 리스트
+       String[] member=event.getEventAttandentId().split(",");
+
+		//System.out.println("멤버 리스트 :: "+Arrays.toString(memberList));
+		//System.out.println("멤버 리스트 길이 :: "+memberList.length);
 		
-		eventDetail.add(event);
-		eventDetail.add(study);
-				
-    	return eventDetail;
-    }
+		for (int i=0; i<member.length; i++) {
+		   //스터디 멤버
+		    MemberDto mem= memberService.selectStudyMemberDetail(String.valueOf(member[i]));
+		    System.out.println("멤버 리스트 :: "+mem);
+		    memberList.add(mem);
+		}
+		//멤버 count
+	    int memberCount = member.length;
+	    study.setMemberCnt(memberCount); 
+	    
+	    eventDetail.add(memberList);      
+        return eventDetail;
+     }
 	
 	// GalleryList----------------------------
 	@GetMapping("/study/{studyId}/gallery")

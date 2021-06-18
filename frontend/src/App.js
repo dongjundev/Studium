@@ -19,9 +19,9 @@ function App(){
       <ScrollToTop />
       <Switch>
         <Route path="/" exact={true} component={Main} />
-        <Route path="/event-detail/:eventId" component={EventDetail} />
+        <Route path="/event/:eventId" component={EventDetail} />
         <Route path="/study/:studyId" exact={true} component={GroupDetail} />
-        <Route path="/study/:studyId/member/:memberId" exact={true} component={GroupMemberDetail} />
+        <Route path="/member/:memberId" exact={true} component={GroupMemberDetail} />
         <Route path="/search" component={Search} />
       </Switch>
       <Footer />

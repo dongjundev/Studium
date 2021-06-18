@@ -2,7 +2,6 @@ import React from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
 // import './group-detail.css'
-import Group from '../../components/group/Group'
 import Member from "../../components/member/Member";
 
 class GroupMemberDetail extends React.Component{

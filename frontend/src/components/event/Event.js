@@ -7,7 +7,7 @@ import { faClock, faMapMarkedAlt, faSearch, faThumbtack } from "@fortawesome/fre
 import Group from '../group/Group'
 import Member from '../member/Member'
 
-function Event( {title, description, date, location, display} ) {
+function Event( {image, title, description, date, location, attendants, study, display} ) {
     if(display === "thum-main") {
         return (
             <div className="event-thum">
@@ -41,11 +41,11 @@ function Event( {title, description, date, location, display} ) {
                     <h1>[{title}]</h1>
                     <div className="event-host">
                         <div className="event-host-image">
-                            <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"></img>
+                            {attendants[0] === undefined ? "Loading.." : <img src={attendants[0].memberImage}></img>}
                         </div>
                         <div className="event-host-name">
                             <p style={{color:"grey"}}>Hosted by</p>
-                            <p>Gunho K. and 4 others</p>
+                            {attendants[0] === undefined ? "Loading.." : <p>{attendants[0].memberName}</p>}
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,8 @@ function Event( {title, description, date, location, display} ) {
                         </div>
                         <div className="main-description">
                             <h3>세부사항</h3>
-                            <p>
+                            <p>{description}</p>
+                            {/* <p>
                                 Saturday Morning English Talk Time at Hongdae<br />
                                 <br />
                                 Location?: Hongdae Terrace 서교동[masked] Floor<br />
@@ -73,41 +74,32 @@ function Event( {title, description, date, location, display} ) {
                                 Short summary / hook of the meetup:<br />
                                 Good morning! GSM Hongdae opens a brand-new morning English speaking group finally.<br />
                                 Come and join us and share your opinions on various topics from real-life topics to current issues.<br />
-                            </p>
+                            </p> */}
                         </div>
                         <div className="main-attendants">
                             <h3>참석자</h3>
                             <div className="attendants-member">
-                                <Member
-                                    image = {"https://pfpmaker.com/_nuxt/img/profile-3-1.3e702c5.png"}
-                                    name = {"주단태"}
-                                    city = {"Daegu"}
-                                    display = {"thum-event"}
-                                />
-                                <Member
-                                    image = {"http://forums2.cubiccastles.com/uploads/imageupload/162/1DP35AMQYX8F.jpg"}
-                                    name = {"조비서"}
-                                    city = {"Seoul"}
-                                    display = {"thum-event"}
-                                />
-                                <Member
-                                    image = {"http://forums2.cubiccastles.com/uploads/imageupload/432/6PFWTE73ZOV5.jpg"}
-                                    name = {"나애교"}
-                                    city = {"Busan"}
-                                    display = {"thum-event"}
-                                />
-                                <Member
-                                    image = {"https://i1.sndcdn.com/artworks-000641856217-0kq1oc-t500x500.jpg"}
-                                    name = {"오윤희"}
-                                    city = {"Seoul"}
-                                    display = {"thum-event"}
-                                />
-                                <Member
-                                    image = {"https://is5-ssl.mzstatic.com/image/thumb/Purple114/v4/f6/19/72/f61972c9-e38b-230c-2709-c8653778b8c0/source/512x512bb.jpg"}
-                                    name = {"이규진"}
-                                    city = {"Ulsan"}
-                                    display = {"thum-event"}
-                                />
+                                {attendants.map(attendant => (
+                                    <div className="thum-event-member" key={attendant.memberId}>
+                                        <Link to={{
+                                            pathname: '/member/' + attendant.memberId,
+                                            state: {
+                                                image: attendant.memberImage,
+                                                name: attendant.memberName,
+                                                gender: attendant.memberGender,
+                                                city: attendant.memberAddress,
+                                                display: "detail-inGroup"
+                                            }
+                                        }}>
+                                            <Member
+                                                image = {attendant.memberImage}
+                                                name = {attendant.memberName}
+                                                city = {attendant.memberAddress}
+                                                display = "thum-event"
+                                            />
+                                        </Link>
+                                    </div>
+                                ))} 
                             </div>
                         </div>
                         <div className="main-join">
@@ -123,10 +115,10 @@ function Event( {title, description, date, location, display} ) {
                     <div className="content-bd-side">
                         <div className="side-group">
                             <Group
-                                image = {"https://res.klook.com/images/fl_lossy.progressive,q_65/c_fill,w_1200,h_630,f_auto/w_80,x_15,y_15,g_south_west,l_klook_water/activities/xfarkb2lvobut3c5jugs/%20Language%20Exchange%20Experience%20in%20Seoul.jpg"}
-                                name = {"영어회화 배우기"}
-                                numOfMembers = {338}
-                                tags = {"외국어"}
+                                image = {study.studyImage}
+                                name = {study.studyName}
+                                memberCnt = {study.memberCnt}
+                                tags = {study.studyTag}
                                 display = {"thum-event"}
                             />
                         </div>
@@ -150,11 +142,13 @@ function Event( {title, description, date, location, display} ) {
 }
 
 Event.propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     description: PropTypes.string,
-    date: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
-    display: PropTypes.string.isRequired
+    date: PropTypes.string,
+    location: PropTypes.string,
+    attendents: PropTypes.array,
+    group: PropTypes.array,
+    display: PropTypes.string,
 }
 
 // Need these API calls to fetch data 

@@ -7,17 +7,20 @@ import './event-detail.css'
 class EventDetail extends React.Component{
     constructor(){
         super();
-        this.state = {event: [], attendents: [], study: []}
+        this.state = {event: [], attendants: [], study: []}
     }
 
     getEventDetail = async () => {
-        console.log(this.props);
         const url = "http://localhost:8080" + this.props.match.url;
         console.log(url);
         const data = await axios.get(url);
-        console.log(JSON.stringify(data.data));
+        console.log("이벤트 내용: " + JSON.stringify(data.data[0]));
+        console.log("스터디 내용: " + JSON.stringify(data.data[1]));
+        console.log("참석자 내용: " + JSON.stringify(data.data[2]));
         this.setState({
-            
+            event: data.data[0],
+            study: data.data[1],
+            attendants: data.data[2]
         });
     }
     componentDidMount() {
@@ -29,17 +32,21 @@ class EventDetail extends React.Component{
     }
     render() {
         const { location } = this.props;
-        
-
-        if(location.state){
+        const { event, study, attendants } = this.state;
+        if(event !== undefined){
             return (
-                <Event
-                title = {location.state.title}
-                description = {location.state.description}
-                date = {location.state.date}
-                location = {location.state.location}
-                display = {location.state.display}
-                />
+                <div className="event-detail" key={event.eventId}>
+                    <Event
+                        image = {event.eventImage}
+                        title = {event.eventName}
+                        description = {event.eventDescription}
+                        date = {event.eventDate}
+                        location = {event.eventLocation}
+                        display = {location.state.display}
+                        study = {study}
+                        attendants = {attendants}
+                    />
+                </div>
             )
         } else {
             return null;
