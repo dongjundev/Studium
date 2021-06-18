@@ -81,6 +81,7 @@
 .group-detail .group-detail-content-head{
     height: 300px;
     margin: 30px 0;
+    position: relative;
 }
 .content-head-image{
     display: inline-block;
@@ -128,7 +129,7 @@
 .group-detail-tabs ul li a:hover{
     color: #a79b00;
 }
-.group-detail-tabs button{
+.content-head-summary button{
     font-weight: bold;
     margin-left: 30px;
     padding: 10px 40px; 
@@ -136,13 +137,15 @@
     opacity: 0.7;
     background-color: #fff700;
     transition: all, 0.3s;
+    position: absolute;
+    bottom: 0;
 }
-.group-detail-tabs button:hover{
+.content-head-summary button:hover{
     text-decoration: none;
     opacity: 1;
     background-color: #fff700;
     cursor: pointer;
 }
-.group-detail-overview{
-    padding: 30px 0;
+.group-detail-content-body > div{
+    padding: 10px 0;
 }
