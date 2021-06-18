@@ -13,7 +13,7 @@ class GroupDetail extends React.Component{
         const url = "http://localhost:8080" + this.props.match.url;
         console.log(url);
         const data = await axios.get(url);
-        console.log(JSON.stringify(data.data[2]));
+        console.log(JSON.stringify(data.data));
         this.setState({
             study: data.data[0], 
             members: data.data[1],

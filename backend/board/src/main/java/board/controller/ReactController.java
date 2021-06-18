@@ -149,7 +149,8 @@ public class ReactController {
  
 		ArrayList<Object> studyDetail=new ArrayList<>();
 		ArrayList<MemberDto> memberList = new ArrayList<>();
-
+		List<StudyDto> eventList = studyService.selectStudyEvent(studyId);
+	    
     	StudyDto study = studyService.selectStudyDetail(studyId);
     	
     	//현재 스터디 전역변수로 저장
@@ -169,6 +170,7 @@ public class ReactController {
     	
     	studyDetail.add(study);
     	studyDetail.add(memberList);
+    	studyDetail.add(eventList);
     	
     	return studyDetail;
     }
