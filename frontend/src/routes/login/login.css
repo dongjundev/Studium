@@ -1,0 +1,81 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap'); */
+
+body{
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.login-form{
+  width: 800px;
+  margin: 0 auto;
+  padding: 150px 0;
+  /* background-color: white; */
+  /* border: 1px solid white; */
+  border-radius: 10px;
+  height: 100%;
+  text-align: center;
+}
+
+.login-form #login-header{
+  color:#febf00;
+}
+
+.login-text-center{
+  padding: 20px;
+  color:black;
+}
+
+.login-title{
+  text-align: center;
+}
+
+
+.login-form #login-id-area{
+  width: 50%;
+  height: 50px;
+  border: 3px solid #febf00;
+}
+
+.login-form #login-password-area{
+  width: 50%;
+  height: 50px;
+  border: 3px solid #febf00;
+}
+
+.login-form .login-inputarea{
+  display: block;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+
+.login-form .btn-lg{
+  position: relative;
+  overflow: hidden;
+  transition: 300ms;
+  width: 50%;
+  background-color: #febf00;
+  color: black;
+  border: 1px solid #febf00;
+  height: 40px;
+}
+
+.login-form .btn-lg:hover{
+  position: relative;
+  overflow: hidden;
+  transition: 400ms;
+  width: 50%;
+  background-color: #febf00;
+  color: black;
+  border: 1px solid #febf00;
+  border-radius: 50px;
+}
+
+.text-center a{
+  margin-left: 10px;
+  margin-right: 10px;
+}
