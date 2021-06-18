@@ -5,15 +5,28 @@ import { Link } from 'react-router-dom'
 //import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 
 
-
-
  class start extends Component{
+   constructor(){
+    super();
+    this.state ={
+      locationValue: '' // 현재 start의 저장할 데이터
+    }
+   }
+
+   onChangeLocation(e){
+     this.setState({
+       locationValue: e.target.value
+     });
+   }
+
    render() {
+    
     return(
       <div className='start'>
         <div className="start-row-step">
           <div classNam="start-stepbox">
               <p id="start-step">1/4단계</p>
+              
           </div>
           <form className="start-contents-all">
             <div className="start-contents-box">
@@ -23,17 +36,19 @@ import { Link } from 'react-router-dom'
                   We'll connect you with people in your area, and more can join you online.</p>
               </div>
               <div className="start-contents-wrap">
-                <input type="serach" name="venue" id="start-venueSearch" placeholder="지역 입력"/>
+                <input type="serach" name="venue" id="start-venueSearch" placeholder="지역 입력" onChange={this.onChangeLocation.bind(this)}/>
               </div>
             </div>
-            
           </form>
           
           <div className="start-Footer">
             <div className="start-Footer-box">
-              <Link to="./topics">
-                <button>다음</button>
-              </Link>
+            <Link to={{
+                pathname: '/topics',
+                state: {
+                    location: this.state.locationValue
+                }
+              }}><button>다음</button></Link>
             </div>
           </div>
         </div>

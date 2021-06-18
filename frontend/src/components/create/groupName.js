@@ -7,7 +7,17 @@ import { Link } from 'react-router-dom'
 
 
 class groupName extends Component{
+  constructor(props){
+    super(props);
+    this.state ={
+      studyName : '', //현재 groupName의 저장된 데이터
+      location : this.props.location.state.location, // 지역 데이터
+      selectedTopics : this.props.location.state.selectedTopics // 토픽 배열 데이터
+    };
+  }
   render() {
+    const {location, selectedTopics} = this.state;
+    console.log(location, selectedTopics);
     return (
       <div className='groupName'>
         <div className="groupName-row-step">

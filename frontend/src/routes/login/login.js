@@ -13,10 +13,10 @@ class Login extends Component{
   constructor(props){
     super(props);
     this.state ={
-        MemberID : '',
-        MemberPassWord : ''
+        MemberId : '',
+        MemberPassword : ''
     };
-
+    
     this.handleRequest = this.handleRequest.bind(this);
   }
   handleRequest = async () =>{
@@ -24,8 +24,8 @@ class Login extends Component{
       method: 'post',
       url: 'http://localhost:8080/login.do',
       data: {
-        MemberID : this.state.MemberID,
-        MemberPassWord : this.state.MemberPassWord
+        MemberId : this.state.MemberId,
+        MemberPassword : this.state.MemberPassword
       }
     });
     console.log(response);
@@ -55,16 +55,16 @@ class Login extends Component{
 
           <div>
             <div className="login-inputarea">
-              <input id="login-id-area" type="ID" placeholder="Enter your Id" name={'MemberID'} 
-                    value={this.state.MemberID} 
-                    onChange={(e) => this.setState({MemberID : e.target.value})} ></input>
+              <input id="login-id-area" type="ID" placeholder="Enter your Id" name={'MemberId'} 
+                    value={this.state.MemberId} 
+                    onChange={(e) => this.setState({MemberId : e.target.value})} ></input>
             </div>
           </div>
           <div>
             <div className="login-inputarea">
-              <input id="login-password-area" type="Password" placeholder="Enter your Password" name={'MemberPassWord'} 
-                    value={this.state.MemberPassWord} 
-                    onChange={(e) => this.setState({MemberPassWord : e.target.value})}
+              <input id="login-password-area" type="Password" placeholder="Enter your Password" name={'MemberPassword'} 
+                    value={this.state.MemberPassword} 
+                    onChange={(e) => this.setState({MemberPassword : e.target.value})}
               ></input>
             </div>
           </div>

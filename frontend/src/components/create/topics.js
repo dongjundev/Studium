@@ -9,10 +9,11 @@ import { Link } from 'react-router-dom'
 
 class topics extends Component{
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props);
     this.state = {
-      options: []
+      options: [], // 현재 topics의 저장할 데이터
+      location: this.props.location.state.location //start에서 지역 데이터 뽑기
     }
   }
 
@@ -35,13 +36,15 @@ class topics extends Component{
 
 
   render() {
-    
+    const {location} = this.state;
+    console.log(location);
     return (
       
       <div className='topics'>
         <div className="topics-row-step">
           <div classNam="topics-stepbox">
             <p id="topics-step">2/4단계</p>
+            
           </div>
         <form className="topics-contents-all">
           <div className="topics-contents-box">
@@ -93,9 +96,13 @@ class topics extends Component{
             <Link to="./start">
               <button className="topics-btn">이전</button>
             </Link>
-            <Link to="./groupName">
-              <button className="topics-btn">다음</button>
-            </Link>
+            <Link to={{
+                pathname: '/groupName',
+                state: {
+                    location: location,
+                    selectedTopics : this.state.options
+                }
+              }}><button className="topics-btn">다음</button></Link>
             
           </div>
         </div>
