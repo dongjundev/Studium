@@ -155,6 +155,7 @@ public class ReactController {
 				
 				//세션 안될 경우 전역변수에 memberId 저장
 				glo_memberId=loginDto.getMemberId();
+				System.out.println("로그인 정보 :: "+glo_memberId);
 				
 				System.out.println("로그인 성공"); 
 				  
@@ -177,15 +178,17 @@ public class ReactController {
 	@GetMapping("/logout.do")
 	public String logout(MemberDto member,HttpServletRequest request) throws Exception {
 
-		HttpSession session = (HttpSession)request.getSession();
-		session.setAttribute("loginUser", null);
+//		HttpSession session = (HttpSession)request.getSession();
+//		session.setAttribute("loginUser", null);
+		
+		glo_memberId=null;
 		
 		System.out.println("로그아웃 성공");
 		
 		return "ok";
 	}
 	
-	// StudyDetail----------------------------
+	// 스터디 상세 StudyDetail----------------------------
 	@GetMapping("/study/{studyId}")
     public ArrayList<Object> StudyDetail(@PathVariable(name = "studyId") int studyId) throws Exception{		
  
@@ -223,15 +226,14 @@ public class ReactController {
     	return studyDetail;
     }
 	
-    // StudyJoin----------------------------
+    // 스터디 가입 StudyJoin----------------------------
     @RequestMapping("/study/{studyId}/join.do")
     public String StudyJoin(@PathVariable(name = "studyId") int studyId,@ModelAttribute MemberDto member,HttpSession session) throws Exception{	
     	
-    	
-    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
-    	System.out.println("member확인:: "+mem);
+    	//MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+    	//System.out.println("member확인:: "+mem);
 
-    	if (mem==null) {
+    	if (glo_memberId==null) {
     		System.out.println("로그인 해주세요.");
     		return "404";
     	}
@@ -240,8 +242,8 @@ public class ReactController {
 	    	// studyService.studyJoinChk(studyId) = 1,2,3,4
 	    	
 	    	String[] result_list=studyService.studyJoinChk(studyId).split(",");
-	    	String memberId=mem.getMemberId();
-	
+	    	String memberId=glo_memberId;
+	    	
 	    	for (int i=0;i<result_list.length;i++) {
 	    		if (result_list[i].equals(memberId)) {
 	    			System.out.println("중복 가입입니다.");
@@ -306,7 +308,7 @@ public class ReactController {
 	
 	// GalleryList----------------------------
 	@GetMapping("/study/{studyId}/gallery")
-    public List<BoardDto> GalleryList(@PathVariable(name = "studyId") int studyId,HttpSession session) throws Exception{		
+    public List<BoardDto> GalleryList(@PathVariable(name = "studyId") int studyId) throws Exception{		
  
 		List<BoardDto> board = boardService.selectBoardList(studyId);
 		
@@ -316,16 +318,18 @@ public class ReactController {
 	// EventJoin------------------------------
     @RequestMapping("/event/{eventId}/join.do")
     public String EventJoin(@PathVariable(name = "eventId") int eventId,HttpSession session) throws Exception{	
-    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
-    	System.out.println("member확인:: "+mem);
     	
-    	if (mem==null) {
+    	//MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+    	//System.out.println("member확인:: "+mem);
+    	
+    	if (glo_memberId==null) {
     		System.out.println("로그인 해주세요.");
     		return "404";
     	}
     	else {
-        	String memberId=mem.getMemberId();
-        	
+        	//String memberId=mem.getMemberId();
+    		String memberId=glo_memberId;
+    		
         	//이벤트 정보
     		StudyDto event = studyService.selectEventDetail(eventId);
 
@@ -381,11 +385,12 @@ public class ReactController {
  		
 // 		StudyDto studyDto=null;
 // 		studyDto = new StudyDto();
- 		LoginDto mem=(LoginDto) session.getAttribute("loginUser");
- 		System.out.println("멤버 정보 "+mem);
+// 		LoginDto mem=(LoginDto) session.getAttribute("loginUser");
+// 		System.out.println("멤버 정보 "+mem);
  		
  		try {
- 			String memberId=mem.getMemberId();
+ 			//String memberId=mem.getMemberId();
+ 			String memberId=glo_memberId;
  			studyDto.setMemberId(memberId);
  		}catch(Exception e){
  			String memberId="cho";
@@ -536,15 +541,16 @@ public class ReactController {
 	public String reportStudy(@RequestBody StudyDto studyDto,@RequestBody ReportDto reportDto,HttpServletRequest request,HttpSession session) throws Exception{	
     	// 스터디 아이디, 신고자 신원, 신고 이유 
     	System.out.println("들어옴 :: ");
-    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
-    	System.out.println("member확인:: "+mem);
+//    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+//    	System.out.println("member확인:: "+mem);
     	
     	System.out.println("스터디 아이디 :: "+studyDto.getStudyId());
-    	System.out.println("신고자 신원 :: "+mem.getMemberId());
+    	//System.out.println("신고자 신원 :: "+mem.getMemberId());
     	System.out.println("신고 이유 :: "+reportDto.getReportDescription());
     	
-    	reportService.reportStudy(studyDto.getStudyId(),mem.getMemberId(),reportDto.getReportDescription());
- 		
+    	//reportService.reportStudy(studyDto.getStudyId(),mem.getMemberId(),reportDto.getReportDescription());
+    	reportService.reportStudy(studyDto.getStudyId(),glo_memberId,reportDto.getReportDescription());
+    	
      	return "ok";
      }
     
@@ -553,16 +559,17 @@ public class ReactController {
 	@PostMapping(value="/report-member.do")
 	public String reportMember(@RequestBody MemberDto memberDto,@RequestBody ReportDto reportDto,HttpServletRequest request,HttpSession session) throws Exception{	
     	// 멤버 아이디, 신고자 신원, 신고 이유  
-    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
-    	System.out.println("member확인:: "+mem);
+//    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+//    	System.out.println("member확인:: "+mem);
     	
     	System.out.println("멤버 아이디 :: "+memberDto.getMemberId());
-    	System.out.println("신고자 신원 :: "+mem.getMemberId());
+    	//System.out.println("신고자 신원 :: "+mem.getMemberId());
     	System.out.println("신고 이유 :: "+reportDto.getReportDescription());
     	
-    	reportService.reportMember(memberDto.getMemberId(),mem.getMemberId(),reportDto.getReportDescription());
- 		
-     	return "ok";
+    	//reportService.reportMember(memberDto.getMemberId(),mem.getMemberId(),reportDto.getReportDescription());
+    	reportService.reportMember(memberDto.getMemberId(),glo_memberId,reportDto.getReportDescription());
+     	
+    	return "ok";
      }
     
     // Mypage
@@ -570,13 +577,14 @@ public class ReactController {
 	@PostMapping(value="/mypage")
 	public List<MemberDto> myPage(HttpServletRequest request,HttpSession session) throws Exception{	
 
-    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
-    	System.out.println("member확인:: "+mem);
-    	System.out.println("member Id 확인 :: "+mem.getMemberId());
+//    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+//    	System.out.println("member확인:: "+mem);
+//    	System.out.println("member Id 확인 :: "+mem.getMemberId());
     	
     	ArrayList<MemberDto> memberDetail = new ArrayList<>();
     	
-     	MemberDto member = memberService.selectStudyMemberDetail(mem.getMemberId());
+     	//MemberDto member = memberService.selectStudyMemberDetail(mem.getMemberId());
+    	MemberDto member = memberService.selectStudyMemberDetail(glo_memberId);
      	memberDetail.add(member);
      	
      	return memberDetail;
