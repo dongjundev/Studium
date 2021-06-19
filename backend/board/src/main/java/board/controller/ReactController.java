@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.io.File;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import board.dto.BoardDto;
 import board.dto.BoardFileDto;
+import board.dto.LoginDto;
 import board.dto.MemberDto;
 import board.dto.ReportDto;
 import board.dto.StudyDto;
@@ -43,8 +45,7 @@ import board.service.StudyService;
 @CrossOrigin(origins="http://localhost:3000")
 @RestController
 public class ReactController {
-	MemberDto memberDto=null;
-
+	String glo_memberId;
 	int glo_studyId;
 	
 	@Autowired
@@ -90,21 +91,15 @@ public class ReactController {
 	@ResponseBody
 	@PostMapping(value="/signup.do")
 	public String signUp(@RequestBody MemberDto memberDto,HttpServletRequest request) throws Exception {
-	
-		MemberDto member = new MemberDto();
 		
+		// 값 확인용
+		System.out.println("frontend에서 들어온 값 :: "+memberDto);
 		System.out.println(memberDto.getMemberId());
 		System.out.println(memberDto.getMemberName());
 		System.out.println(memberDto.getMemberAddress());
 		System.out.println(memberDto.getMemberGender());
 		System.out.println(memberDto.getMemberRePassword());
-		
-		member.setMemberId(memberDto.getMemberId());
-		member.setMemberName(memberDto.getMemberName());
-		member.setMemberAddress(memberDto.getMemberAddress());
-		member.setMemberGender(memberDto.getMemberGender());
-		
-		
+
 		int result=memberService.idChk(memberDto.getMemberId());
 		
 		System.out.println(result);
@@ -116,21 +111,13 @@ public class ReactController {
 			return "404";
 		}
 		else if (result==0){
-			// 아이디가 중복이 아니면 && 비밀번호가 일치하면 db에 insert
-			if (memberDto.getMemberRePassword().equals(memberDto.getMemberPassword())) {
-				String password=passwordEncoder.encode(memberDto.getMemberPassword());
+			// 아이디가 중복이 아니면db에 insert
+			String password=passwordEncoder.encode(memberDto.getMemberPassword());
 				
-				member.setMemberPassword(password);
-				memberService.insertMember(member);
-			}
-			else {
-				System.out.println("비밀번호가 맞지 않습니다.");
-				return "404";
-			}
+			memberDto.setMemberPassword(password);
+			memberService.insertMember(memberDto);
 		}
-		
-		member=null;
-		//return "redirect:/user/login.do";
+
 		System.out.println("가입완료");
 		return "ok";
 	}
@@ -139,46 +126,64 @@ public class ReactController {
 	@ResponseBody
 	@PostMapping(value="/login.do")
 	public String login(@RequestBody MemberDto memberDto,HttpServletRequest request) throws Exception{
-		  System.out.println("들어옴"+memberDto.getMemberId()+memberDto.getMemberPassword()); 
-		  //memberDto.getMemberId();
-		  //memberDto.getMemberPassword();
-		 
-		  String DBPassword = memberService.login(memberDto.getMemberId()); 
+		
+		//로그인 정보 저장 할 Dto
+		LoginDto loginDto=new LoginDto();
+		loginDto.setMemberId(memberDto.getMemberId());
+		loginDto.setMemberPassword(memberDto.getMemberPassword());
 		  
-		  //사용자에게 받은 값:: member.getMemberPw()
-		  //db에서 받은 값:: dbPwd
-		  if (DBPassword !=null) {
-			  if (BCrypt.checkpw(memberDto.getMemberPassword(), DBPassword) == true) {
-				  System.out.println("로그인 성공"); 
-				  
-				  // 서버에 세션 id 발급, 서버에서 받은 세션을 클라이언트 브라우저의 쿠키가 저장하여 가지고 있어야 함
-				  //RequestAttributes requestAttribute = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-				  //requestAttribute.setAttribute("login", null, RequestAttributes.SCOPE_SESSION);
-				  
-				  HttpSession session = (HttpSession)request.getSession();
-				  session.setAttribute("loginUser", memberDto);
+		System.out.println("login 정보 확인 :: "+loginDto);
+		System.out.println("front 입력 정보 :: "+memberDto.getMemberId()+" "+memberDto.getMemberPassword()); 
+		 
+		String DBPassword = memberService.login(memberDto.getMemberId()); 
+		  
+		//사용자에게 받은 값:: member.getMemberPw()
+		//db에서 받은 값:: dbPwd
+		if (DBPassword !=null) {
+			if (BCrypt.checkpw(memberDto.getMemberPassword(), DBPassword) == true) {
 
-				  // 세션 아이디 가져오기
-				  //System.out.println("세션 아이디 :: "+requestAttribute.getSessionId());
-				  System.out.println("세션 아이디2 :: "+session.getId());
-				  //return "redirect:/home";
-				  
-				  
-				  return "ok";
-			  }
-			  else {
-				  System.out.println("로그인 실패"); 
+				// 서버에 세션 id 발급, 서버에서 받은 세션을 클라이언트 브라우저의 쿠키가 저장하여 가지고 있어야 함
+				//RequestAttributes requestAttribute = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+				//requestAttribute.setAttribute("login", null, RequestAttributes.SCOPE_SESSION);
+		            
+				HttpSession session = request.getSession();
+				session.setAttribute("loginUser", loginDto);
+
+				// 세션 아이디 가져오기
+				System.out.println("세션 아이디 :: "+session.getId());
+				System.out.println("세션 정보 :: "+session);
 				
-			  }
-		  }
-		  else {
-			  System.out.println("해당하는 아이디가 없습니다");
-			  System.out.println("로그인 실패");
-		  }
+				//세션 안될 경우 전역변수에 memberId 저장
+				glo_memberId=loginDto.getMemberId();
+				
+				System.out.println("로그인 성공"); 
+				  
+				return "ok";
+			}
+			else {
+				System.out.println("로그인 실패"); 
+				
+			}
+		}
+		else {
+			System.out.println("해당하는 아이디가 없습니다");
+			System.out.println("로그인 실패");
+			return "noId";
+		}
 		  //return "redirect:/user/login.do";
-		  return "404";
+		return "404";
 	}
+	
+	@GetMapping("/logout.do")
+	public String logout(MemberDto member,HttpServletRequest request) throws Exception {
 
+		HttpSession session = (HttpSession)request.getSession();
+		session.setAttribute("loginUser", null);
+		
+		System.out.println("로그아웃 성공");
+		
+		return "ok";
+	}
 	
 	// StudyDetail----------------------------
 	@GetMapping("/study/{studyId}")
@@ -369,26 +374,52 @@ public class ReactController {
      	return memberDetail;
      }
  	
- 	// Study 생성----------------------------
- 	@GetMapping("/create-study.do")
-    public String MakeStudyDescription(@RequestParam(defaultValue="studyName")String studyName,@RequestParam(defaultValue="studyDescription")String studyDescription,
-			@RequestParam(defaultValue="studyTag")String studyTag,@RequestParam(defaultValue="memberId")String memberId,
-			@RequestParam(defaultValue="studyLocation")String studyLocation) throws Exception{
+ 	// 스터디 생성 만들기 -----------------------------------------------------------------------
+ 	@ResponseBody
+	@PostMapping(value="/create-study.do")
+	public String MakeStudyDescription(@RequestBody StudyDto studyDto,HttpSession session) throws Exception{
  		
- 		StudyDto studyDto=null;
- 		studyDto = new StudyDto();
+// 		StudyDto studyDto=null;
+// 		studyDto = new StudyDto();
+ 		LoginDto mem=(LoginDto) session.getAttribute("loginUser");
+ 		System.out.println("멤버 정보 "+mem);
  		
- 		studyDto.setStudyName(studyName);
- 		studyDto.setStudyDescription(studyDescription);
- 		studyDto.setStudyTag(studyTag);
- 		studyDto.setMemberId(memberId);
- 		studyDto.setStudyLocation(studyLocation);
-
+ 		try {
+ 			String memberId=mem.getMemberId();
+ 			studyDto.setMemberId(memberId);
+ 		}catch(Exception e){
+ 			String memberId="cho";
+ 			studyDto.setMemberId(memberId);
+ 		}
+    	
+ 		//System.out.println("멤버 세션 "+mem.getMemberId());
+ 		System.out.println("받은 스터디 내용들 "+studyDto);
     	studyService.insertStudy(studyDto);
     	studyDto = null;
     	
     	return "ok";
     }
+	
+ 	// Study 생성---------------------------- 
+// 	@GetMapping("/create-study.do")
+//    public String MakeStudyDescription(@RequestParam(defaultValue="studyName")String studyName,@RequestParam(defaultValue="studyDescription")String studyDescription,
+//			@RequestParam(defaultValue="studyTag")String studyTag,@RequestParam(defaultValue="memberId")String memberId,
+//			@RequestParam(defaultValue="studyLocation")String studyLocation) throws Exception{
+// 		
+// 		StudyDto studyDto=null;
+// 		studyDto = new StudyDto();
+// 		
+// 		studyDto.setStudyName(studyName);
+// 		studyDto.setStudyDescription(studyDescription);
+// 		studyDto.setStudyTag(studyTag);
+// 		studyDto.setMemberId(memberId);
+// 		studyDto.setStudyLocation(studyLocation);
+//
+//    	studyService.insertStudy(studyDto);
+//    	studyDto = null;
+//    	
+//    	return "ok";
+//    }
  	
  	// 카테고리 검색---------------------------
  	@GetMapping("/search/{tagId}")
@@ -436,8 +467,12 @@ public class ReactController {
  	@GetMapping("/search")
     public List<StudyDto> KeywordSearch(@RequestParam(defaultValue="keyword")String keyword,@RequestParam(defaultValue="searchCondition")String searchCondition) throws Exception{
  		
- 		List<StudyDto> searchList = studyService.searchStudy(searchCondition,keyword);
- 		//List<StudyDto> result= new ArrayList<>();
+ 		String decodekeyword=URLDecoder.decode(keyword);
+ 		System.out.println("decodeURIComponent ::"+URLDecoder.decode(keyword));
+ 		List<StudyDto> searchList = studyService.searchStudy(searchCondition,decodekeyword);
+ 		for (int i=0; i<searchList.size(); i++) {
+ 			searchList.get(i).setMemberCnt(searchList.get(i).getMemberId().length());
+ 		}
 		
 		return searchList;
     }
