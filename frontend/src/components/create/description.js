@@ -21,10 +21,10 @@ import Swal from 'sweetalert2'
       this.handleRequest = this.handleRequest.bind(this);
     }
 
-    // sendStudyData = (e) =>{
-    //   this.handleChange(e);
-    //   this.handleRequest();
-    // }
+    sendStudyData = () =>{
+      this.handleRequest();
+      this.opensweetalert();
+    }
 
     handleChange = (e) =>{
       var textlength = e.target.value.length;
@@ -111,7 +111,7 @@ import Swal from 'sweetalert2'
           <div className="description-Footer">
             <div className="description-Footer-box">
               <Link to="../">
-                <button className="save-btn" disabled={this.state.inputarea.length<50}  onClick={this.handleRequest}>다음</button>
+                <button className="save-btn" disabled={this.state.inputarea.length<50}  onClick={this.sendStudyData}>다음</button>
                 {/* disabled={this.state.inputarea.length<50} */}
               </Link>
             </div>

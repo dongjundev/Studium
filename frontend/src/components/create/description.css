@@ -39,6 +39,11 @@
     border-radius: 15px;
 }
 
+.description-text-error{
+    margin: 0;
+    padding: 0;
+}
+
 #description-subbox{
     padding: 20px;
 }
