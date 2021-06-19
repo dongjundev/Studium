@@ -13,8 +13,15 @@ class groupName extends Component{
       studyName : '', //현재 groupName의 저장된 데이터
       location : this.props.location.state.location, // 지역 데이터
       selectedTopics : this.props.location.state.selectedTopics // 토픽 배열 데이터
-    };
+    }
   }
+
+  onChangeStudyName(e){
+    this.setState({
+      studyName: e.target.value
+    });
+  }
+
   render() {
     const {location, selectedTopics} = this.state;
     console.log(location, selectedTopics);
@@ -32,7 +39,7 @@ class groupName extends Component{
                   떠오르는 기발한 이름이 있나요? 마음이 바뀌면 나중에 다시 변경할 수 있습니다.</p>
               </div>
               <div className="groupName-contents-wrap">
-                <input type="serach" name="venue" id="groupName-venueSearch" 
+                <input type="serach" name="venue" id="groupName-venueSearch" onChange={this.onChangeStudyName.bind(this)}
                       placeholder="ex) 휴스타3기 자격증 취득반"/>
               </div>
             </div>
@@ -41,8 +48,14 @@ class groupName extends Component{
           
           <div className="groupName-Footer">
             <div className="groupName-Footer-box">
-              <Link to="./description">
-                <button>다음</button>
+              <Link to={{
+                pathname: '/description',
+                state: {
+                  location: location,
+                  selectedTopics : selectedTopics,
+                  studyName:this.state.studyName
+                }
+              }}><button>다음</button>
               </Link>
             </div>
           </div>

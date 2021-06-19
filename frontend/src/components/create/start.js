@@ -48,7 +48,8 @@ import { Link } from 'react-router-dom'
                 state: {
                     location: this.state.locationValue
                 }
-              }}><button>다음</button></Link>
+              }}><button>다음</button>
+              </Link>
             </div>
           </div>
         </div>

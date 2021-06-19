@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
 import './description.css';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import axios from "axios";
 //import { BrowserRouter, Route } from 'react-router-dom';
 //import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import Swal from 'sweetalert2'
 
  class description extends Component{
 
-    constructor(){
-      super();
+    constructor(props){
+      super(props);
       this.state = {
         inputarea:"",
-        btnColorState : false
-      }
+        btnColorState : false,
+
+        location: this.props.location.state.location,
+        selectedTopics : this.props.location.state.selectedTopics,
+        studyName : this.props.location.state.studyName
+      };
+      this.handleRequest = this.handleRequest.bind(this);
     }
+
+    // sendStudyData = (e) =>{
+    //   this.handleChange(e);
+    //   this.handleRequest();
+    // }
 
     handleChange = (e) =>{
       var textlength = e.target.value.length;
@@ -21,7 +32,25 @@ import Swal from 'sweetalert2'
         inputarea:e.target.value
       })
       console.log(textlength);
-  }
+    }
+
+    
+
+    handleRequest = async () =>{
+      const response = await axios({
+        method: 'post',
+        url: 'http://localhost:8080/description.do',
+        data: {
+          location : this.state.location,
+          selectedTopics : this.state.selectedTopics,
+          studyName : this.state.studyName,
+          inputarea : this.state.inputarea
+        }
+      });
+      console.log(response);
+    }
+
+  
 
   opensweetalert(){
     Swal.fire({
@@ -42,7 +71,8 @@ import Swal from 'sweetalert2'
 
 
    render() {
-
+    const {location, selectedTopics, studyName} = this.state;
+    console.log(location, selectedTopics, studyName);
     return(
       <div className='description'>
         <div className="description-row-step">
@@ -81,7 +111,7 @@ import Swal from 'sweetalert2'
           <div className="description-Footer">
             <div className="description-Footer-box">
               <Link to="../">
-                <button className="save-btn" disabled={this.state.inputarea.length<50}  onClick={this.opensweetalert}>다음</button>
+                <button className="save-btn" disabled={this.state.inputarea.length<50}  onClick={this.handleRequest}>다음</button>
                 {/* disabled={this.state.inputarea.length<50} */}
               </Link>
             </div>
