@@ -8,6 +8,10 @@
     box-shadow: 5px 5px 5px #e1e1e1;
     transition: all, 0.3s;
 }
+.event-thum a{
+    text-decoration: none;
+    color: #000;
+}
 .event-thum:hover{
     box-shadow: 10px 10px 5px #e1e1e1;
 }

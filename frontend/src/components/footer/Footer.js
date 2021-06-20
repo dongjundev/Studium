@@ -11,25 +11,28 @@ function Footer(){
                     <p className="foot-nav-title">내 계정</p>
                     <ul>
                         <li>
-                            <Link to="/lgoin">로그인</Link>
+                            <Link to="/mypage">마이페이지</Link>
                         </li>
-                        <li>
+                        {/* <li>
                             <Link to="/register">회원가입</Link>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
                 <div className="footer-nav-search">
                     <p className="foot-nav-title">탐색</p>
                     <ul>
                         <li>
-                            <Link to="/none">그룹</Link>
+                            <Link to={{
+                                pathname: "/search",
+                                search: "keyword=&searchCondition=study",
+                                state: {
+                                    isLoggedIn: true
+                                }
+                            }}>그룹/이벤트 검색</Link>
                         </li>
-                        <li>
-                            <Link to="/noen">이벤트</Link>
-                        </li>
-                        <li>
-                            <Link to="/noen">캘린더</Link>
-                        </li>
+                        {/* <li>
+                            <Link to="/none">캘린더</Link>
+                        </li> */}
                     </ul>
                 </div>
                 <div className="footer-nav-company">

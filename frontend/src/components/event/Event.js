@@ -10,7 +10,7 @@ import Member from '../member/Member'
 function Event( {image, title, description, date, location, attendants, study, display} ) {
     if(display === "thum-main") {
         return (
-            <div className="event-thum">
+            <div>
                 <div className="event-thum-detail">
                     <p className="event-date">{date}</p>
                     <p className="event-title">{title}</p>

@@ -7,7 +7,7 @@ import Member from '../member/Member'
 import Event from '../event/Event'
 import './Group.css'
 
-function Group ( {id, image, name, description, memberCnt, tag, display, members, events} ) {
+function Group ( {image, name, description, memberCnt, tag, display, members, events} ) {
     if(display === "thum-main") {
         return (
             <div>
@@ -106,7 +106,7 @@ function Group ( {id, image, name, description, memberCnt, tag, display, members
                                         display = "thum-group"
                                     />
                                 </Link>
-                            </div>
+                                </div>
                             ))}
                     </div>
                     <div className="group-detail-photos">

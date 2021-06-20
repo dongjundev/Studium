@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -158,7 +159,7 @@ public class ReactController {
     	
     	//멤버 리스트
     	String[] member=study.getMemberId().split(",");
-
+    	study.setMemberCnt(member.length);
     	//System.out.println("멤버 리스트 :: "+Arrays.toString(memberList));
     	//System.out.println("멤버 리스트 길이 :: "+memberList.length);
     	
@@ -224,22 +225,36 @@ public class ReactController {
     }
 	
 	// EventDetail----------------------------
-	@GetMapping("/event")
-    public List<StudyDto> EventDetail(@RequestParam(defaultValue="eventId")int eventId) throws Exception{		
-		
-		List<StudyDto> eventDetail=new ArrayList<>();
-		
-		//이벤트 정보
-		StudyDto event = studyService.selectEventDetail(eventId);
-
-		//이벤트가 속한 스터디 정보
-		StudyDto study=studyService.selectStudyDetail(event.getStudyId());
-		
-		eventDetail.add(event);
-		eventDetail.add(study);
-				
-    	return eventDetail;
-    }
+	   @GetMapping("/event/{eventId}")
+	    public List<Object> EventDetail(@PathVariable(name = "eventId") int eventId) throws Exception{      
+	      
+	      List<Object> eventDetail=new ArrayList<>();
+	      List<MemberDto> memberList=new ArrayList<>();
+	      
+	      //이벤트 정보
+	      StudyDto event = studyService.selectEventDetail(eventId);
+	      eventDetail.add(event);
+	      //이벤트가 속한 스터디 정보
+	      StudyDto study=studyService.selectStudyDetail(event.getStudyId());
+	      
+	      //참석자
+	      //멤버 리스트
+	       String[] member=event.getEventAttandentId().split(",");
+	       study.setMemberCnt(member.length);
+	       //System.out.println("멤버 리스트 :: "+Arrays.toString(memberList));
+	       //System.out.println("멤버 리스트 길이 :: "+memberList.length);
+	       
+	       for (int i=0; i<member.length; i++) {
+	          //스터디 멤버
+	           MemberDto mem= memberService.selectStudyMemberDetail(String.valueOf(member[i]));
+	           System.out.println("멤버 리스트 :: "+mem);
+	           memberList.add(mem);
+	       }
+	       
+	       eventDetail.add(study);
+	       eventDetail.add(memberList);      
+	       return eventDetail;
+	    }
 	
 	// GalleryList----------------------------
 	@GetMapping("/study/{studyId}/gallery")
@@ -332,35 +347,50 @@ public class ReactController {
     	return "ok";
     }
  	
- 	// 카테고리 검색---------------------------
- 	@GetMapping("/search")
-    public List<StudyDto> CategorySearch(@RequestParam(defaultValue="tagId")int tagId) throws Exception{
- 		List<StudyDto> list = studyService.selectStudyList();
- 		List<StudyDto> result= new ArrayList<>();
- 		
-		for(int i=0; i<list.size(); i++) {
-			System.out.println("search 확인 :: "+list.get(i));
-			
-			if (list.get(i).getStudyTag()==null) {
-				continue;
-			}
-			String[] TagList = list.get(i).getStudyTag().split(",");
-			System.out.println("TagList 확인 :: "+Arrays.toString(TagList));
-			
-			for (int j=0; j<TagList.length; j++) {
-				if (Integer.parseInt(TagList[j])==tagId) {
-					int studyId=list.get(i).getStudyId();
-					result.add(studyService.selectStudyDetail(studyId));
-				}
-				else {
-					continue;
-				}
-			}
-		}
-		
-		return result;
-    }
+// 	// 카테고리 검색---------------------------
+// 	@GetMapping("/search")
+//    public List<StudyDto> CategorySearch(@RequestParam(defaultValue="tagId")int tagId) throws Exception{
+// 		List<StudyDto> list = studyService.selectStudyList();
+// 		List<StudyDto> result= new ArrayList<>();
+// 		
+//		for(int i=0; i<list.size(); i++) {
+//			System.out.println("search 확인 :: "+list.get(i));
+//			
+//			if (list.get(i).getStudyTag()==null) {
+//				continue;
+//			}
+//			String[] TagList = list.get(i).getStudyTag().split(",");
+//			System.out.println("TagList 확인 :: "+Arrays.toString(TagList));
+//			
+//			for (int j=0; j<TagList.length; j++) {
+//				if (Integer.parseInt(TagList[j])==tagId) {
+//					int studyId=list.get(i).getStudyId();
+//					result.add(studyService.selectStudyDetail(studyId));
+//				}
+//				else {
+//					continue;
+//				}
+//			}
+//		}
+//		
+//		return result;
+//    }
  	
+ 	 // 키워드검색---------------------------
+    @GetMapping("/search")
+    public List<StudyDto> KeywordSearch(@RequestParam(defaultValue="keyword")String keyword,@RequestParam(defaultValue="searchCondition")String searchCondition) throws Exception{
+       
+       String decodekeyword=URLDecoder.decode(keyword);
+       System.out.println("decodeURIComponent ::"+URLDecoder.decode(keyword));
+       List<StudyDto> searchList = studyService.searchStudy(searchCondition,decodekeyword);
+       if(searchCondition.equals("study")) {
+    	   for (int i=0; i<searchList.size(); i++) {
+    	          searchList.get(i).setMemberCnt((searchList.get(i).getMemberId().split(",")).length);
+    	   }  
+       }
+      
+      return searchList;
+    }
 //	@GetMapping("/study")
 //	public List<StudyDto> seletTest(@RequestParam("no") int no) throws Exception{
 //		System.out.println("받은 값 :: "+no);

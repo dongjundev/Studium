@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Switch, HashRouter, Route } from "react-router-dom"
+import { BrowserRouter, Switch, Router, Route } from "react-router-dom"
 import Navigation from "./components/navigation/Navigation"
 import Footer from "./components/footer/Footer"
 import ScrollToTop from './components/ScrollToTop'
@@ -20,8 +20,8 @@ function App(){
       <Switch>
         <Route path="/" exact={true} component={Main} />
         <Route path="/event/:eventId" component={EventDetail} />
-        <Route path="/study/:studyId" exact={true} component={GroupDetail} />
-        <Route path="/member/:memberId" exact={true} component={GroupMemberDetail} />
+        <Route path="/study/:studyId"  component={GroupDetail} />
+        <Route path="/member/:memberId" component={GroupMemberDetail} />
         <Route path="/search" component={Search} />
       </Switch>
       <Footer />
