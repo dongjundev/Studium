@@ -149,7 +149,9 @@ public class ReactController {
 	// 로그인 ----------------------------
 	@ResponseBody
 	@PostMapping(value="/login.do")
-	public String login(@RequestBody MemberDto memberDto,HttpServletRequest request) throws Exception{
+	public List<Object> login(@RequestBody MemberDto memberDto,HttpServletRequest request) throws Exception{
+		
+		List<Object> list=new ArrayList<>();
 		
 		//로그인 정보 저장 할 Dto
 		LoginDto loginDto=new LoginDto();
@@ -182,21 +184,22 @@ public class ReactController {
 				System.out.println("로그인 정보 :: "+glo_memberId);
 				
 				System.out.println("로그인 성공"); 
-				  
-				return "ok";
+				list.add(glo_memberId);
+				list.add(memberService.loginName(glo_memberId));
+				
 			}
 			else {
 				System.out.println("로그인 실패"); 
-				
+				list.add("404");
 			}
 		}
 		else {
 			System.out.println("해당하는 아이디가 없습니다");
 			System.out.println("로그인 실패");
-			return "no-id";
+			list.add("no-id");
 		}
 		  //return "redirect:/user/login.do";
-		return "404";
+		return list;
 	}
 	
 	@GetMapping("/logout.do")

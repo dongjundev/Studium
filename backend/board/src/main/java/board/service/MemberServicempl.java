@@ -66,5 +66,12 @@ public class MemberServicempl implements MemberService{
 		int result=memberMapper.studyJoinChk(memberId,studyId);
 		return result;
 	}
+	
+	@Override
+	public String loginName(String memberId) throws Exception {
+		// TODO Auto-generated method stub
+		String result=memberMapper.loginName(memberId);
+		return result;
+	}
 
 }

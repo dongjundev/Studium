@@ -2,6 +2,7 @@ package board.dto;
 
 import lombok.Data;
 
+
 @Data
 public class StudyDto {
 	private int studyId;
