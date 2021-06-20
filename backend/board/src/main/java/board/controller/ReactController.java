@@ -11,6 +11,10 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
+import java.util.Set;
+import java.util.HashSet;
+
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +33,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import board.dto.BoardDto;
 import board.dto.BoardFileDto;
@@ -81,8 +84,29 @@ public class ReactController {
 		}
 		List<StudyDto> eventList=studyService.selectEventList();
 		
+		// 랜덤으로 값 생성 (중복x, Set이용)
+		int main_cnt=6; //메인에 나타날 스터디 개수
+		Set<Integer> arr=new HashSet<>();
+		
+		while(arr.size()<main_cnt) {
+			double randomValue=Math.random();
+			arr.add((int)(randomValue*list.size())+1);
+		}
+		
+		System.out.println("랜덤으로 생성된 arr :: "+arr);
+		
+		List<Integer> random_arr = new ArrayList<>(arr);
+		List<StudyDto> randomList=new ArrayList<>();
+		
+		for (int i=0; i<main_cnt; i++) {
+			randomList.add(list.get(random_arr.get(i)-1));
+		}
+		
+		System.out.println("랜덤 studyList :: "+randomList);
+		
 		result.add(list);
 		result.add(eventList);
+		result.add(randomList);
 		
 		return result;
 	}
@@ -169,7 +193,7 @@ public class ReactController {
 		else {
 			System.out.println("해당하는 아이디가 없습니다");
 			System.out.println("로그인 실패");
-			return "noId";
+			return "no-id";
 		}
 		  //return "redirect:/user/login.do";
 		return "404";
@@ -475,8 +499,11 @@ public class ReactController {
  		String decodekeyword=URLDecoder.decode(keyword);
  		System.out.println("decodeURIComponent ::"+URLDecoder.decode(keyword));
  		List<StudyDto> searchList = studyService.searchStudy(searchCondition,decodekeyword);
- 		for (int i=0; i<searchList.size(); i++) {
- 			searchList.get(i).setMemberCnt(searchList.get(i).getMemberId().length());
+ 		
+ 		if (searchCondition.equals("study")) {
+ 			for (int i=0; i<searchList.size(); i++) {
+ 	 			searchList.get(i).setMemberCnt(searchList.get(i).getMemberId().length());
+ 	 		}
  		}
 		
 		return searchList;
