@@ -21,5 +21,6 @@ public interface MemberMapper {
 	List<MemberDto> selectStudyMember(int studyId) throws Exception; //스터디 멤버
 	
 	MemberDto selectStudyMemberDetail(String memberId) throws Exception; //스터디 멤버 상세보기
+	String loginName(String memberId) throws Exception;
 
 }
