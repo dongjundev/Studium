@@ -14,36 +14,31 @@ class Main extends React.Component{
             isEventsLoading: false,
             isGroupsLoading: false,
             isCategoriesLoading: false,
-            events: [
-                {
-                    id: 1,
-                    title: "Meet up for learning English",
-                    description: "This meeting is about...",
-                    date: "2021.06.21 FRI 10:00 - 12:00",
-                    location: "대구 혁신도시"
-                },
-                {
-                    id: 2,
-                    title: "Awesome language exchange and make good friends in Daegu",
-                    description: "Awesome party with international friends, join us and learn languages and make friends!",
-                    date: "2021.06.23 SAT 11:00 - 13:00",
-                    location: "대구 율하역"
-                },
-                {
-                    id: 3,
-                    title: "Learning AWS",
-                    description: "This meeting is about...",
-                    date: "2021.06.30 MON 13:00 - 16:00",
-                    location: "대구 동성로"
-                    }
-            ],
+            // events: [
+            //     {
+            //         id: 1,
+            //         title: "Meet up for learning English",
+            //         description: "This meeting is about...",
+            //         date: "2021.06.21 FRI 10:00 - 12:00",
+            //         location: "대구 혁신도시"
+            //     },
+            //     {
+            //         id: 2,
+            //         title: "Awesome language exchange and make good friends in Daegu",
+            //         description: "Awesome party with international friends, join us and learn languages and make friends!",
+            //         date: "2021.06.23 SAT 11:00 - 13:00",
+            //         location: "대구 율하역"
+            //     },
+            //     {
+            //         id: 3,
+            //         title: "Learning AWS",
+            //         description: "This meeting is about...",
+            //         date: "2021.06.30 MON 13:00 - 16:00",
+            //         location: "대구 동성로"
+            //         }
+            // ],
             groups: [],
             categories: [
-                {
-                    id: "100",
-                    thumbnail: "https://cdn.dribbble.com/users/879147/screenshots/7906715/media/1b1d2ef35dab525ed63b8b5816813132.jpg?compress=1&resize=400x300",
-                    name: "기술"
-                },
                 {
                     id: "101",
                     thumbnail: "https://t1.daumcdn.net/liveboard/bookclub/93ff3a3b875349dda49bb3c9581a4532.jpeg",
@@ -53,7 +48,43 @@ class Main extends React.Component{
                     id: "102",
                     thumbnail: "https://image.freepik.com/free-vector/online-certification-illustration_23-2148575512.jpg",
                     name: "자격증"
+                },
+                {
+                    id: "103",
+                    thumbnail: "https://blog.kakaocdn.net/dn/FYWhq/btqEt6aAvrk/Po8oyIHB7sw4DimFU3Rlhk/img.png",
+                    name: "취업"
+                },
+                {
+                    id: "104",
+                    thumbnail: "https://cdn.dribbble.com/users/879147/screenshots/7906715/media/1b1d2ef35dab525ed63b8b5816813132.jpg?compress=1&resize=400x300",
+                    name: "기술"
+                },
+                {
+                    id: "105",
+                    thumbnail: "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FOH5pw%2FbtqFBY3l84K%2FfBYboXoTEY3vQIvupcyLT0%2Fimg.jpg",
+                    name: "과학"
+                },
+                {
+                    id: "106",
+                    thumbnail: "https://vrthumb.clipartkorea.co.kr/2021/03/31/cm230005311.jpg",
+                    name: "경제"
+                },
+                {
+                    id: "107",
+                    thumbnail: "https://cdn.dribbble.com/users/1040983/screenshots/14588186/media/88ecf3d892e527ed697d813b44b781de.png?compress=1&resize=400x300",
+                    name: "독서"
+                },
+                {
+                    id: "108",
+                    thumbnail: "https://image.freepik.com/free-vector/painting-tools-elements-cartoon-colorful-set-art-supplies-easel-with-canvas-paint-tubes-brushes-pencil-watercolor-palette-drawing-creative-materials-for-workshops-designs_311563-31.jpg",
+                    name: "미술"
+                },
+                {
+                    id: "109",
+                    thumbnail: "https://image.freepik.com/free-vector/music-colorful-illustration_24908-57101.jpg",
+                    name: "음악"
                 }
+                
             ]
         }
     }
@@ -114,7 +145,7 @@ class Main extends React.Component{
                             ))}
                         </div>
                     </div>
-                    <div className="events-wrap">
+                    {/* <div className="events-wrap">
                         <p className="section-title">내 주변 이벤트</p>
                         <p className="section-detail">근처에서 곧 진행될 이벤트를 확인해보세요</p>
                         <div className="event">
@@ -141,17 +172,19 @@ class Main extends React.Component{
                                 </Link>      
                             ))}
                         </div>
-                    </div>
+                    </div> */}
                     <div className="category-wrap">
                         <p className="section-title">카테고리</p>
                         <p className="section-detail">관심 있는 주제로 그룹을 찾아보세요.</p>
                         <div className="category">
                             {isCategoriesLoading ? "Loading.." : categories.map(category => (
                                 <Link to={{
+                                    //pathname : "/search?keyword=" + category.name,
                                     pathname: '/search',
+                                    search: "keyword=" + category.name + "&searchCondition=study",
                                     state: {
                                         isLoggedIn: this.state.isLoggedIn,
-                                        keyword: category.name
+                                        name: category.name
                                     }
                                 }}>
                                     <Category

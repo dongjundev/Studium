@@ -7,7 +7,7 @@ import Member from '../member/Member'
 import Event from '../event/Event'
 import './Group.css'
 
-function Group ( {id, image, name, description, memberCnt, tag, display, members, events} ) {
+function Group ( {image, name, description, memberCnt, tag, display, members, events} ) {
     if(display === "thum-main") {
         return (
             <div>
@@ -88,6 +88,7 @@ function Group ( {id, image, name, description, memberCnt, tag, display, members
                             ))}
                         </div>
                     </div>
+                    {events.length == 0 ? "" :
                     <div className="group-detail-upcomingEvents">
                         <h3>이벤트</h3>
                         {events.map(event => (
@@ -106,12 +107,13 @@ function Group ( {id, image, name, description, memberCnt, tag, display, members
                                         display = "thum-group"
                                     />
                                 </Link>
-                            </div>
+                                </div>
                             ))}
                     </div>
-                    <div className="group-detail-photos">
+                    }
+                    {/* <div className="group-detail-photos">
                         <h3>사진</h3>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         )

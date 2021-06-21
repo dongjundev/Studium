@@ -149,3 +149,7 @@
 .group-detail-content-body > div{
     padding: 10px 0;
 }
+
+.group-detail-overview p{
+    line-height: 200%;
+}
