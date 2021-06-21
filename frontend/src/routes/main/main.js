@@ -14,30 +14,8 @@ class Main extends React.Component{
             isEventsLoading: false,
             isGroupsLoading: false,
             isCategoriesLoading: false,
-            // events: [
-            //     {
-            //         id: 1,
-            //         title: "Meet up for learning English",
-            //         description: "This meeting is about...",
-            //         date: "2021.06.21 FRI 10:00 - 12:00",
-            //         location: "대구 혁신도시"
-            //     },
-            //     {
-            //         id: 2,
-            //         title: "Awesome language exchange and make good friends in Daegu",
-            //         description: "Awesome party with international friends, join us and learn languages and make friends!",
-            //         date: "2021.06.23 SAT 11:00 - 13:00",
-            //         location: "대구 율하역"
-            //     },
-            //     {
-            //         id: 3,
-            //         title: "Learning AWS",
-            //         description: "This meeting is about...",
-            //         date: "2021.06.30 MON 13:00 - 16:00",
-            //         location: "대구 동성로"
-            //         }
-            // ],
             groups: [],
+            events: [],
             categories: [
                 {
                     id: "101",
@@ -91,15 +69,13 @@ class Main extends React.Component{
 
     render() {
         const {
-            isLoggedIn,
-            isEventsLoading,
             isGroupsLoading,
+            isEventsLoading,
             isCategoriesLoading,
-            events, 
             groups,
+            events,
             categories
         } = this.state;
-
         return (
             <div className="container">
                 <div className="main-image">
@@ -119,8 +95,7 @@ class Main extends React.Component{
                 <div className="content-area">
                     <div className="groups-wrap">
                         <p className="section-title">추천 스터디</p>
-                        <p className="section-detail">나랑 같이 공부할 그룹 찾기</p>
-                        <button>더보기</button>
+                        <p className="section-detail">함께 공부할 스터디 그룹 찾기</p>
                         <div className="group">
                             {isGroupsLoading ? "Loading.." : groups.map(group => (
                                 <Link to={{
@@ -145,34 +120,30 @@ class Main extends React.Component{
                             ))}
                         </div>
                     </div>
-                    {/* <div className="events-wrap">
-                        <p className="section-title">내 주변 이벤트</p>
-                        <p className="section-detail">근처에서 곧 진행될 이벤트를 확인해보세요</p>
+                    <div className="events-wrap">
+                        <p className="section-title">추천 이벤트</p>
+                        <p className="section-detail">참석할 스터디 이벤트 찾기</p>
                         <div className="event">
                             {isEventsLoading ? "Loading..." : events.map(event => (
+                                <div className="event-thum" key={event.eventId}>
                                 <Link to={{
-                                    pathname: '/event-detail',
+                                    pathname: '/event/' + event.eventId,
                                     state: {
-                                        isLoggedIn: isLoggedIn,
-                                        title: event.title,
-                                        description: event.description,
-                                        date: event.date,
-                                        location: event.location,
                                         display: "event-detail"
                                     }
                                 }}>
                                     <Event
-                                        key = {event.id}
-                                        title = {event.title}
+                                        title = {event.eventName}
+                                        date = {event.eventDate}
+                                        location = {event.eventLocation}
                                         description = {event.description}
-                                        date = {event.date}
-                                        location = {event.location}
                                         display = "thum-main"
                                     />
-                                </Link>      
+                                </Link>
+                                </div> 
                             ))}
                         </div>
-                    </div> */}
+                    </div>
                     <div className="category-wrap">
                         <p className="section-title">카테고리</p>
                         <p className="section-detail">관심 있는 주제로 그룹을 찾아보세요.</p>
@@ -234,7 +205,7 @@ class Main extends React.Component{
         const data = await axios.get(url);
         //const data = await axios.get(url);
         console.log("data : " + JSON.stringify(data));
-        this.setState( {groups: data.data, isGroupsLoading: false} );
+        this.setState( {groups: data.data[0], events: data.data[1], isGroupsLoading: false} );
         //this.setState( {isGroupsLoading: false} )
     }
 
