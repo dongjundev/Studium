@@ -309,16 +309,15 @@ public class ReactController {
 		
 		//이벤트 정보
 		StudyDto event = studyService.selectEventDetail(eventId);
-
+		eventDetail.add(event);
+		
 		//이벤트가 속한 스터디 정보
 		StudyDto study=studyService.selectStudyDetail(event.getStudyId());
 		
-		eventDetail.add(event);
-		eventDetail.add(study);
 		//참석자
 		//멤버 리스트
     	String[] member=event.getEventAttandentId().split(",");
-
+    	study.setMemberCnt(member.length);
     	//System.out.println("멤버 리스트 :: "+Arrays.toString(memberList));
     	//System.out.println("멤버 리스트 길이 :: "+memberList.length);
     	
@@ -329,6 +328,7 @@ public class ReactController {
         	memberList.add(mem);
     	}
     	
+    	eventDetail.add(study);
 		eventDetail.add(memberList);		
     	return eventDetail;
     }
@@ -605,19 +605,28 @@ public class ReactController {
     // Mypage
     @ResponseBody
 	@PostMapping(value="/mypage")
-	public List<MemberDto> myPage(HttpServletRequest request,HttpSession session) throws Exception{	
+	public List<Object> myPage(HttpServletRequest request,HttpSession session) throws Exception{	
 
 //    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
 //    	System.out.println("member확인:: "+mem);
 //    	System.out.println("member Id 확인 :: "+mem.getMemberId());
     	
-    	ArrayList<MemberDto> memberDetail = new ArrayList<>();
+    	ArrayList<Object> myPage = new ArrayList<>();
     	
      	//MemberDto member = memberService.selectStudyMemberDetail(mem.getMemberId());
     	MemberDto member = memberService.selectStudyMemberDetail(glo_memberId);
-     	memberDetail.add(member);
+    	
+    	//가입되어있는 그룹 list 
+    	List<StudyDto> studyList=studyService.selectMyPageStudyList(glo_memberId);
+    	
+    	//참여한 이벤트
+    	List<StudyDto> eventList=studyService.selectMyPageEventList(glo_memberId);
+    	
+    	myPage.add(member);
+    	myPage.add(studyList);
+    	myPage.add(eventList);
      	
-     	return memberDetail;
+     	return myPage;
      }
 
 }
