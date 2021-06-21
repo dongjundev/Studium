@@ -9,6 +9,7 @@ import GroupDetail from "./routes/group-detail/group-detail"
 import Search from './routes/search/search'
 import Mypage from './routes/mypage/mypage'
 import GroupMemberDetail from "./routes/group-member-detail/group-member-detail";
+import Login from "./routes/login/login";
 
 
 function App(){
@@ -24,6 +25,7 @@ function App(){
         <Route path="/member/:memberId" component={GroupMemberDetail} />
         <Route path="/search" component={Search} />
         <Route path="/mypage" component={Mypage} />
+        <Route path="/login" component={Login} />
       </Switch>
       <Footer />
     </BrowserRouter>
