@@ -22,7 +22,5 @@ public interface StudyMapper {
 	String studyJoinChk(int studyId) throws Exception; //스터디 중복가입 체크
 	String eventJoinChk(int eventId) throws Exception; //이벤트 참석 체크
 	void eventJoin(Map<String,Object> map) throws Exception; //이벤트 참석
-	List<StudyDto> selectMyPageStudyList(String memberId) throws Exception; //마이페이지 스터디 리스트
-	List<StudyDto> selectMyPageEventList(String memberId) throws Exception; //마이페이지 이벤트 리스트
 	List<StudyDto> selectEventList() throws Exception; //이벤트 리스트
 }

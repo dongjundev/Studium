@@ -13,32 +13,60 @@
 		]]>
 	</select>
 	
+	<!-- 스터디 검색 !
+	<select id="searchStudy" resultType="board.dto.StudyDto" >
+		<![CDATA[
+			SELECT
+				study_id, study_name, study_description, study_image, study_tag
+			FROM t_study
+		]]>
+		<choose>
+			<when test="searchCondition=='studyName'">
+				<![CDATA[
+				WHERE study_name LIKE CONCAT('%', #{searchKeyword} , '%')
+				]]>
+			</when>
+			<when test="searchCondition=='studyContents'">
+				<![CDATA[
+				WHERE study_contents LIKE CONCAT('%', #{searchKeyword} , '%')
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+				WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_description LIKE CONCAT('%', #{searchKeyword} , '%'))
+				]]>
+			</otherwise>
+		</choose>
+		
+	</select>-->
+	
 	<!-- react 스터디 검색 !-->
-   <select id="searchStudy" resultType="board.dto.StudyDto" >
-      <![CDATA[
-         SELECT *
-      ]]>
-      <choose>
-         <when test="searchCondition=='study'">
-            <![CDATA[
-            FROM t_study
-            WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_description LIKE CONCAT('%', #{searchKeyword} , '%') OR study_tag LIKE CONCAT ('%', #{searchKeyword} , '%'))
-            ]]>
-         </when>
-         <when test="searchCondition=='event'">
-            <![CDATA[
-            FROM t_event
-            WHERE (event_name LIKE CONCAT('%', #{searchKeyword} , '%') OR event_description LIKE CONCAT('%', #{searchKeyword} , '%'))
-            ]]>
-         </when>
-         <otherwise>
-            <![CDATA[
-            FROM t_study
-            WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_description LIKE CONCAT('%', #{searchKeyword} , '%'))
-            ]]>
-         </otherwise>
-      </choose>
-   </select>
+	<select id="searchStudy" resultType="board.dto.StudyDto" >
+		<![CDATA[
+			SELECT *
+		]]>
+		<choose>
+			<when test="searchCondition=='study'">
+				<![CDATA[
+				FROM t_study
+				WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_description LIKE CONCAT('%', #{searchKeyword} , '%'))
+				]]>
+			</when>
+			<when test="searchCondition=='event'">
+				<![CDATA[
+				FROM t_event
+				WHERE (event_name LIKE CONCAT('%', #{searchKeyword} , '%') OR event_description LIKE CONCAT('%', #{searchKeyword} , '%'))
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+				FROM t_study
+				WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_description LIKE CONCAT('%', #{searchKeyword} , '%'))
+				]]>
+			</otherwise>
+		</choose>
+		
+	</select>
 	
 	<!-- 스터디 상세정보 !-->
 	<select id="selectStudyDetail" parameterType="int" resultType="board.dto.StudyDto">
@@ -127,33 +155,12 @@
 		]]>
 	</select>
 	
-	<select id="selectMyPageStudyList" resultType="board.dto.StudyDto">   <!-- <select> 태그를 이용하여 select 쿼리임을 나타냄. id값과 boardmapper의 함수명 같아야함. -->
-      <![CDATA[
-         SELECT
-            *
-         FROM
-            t_study
-         WHERE
-            member_id LIKE CONCAT('%', #{memberId} , '%')
-      ]]>
-   </select>
-   
-   <select id="selectMyPageEventList" resultType="board.dto.StudyDto">   <!-- <select> 태그를 이용하여 select 쿼리임을 나타냄. id값과 boardmapper의 함수명 같아야함. -->
-      <![CDATA[
-         SELECT
-            *
-         FROM
-            t_event
-         WHERE
-            event_attandent_id LIKE CONCAT('%', #{memberId} , '%')
-      ]]>
-   </select>
-
 	<!-- 이벤트 리스트 !-->
-   <select id="selectEventList" resultType="board.dto.StudyDto">
-      <![CDATA[
-         SELECT *
-         FROM t_event
-      ]]>
-   </select>
+	<select id="selectEventList" resultType="board.dto.StudyDto">
+		<![CDATA[
+			SELECT *
+			FROM t_event
+		]]>
+	</select>
+
 </mapper>
