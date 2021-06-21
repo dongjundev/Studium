@@ -1,0 +1,73 @@
+/* body{
+    color: white;
+    text-align: center;
+    margin: 0 auto;
+    background-color: #fffaeb;
+} */
+
+.start{
+    max-width: 100%;
+    min-width: auto;
+    margin: 0 auto;
+    background-color: #fffaeb;
+    text-align: center;
+}
+
+h2{
+    font-weight:bold;
+}
+
+.start .start-row-step{
+    display: block;
+    padding:130px 10px;
+    position: relative;
+}
+
+#start-step{
+    display: inline-block;
+    overflow: hidden;
+    color: black;
+    margin: 30px;
+}
+
+.start-contents-all{
+    display: block;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.start-contents-all .start-contents-box .start-contents-wrap{
+    padding: 30px 20px;
+    margin: 30px 20px;
+}
+
+#start-venueSearch{
+    width: 400px;
+    height: 3.5rem;
+    border: 3px solid #febf00;
+    border-radius: 15px;
+}
+
+#start-subbox{
+    padding: 20px;
+}
+
+.start-Footer .start-Footer-box button{
+    width: 150px;
+    height: 50px;
+    color: black;
+    transition: 400ms;
+    background-color: #febf00;
+    border: 1px solid #febf00;
+    border-radius: 5px;
+}
+
+.start-Footer .start-Footer-box button:hover{
+    width: 150px;
+    height: 50px;
+    color: black;
+    transition: 400ms;
+    background-color: #febf00;
+    border-radius: 50px;
+    border: 1px solid #febf00;
+}

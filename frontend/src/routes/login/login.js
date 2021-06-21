@@ -2,6 +2,7 @@ import React, { Component, useState, useEffect } from 'react';
 import './login.css';
 import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
+import { ElementDragging } from '@fullcalendar/core';
 // import { Button, Form, FormGroup, Label, Input }
 //     from 'reactstrap';
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -29,6 +30,37 @@ class Login extends Component{
       }
     });
     console.log(response);
+    console.log(response.data);
+    // if (response.data=="ok"){
+    //   var loginId=this.state.memberId;
+    //   alert(loginId);
+    //   document.location.href = "http://localhost:3000/";
+    // }else if(response.data=="no-id"){
+    //   alert("아이디가 존재하지 않습니다!");
+    // }else{
+    //   alert("비밀번호가 틀렸습니다!");
+    // }
+    if (response.data[0]=="no-id"){
+      alert("아이디가 존재하지 않습니다!");
+    }else if(response.data[0]=="404"){
+      alert("비밀번호가 틀렸습니다!");
+    }else{
+      // var loginId=this.state.memberId;
+      // alert(loginId);
+      var loginName=response.data[1];
+      alert(loginName+"님 반갑습니다!");
+      sessionStorage.setItem('memberId',  this.state.memberId);
+      sessionStorage.setItem('memberName',  loginName);
+      // <Link to={{
+      //   pathname: '/',
+      //   state: {
+      //       memberId: this.state.memberId,
+      //       memberName:loginName,
+      //   }
+      // }}>
+      // </Link>
+      document.location.href = "http://localhost:3000/";
+    }
   }
 
   // inputId = (e) =>{

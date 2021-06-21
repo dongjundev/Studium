@@ -43,6 +43,13 @@ class signup extends Component {
       }
     });
     console.log(response);
+    console.log(response.data);
+    if (response.data=="ok"){
+      alert("회원가입 성공!");
+      document.location.href = "http://localhost:3000/login";
+    }else if(response.data=="404"){
+      alert("중복된 아이디입니다!");
+    }
   }
 
   inputId = (e) => {
