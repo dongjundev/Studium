@@ -118,4 +118,11 @@ public class StudyServiceImpl implements StudyService {
     public List<StudyDto> selectMyPageEventList(String memberId) throws Exception{
     	return studyMapper.selectMyPageEventList(memberId);	
     }	
+    
+    // ---------------------------------이벤트 리스트
+    @Override
+    public List<StudyDto> selectEventList() throws Exception {
+       // TODO Auto-generated method stub
+       return studyMapper.selectEventList();
+    }
 }

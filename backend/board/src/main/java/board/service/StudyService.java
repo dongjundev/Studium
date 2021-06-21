@@ -29,4 +29,6 @@ public interface StudyService {
 	List<StudyDto> selectMyPageStudyList(String memberId) throws Exception; //마이페이지 스터디 리스트
 	   
 	List<StudyDto> selectMyPageEventList(String memberId) throws Exception; //마이페이지 이벤트 리스트
+	
+	List<StudyDto> selectEventList() throws Exception; //이벤트 리스트
 }

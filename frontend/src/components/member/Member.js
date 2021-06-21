@@ -42,7 +42,6 @@ function Member( {image, name, city, gender, display} ){
             </div>
         )
     } else if(display === "mypage") {
-        console.log({name});
         return (
             <div>
                  <div className="detail-inGroup">

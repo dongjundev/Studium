@@ -5,6 +5,10 @@ import './Calendar.css'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 export default class Calendar extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     state = {
         dateContext: moment(),
         today: moment(),
@@ -12,14 +16,6 @@ export default class Calendar extends React.Component {
         showYearPopup: false,
         selectedDay: null
     }
-
-    constructor(props) {
-        super(props);
-        // this.width = props.width || "350px";
-        // this.style = props.style || {};
-        // this.style.width = this.width; // add this
-    }
-
 
     weekdays = moment.weekdays(); //["Sunday", "Monday", "Tuesday", "Wednessday", "Thursday", "Friday", "Saturday"]
     weekdaysShort = moment.weekdaysShort(); // ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
@@ -30,6 +26,36 @@ export default class Calendar extends React.Component {
     }
     month = () => {
         return this.state.dateContext.format("MMMM");
+    }
+    monthAsNumber = (monthInLetter) => {
+        //console.log("input : " + monthInLetter);
+        if(monthInLetter === "January") {
+            return "01";
+        } else if(monthInLetter === "February"){
+            return "02";
+        } else if(monthInLetter === "March"){
+            return "03";
+        } else if(monthInLetter === "April"){
+            return "04";
+        } else if(monthInLetter === "May"){
+            return "05";
+        } else if(monthInLetter === "June"){
+            return "06";
+        } else if(monthInLetter === "July"){
+            return "07";
+        } else if(monthInLetter === "August"){
+            return "08";
+        } else if(monthInLetter === "September"){
+            return "09";
+        } else if(monthInLetter === "October"){
+            return "10";
+        } else if(monthInLetter === "November"){
+            return "11";
+        } else if(monthInLetter === "December"){
+            return "12";
+        } else {
+            return "error";
+        }
     }
     daysInMonth = () => {
         return this.state.dateContext.daysInMonth();
@@ -174,6 +200,8 @@ export default class Calendar extends React.Component {
     }
 
     render() {
+        const eventDates = this.props.eventDates;
+        //console.log("props.eventDate" + eventDates);
         // Map the weekdays i.e Sun, Mon, Tue etc as <td>
         let weekdays = this.weekdaysShort.map((day) => {
             return (
@@ -189,12 +217,21 @@ export default class Calendar extends React.Component {
             );
         }
 
-        console.log("blanks: ", blanks);
+        //console.log("blanks: ", blanks);
+
+        let eventDatesThisMonth = [];
+        if(eventDates.length > 0){
+            eventDates.map(date => (
+                ( this.year() === date.split("-")[0] && this.monthAsNumber(this.month()) === date.split("-")[1] ) ?
+                eventDatesThisMonth.push(date.split("-")[2])
+                : ""
+            ))
+        }
 
         let daysInMonth = [];
         for (let d = 1; d <= this.daysInMonth(); d++) {
             let className = (d == this.currentDay() ? "day current-day": "day");
-            let selectedClass = (d == this.state.selectedDay ? " selected-day " : "")
+            let selectedClass = (eventDatesThisMonth.includes(String(d)) ? " selected-day " : "")
             daysInMonth.push(
                 <td key={d} className={className + selectedClass} >
                     <span onClick={(e)=>{this.onDayClick(e, d)}}>{d}</span>
@@ -203,7 +240,7 @@ export default class Calendar extends React.Component {
         }
 
 
-        console.log("days: ", daysInMonth);
+        //console.log("days: ", daysInMonth);
 
         var totalSlots = [...blanks, ...daysInMonth];
         let rows = [];
@@ -244,16 +281,6 @@ export default class Calendar extends React.Component {
                                 {" "}
                                 <this.YearNav />
                             </td>
-                            {/* <td colSpan="2" className="nav-month">
-                                <FontAwesomeIcon icon={faChevronLeft} />
-                                <i className="prev fa fa-fw fa-chevron-left"
-                                    onClick={(e)=> {this.prevMonth()}}>
-                                </i>
-                                <FontAwesomeIcon icon={faChevronRight} />
-                                <i className="prev fa fa-fw fa-chevron-right"
-                                    onClick={(e)=> {this.nextMonth()}}>
-                                </i>
-                            </td> */}
                         </tr>
                     </thead>
                     <tbody>

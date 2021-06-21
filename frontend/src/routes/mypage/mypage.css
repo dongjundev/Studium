@@ -1,0 +1,65 @@
+.mypage-studies {
+    max-width: 1000px;
+    margin: 50px auto;
+}
+.mypage-study{
+    display: inline-block;
+    padding: 10px;
+    margin: 0 25px;
+    background-color: #fde9ac;
+    box-shadow: 5px 5px 5px #e1e1e1;
+    font-weight: 600;
+    transition: all, 0.3s;
+}
+.mypage-study:hover{
+    box-shadow: 10px 10px 5px #e1e1e1;
+}
+.mypage-study a{
+    text-decoration: none;
+    color: #000;
+}
+.mypage-events{
+    max-width: 1000px;
+    margin: 50px auto;
+}
+.mypage-event{
+    /* border: 1px solid red; */
+    background-color: #fde9ac;
+    box-shadow: 5px 5px 5px #e1e1e1;
+    padding: 10px;
+    overflow: hidden;
+    margin: 20px 0;
+    border-radius: 3px;
+    transition: all, 0.3s;
+}
+.mypage-event:hover{
+    box-shadow: 10px 10px 5px #e1e1e1;
+}
+.mypage-event a{
+    text-decoration: none;
+    color: #000;
+}
+.mypage-event a p{
+    margin: 0;
+}
+.myevent-date{
+    color: #525252;
+}
+.myevent-name{
+    height:50%;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+    padding: 10px 0;
+}
+.myevent-description{
+    text-align: center;
+}
+.myevent-location{
+    display: inline-block;
+    float: left;
+}
+.myevent-count{
+    display: inline-block;
+    float: right;
+}

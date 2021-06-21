@@ -54,9 +54,10 @@
 .detail-inGroup{
     max-width: 1000px;
     min-height: 400px;
-    margin: 10px auto;
+    margin: 0 auto;
     position: relative;
-    padding: 30px 0;
+    padding-top: 40px;
+    border-bottom: 1px solid #8a8a8a;
 }
 .detail-inGroup h2{
     text-align: center;

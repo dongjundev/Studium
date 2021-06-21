@@ -149,4 +149,11 @@
       ]]>
    </select>
 
+	<!-- 이벤트 리스트 !-->
+   <select id="selectEventList" resultType="board.dto.StudyDto">
+      <![CDATA[
+         SELECT *
+         FROM t_event
+      ]]>
+   </select>
 </mapper>

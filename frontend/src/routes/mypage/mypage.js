@@ -3,53 +3,27 @@ import { Link } from "react-router-dom"
 import axios from "axios";
 import Member from '../../components/member/Member'
 import Calendar from '../../components/calendar/Calendar'
+import './mypage.css'
 
 class Mypage extends React.Component{
     constructor(){
         super();
         this.state = { 
-            member: {
-                    image: "https://cdn.shortpixel.ai/client/q_glossy,ret_img,w_400,h_400/http://1bang.kr/wp-content/uploads/2020/09/slFhH.jpg",
-                    name: "죠르디",
-                    gender: "남",
-                    city: "서울"
-            }, 
+            member: "", 
             studies: [],
-            events: [
-                {
-                            id: 1,
-                            title: "Meet up for learning English",
-                            description: "This meeting is about...",
-                            date: "2021-06-21",
-                            location: "대구 혁신도시"
-                        },
-                        {
-                            id: 2,
-                            title: "Awesome language exchange and make good friends in Daegu",
-                            description: "Awesome party with international friends, join us and learn languages and make friends!",
-                            date: "2021-06-23",
-                            location: "대구 율하역"
-                        },
-                        {
-                            id: 3,
-                            title: "Learning AWS",
-                            description: "This meeting is about...",
-                            date: "2021-06-30",
-                            location: "대구 동성로"
-                        }
-            ]
+            events: []
         } 
     }
     getUserInfo = async () => {
         const url = "http://localhost:8080/mypage";
         // console.log(url);
         const data = await axios.get(url);
-        console.log("mypage data1: " + JSON.stringify(data.data[0]));
-        console.log("mypage data2: " + JSON.stringify(data.data[1]));
-        console.log("mypage data3: " + JSON.stringify(data.data[2]));
+        // console.log("mypage data1: " + JSON.stringify(data.data[0]));
+        // console.log("mypage data2: " + JSON.stringify(data.data[1]));
+        // console.log("mypage data3: " + JSON.stringify(data.data[2]));
         this.setState({
             member: data.data[0], 
-            study: data.data[1],
+            studies: data.data[1],
             events: data.data[2]
         });
     }
@@ -59,9 +33,11 @@ class Mypage extends React.Component{
     }
     
     render() {
-        
         const { studies, member, events } = this.state;
-
+        //console.log("mypage events: " + JSON.stringify(events));
+        let eventDates = events.map(event => event.eventDate);
+        let eventSorted = events.sort((a,b) => Date.parse(a.eventDate) - Date.parse(b.eventDate));
+        //console.log("sort!!" + JSON.stringify(eventSorted));
         if(member !== undefined){
             return (
                 <div>
@@ -75,10 +51,42 @@ class Mypage extends React.Component{
                     <div className="mypage-studies">
                         <h3>가입한 스터디</h3>
                         {studies.map(study => (
-                            <p>{study.studyName}</p>
+                            <div className="mypage-study">
+                                <Link to={{
+                                    pathname:'/study/' + study.studyId,
+                                    state:{
+                                        isLoggedIn: false,
+                                        display: "group-detail"
+                                    }
+                                }}>
+                                    {study.studyName}
+                                </Link>
+                            </div>
                         ))}
                     </div>
-                    <Calendar events={events} />
+                    <Calendar eventDates={eventDates} />
+                    <div className="mypage-events">
+                        <h3>참여 이벤트</h3>
+                        {eventSorted.map(event => (
+                            <div className="mypage-event">
+                                <Link to={{
+                                    pathname: '/event/' + event.eventId,
+                                    state: { display: "event-detail" }
+                                }}>
+                                    <p className="myevent-date">{event.eventDate}</p>
+                                    <p className="myevent-name">{event.eventName}</p>
+                                    {(event.eventDescription).length > 30 ? 
+                                        <p className="myevent-description">{(event.eventDescription).substring(0,30)}...</p> :
+                                        <p className="myevent-description">{(event.eventDescription)}</p>
+                                    }
+                                    <p className="myevent-location">{event.eventLocation}</p>
+                                    <p className="myevent-count">
+                                        {(event.eventAttandentId.split(",")).length}명 참석 예정
+                                    </p>
+                                </Link>
+                              </div>
+                        ))}
+                    </div>
                 </div>
             )
         } else {
