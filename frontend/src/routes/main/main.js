@@ -136,7 +136,7 @@ class Main extends React.Component{
                                         title = {event.eventName}
                                         date = {event.eventDate}
                                         location = {event.eventLocation}
-                                        description = {event.description}
+                                        description = {event.eventDescription}
                                         display = "thum-main"
                                     />
                                 </Link>

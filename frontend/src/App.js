@@ -10,7 +10,7 @@ import Search from './routes/search/search'
 import Mypage from './routes/mypage/mypage'
 import GroupMemberDetail from "./routes/group-member-detail/group-member-detail";
 import Login from "./routes/login/login";
-
+import signup from "./routes/signup/signup";
 
 function App(){
   return (
@@ -26,6 +26,7 @@ function App(){
         <Route path="/search" component={Search} />
         <Route path="/mypage" component={Mypage} />
         <Route path="/login" component={Login} />
+        <Route paht="/signup" component={signup} />
       </Switch>
       <Footer />
     </BrowserRouter>
