@@ -17,7 +17,7 @@
 	<select id="searchStudy" resultType="board.dto.StudyDto" >
 		<![CDATA[
 			SELECT
-				study_id, study_name, study_description, study_image, study_tag
+				study_id, study_name, study_description
 			FROM t_study
 		]]>
 		<choose>
