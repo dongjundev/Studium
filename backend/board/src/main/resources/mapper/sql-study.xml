@@ -13,28 +13,6 @@
 		]]>
 	</select>
 	
-	<select id="selectMyPageStudyList" resultType="board.dto.StudyDto">	<!-- <select> 태그를 이용하여 select 쿼리임을 나타냄. id값과 boardmapper의 함수명 같아야함. -->
-		<![CDATA[
-			SELECT
-				*
-			FROM
-				t_study
-			WHERE
-				member_id LIKE CONCAT('%', #{memberId} , '%')
-		]]>
-	</select>
-	
-	<select id="selectMyPageEventList" resultType="board.dto.StudyDto">	<!-- <select> 태그를 이용하여 select 쿼리임을 나타냄. id값과 boardmapper의 함수명 같아야함. -->
-		<![CDATA[
-			SELECT
-				*
-			FROM
-				t_event
-			WHERE
-				event_attandent_id LIKE CONCAT('%', #{memberId} , '%')
-		]]>
-	</select>
-	
 	<!-- 스터디 검색 !
 	<select id="searchStudy" resultType="board.dto.StudyDto" >
 		<![CDATA[
