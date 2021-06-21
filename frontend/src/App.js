@@ -7,7 +7,7 @@ import Main from "./routes/main/main"
 import EventDetail from "./routes/event-detail/event-detail"
 import GroupDetail from "./routes/group-detail/group-detail"
 import Search from './routes/search/search'
-import Member from "./routes/group-member-detail/group-member-detail";
+import Mypage from './routes/mypage/mypage'
 import GroupMemberDetail from "./routes/group-member-detail/group-member-detail";
 
 
@@ -23,6 +23,7 @@ function App(){
         <Route path="/study/:studyId"  component={GroupDetail} />
         <Route path="/member/:memberId" component={GroupMemberDetail} />
         <Route path="/search" component={Search} />
+        <Route path="/mypage" component={Mypage} />
       </Switch>
       <Footer />
     </BrowserRouter>

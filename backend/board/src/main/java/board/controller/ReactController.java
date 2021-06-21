@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,6 +39,7 @@ public class ReactController {
 	MemberDto memberDto=null;
 
 	int glo_studyId;
+	String glo_memberId = "test";
 	
 	@Autowired
 	private BoardService boardService;
@@ -391,6 +393,58 @@ public class ReactController {
       
       return searchList;
     }
+ // Mypage
+    @GetMapping(value="/mypage")
+   public List<Object> myPage(HttpServletRequest request,HttpSession session) throws Exception{   
+
+//       MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+//       System.out.println("member확인:: "+mem);
+//       System.out.println("member Id 확인 :: "+mem.getMemberId());
+       
+       ArrayList<Object> myPage = new ArrayList<>();
+       
+        //MemberDto member = memberService.selectStudyMemberDetail(mem.getMemberId());
+       MemberDto member = memberService.selectStudyMemberDetail(glo_memberId);
+       
+       
+       //가입되어있는 그룹 list 
+       List<StudyDto> studyList2=studyService.selectStudyList();
+       List<StudyDto> studyListResult=new ArrayList<>();
+   
+       
+       for (int i=0; i<studyList2.size(); i++) {
+          
+          String[] arr=studyList2.get(i).getMemberId().split(",");
+          
+          for (int j=0; j<arr.length; j++) {
+             if (arr[j].equals(glo_memberId)){
+                studyListResult.add(studyList2.get(i));
+                System.out.println("studyListResult :: "+studyListResult);
+             }
+          }
+       }
+       
+       //참여한 이벤트
+       List<StudyDto> eventList2=studyService.selectEventList();
+       List<StudyDto> eventListResult=new ArrayList<>();
+       
+       for (int i=0; i<eventList2.size(); i++) {
+          
+          String[] arr=eventList2.get(i).getEventAttandentId().split(",");
+          
+          for (int j=0; j<arr.length; j++) {
+             if (arr[j].equals(glo_memberId)){
+                eventListResult.add(eventList2.get(i));
+                System.out.println("eventListResult :: "+eventListResult);
+             }
+          }
+       }
+       myPage.add(member);
+       myPage.add(studyListResult);
+       myPage.add(eventListResult);
+        
+        return myPage;
+     }
 //	@GetMapping("/study")
 //	public List<StudyDto> seletTest(@RequestParam("no") int no) throws Exception{
 //		System.out.println("받은 값 :: "+no);

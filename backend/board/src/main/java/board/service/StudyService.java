@@ -25,4 +25,8 @@ public interface StudyService {
 	String eventJoinChk(int eventId) throws Exception; //이벤트 참석 체크
 	
 	void eventJoin(int eventId,String memberId) throws Exception; //이벤트 참석
+	
+	List<StudyDto> selectMyPageStudyList(String memberId) throws Exception; //마이페이지 스터디 리스트
+	   
+	List<StudyDto> selectMyPageEventList(String memberId) throws Exception; //마이페이지 이벤트 리스트
 }

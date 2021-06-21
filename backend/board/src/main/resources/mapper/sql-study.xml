@@ -126,5 +126,27 @@
 			UPDATE t_event SET event_attandent_id = CONCAT(event_attandent_id ,',${memberId}') WHERE event_id=#{eventId};
 		]]>
 	</select>
+	
+	<select id="selectMyPageStudyList" resultType="board.dto.StudyDto">   <!-- <select> 태그를 이용하여 select 쿼리임을 나타냄. id값과 boardmapper의 함수명 같아야함. -->
+      <![CDATA[
+         SELECT
+            *
+         FROM
+            t_study
+         WHERE
+            member_id LIKE CONCAT('%', #{memberId} , '%')
+      ]]>
+   </select>
+   
+   <select id="selectMyPageEventList" resultType="board.dto.StudyDto">   <!-- <select> 태그를 이용하여 select 쿼리임을 나타냄. id값과 boardmapper의 함수명 같아야함. -->
+      <![CDATA[
+         SELECT
+            *
+         FROM
+            t_event
+         WHERE
+            event_attandent_id LIKE CONCAT('%', #{memberId} , '%')
+      ]]>
+   </select>
 
 </mapper>
