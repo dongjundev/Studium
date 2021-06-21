@@ -39,12 +39,12 @@ import Swal from 'sweetalert2'
     handleRequest = async () =>{
       const response = await axios({
         method: 'post',
-        url: 'http://localhost:8080/description.do',
+        url: 'http://localhost:8080/create-study.do',
         data: {
-          location : this.state.location,
-          selectedTopics : this.state.selectedTopics,
+          studyLocation : this.state.location,
+          studyTag : String(this.state.selectedTopics),
           studyName : this.state.studyName,
-          inputarea : this.state.inputarea
+          studyDescription : this.state.inputarea
         }
       });
       console.log(response);
