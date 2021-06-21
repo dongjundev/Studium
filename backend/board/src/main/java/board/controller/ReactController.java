@@ -48,7 +48,7 @@ import board.service.StudyService;
 @CrossOrigin(origins="http://localhost:3000")
 @RestController
 public class ReactController {
-	String glo_memberId = "test";
+	String glo_memberId;
 	int glo_studyId;
 	
 	@Autowired
@@ -84,6 +84,7 @@ public class ReactController {
 		}
 		List<StudyDto> eventList=studyService.selectEventList();
 		
+		// 랜덤 스터디
 		// 랜덤으로 값 생성 (중복x, Set이용)
 		int main_cnt=6; //메인에 나타날 스터디 개수
 		Set<Integer> arr=new HashSet<>();
@@ -105,30 +106,30 @@ public class ReactController {
 		System.out.println("랜덤 studyList :: "+randomList);
 		
 		// 랜덤 이벤트
-	      int event_cnt=3; //메인에 나타날 스터디 개수
-	      Set<Integer> arr2=new HashSet<>();
-	      
-	      while(arr2.size()<event_cnt) {
-	         double randomValue=Math.random();
-	         arr2.add((int)(randomValue*eventList.size())+1);
-	      }
-	      
-	      System.out.println("랜덤으로 생성된 arr :: "+arr2);
-	      
-	      List<Integer> random_arr2 = new ArrayList<>(arr2);
-	      List<StudyDto> randomList2=new ArrayList<>();
-	      
-	      for (int i=0; i<event_cnt; i++) {
-	         randomList2.add(eventList.get(random_arr2.get(i)-1));
-	      }
-	      
-	      System.out.println("랜덤 eventList :: "+randomList2);
-	      
-	      
-	      //result.add(list);
-	      //result.add(eventList);
-	      result.add(randomList);
-	      result.add(randomList2);
+		int event_cnt=3; //메인에 나타날 스터디 개수
+		Set<Integer> arr2=new HashSet<>();
+		
+		while(arr2.size()<event_cnt) {
+			double randomValue=Math.random();
+			arr2.add((int)(randomValue*eventList.size())+1);
+		}
+		
+		System.out.println("랜덤으로 생성된 arr :: "+arr2);
+		
+		List<Integer> random_arr2 = new ArrayList<>(arr2);
+		List<StudyDto> randomList2=new ArrayList<>();
+		
+		for (int i=0; i<event_cnt; i++) {
+			randomList2.add(eventList.get(random_arr2.get(i)-1));
+		}
+		
+		System.out.println("랜덤 eventList :: "+randomList2);
+		
+		
+		//result.add(list);
+		//result.add(eventList);
+		result.add(randomList);
+		result.add(randomList2);
 		
 		return result;
 	}
