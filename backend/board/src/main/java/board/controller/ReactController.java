@@ -289,7 +289,7 @@ public class ReactController {
     	}
     }
 	
-	// EventList----------------------------
+	// 이벤트 리스트 EventList----------------------------
 	@GetMapping("/study/{studyId}/event")
     public List<StudyDto> EventList(@PathVariable(name = "studyId") int studyId) throws Exception{		
  
@@ -300,7 +300,7 @@ public class ReactController {
     	return event;
     }
 	
-	// EventDetail----------------------------
+	// 이벤트 상세 EventDetail----------------------------
 	@GetMapping("/event/{eventId}")
     public List<Object> EventDetail(@PathVariable(name = "eventId") int eventId) throws Exception{		
 		
@@ -333,7 +333,7 @@ public class ReactController {
     	return eventDetail;
     }
 	
-	// GalleryList----------------------------
+	// 갤러리 리스트 GalleryList----------------------------
 	@GetMapping("/study/{studyId}/gallery")
     public List<BoardDto> GalleryList(@PathVariable(name = "studyId") int studyId) throws Exception{		
  
@@ -342,7 +342,7 @@ public class ReactController {
     	return board;
     }
 	
-	// EventJoin------------------------------
+	// 이벤트 참석 EventJoin------------------------------
     @RequestMapping("/event/{eventId}/join.do")
     public String EventJoin(@PathVariable(name = "eventId") int eventId,HttpSession session) throws Exception{	
     	
@@ -394,7 +394,7 @@ public class ReactController {
     	}
     }
     
-    // MemberDetail----------------------------
+    // 멤버 상세 MemberDetail----------------------------
  	@GetMapping("/member")
      public ArrayList<MemberDto> MemberDetail(@RequestParam(defaultValue="memberId")String memberId) throws Exception{		
   
@@ -495,7 +495,7 @@ public class ReactController {
 		return result;
     }
  	
- 	// 키워드검색---------------------------
+ 	// 키워드 검색---------------------------
  	@GetMapping("/search")
     public List<StudyDto> KeywordSearch(@RequestParam(defaultValue="keyword")String keyword,@RequestParam(defaultValue="searchCondition")String searchCondition) throws Exception{
  		
@@ -512,7 +512,7 @@ public class ReactController {
 		return searchList;
     }
     
- 	// GalleryDetail----------------------------
+ 	// 갤러리 상세화면 GalleryDetail----------------------------
  	@GetMapping("/gallery/{boardIdx}")
      public List<Object> GalleryDetail(@PathVariable(name = "boardIdx") int boardIdx,HttpSession session) throws Exception{		
  
@@ -544,7 +544,7 @@ public class ReactController {
 //    	return "ok";
 //    }
  	
- 	// GalleryFileDownload----------------------------
+ 	// 갤러리 파일 다운로드 GalleryFileDownload----------------------------
     @GetMapping("/gallery/downloadBoardFile.do")
     public void downloadBoardFile(@RequestParam int boardIdx, HttpServletResponse response) throws Exception{
     	System.out.println("들어옴");
@@ -602,7 +602,7 @@ public class ReactController {
     	return "ok";
      }
     
-    // Mypage
+    // 마이페이지 Mypage
     @GetMapping(value="/mypage")
 	public List<Object> myPage(HttpServletRequest request,HttpSession session) throws Exception{	
 
