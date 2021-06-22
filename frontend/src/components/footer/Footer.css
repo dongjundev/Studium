@@ -15,6 +15,7 @@ html {
 }
 .footer-nav{
     background-color: #252525;
+    height: 60%;
 }
 .footer-nav .footer-nav-detail{
     max-width: 1000px;
@@ -24,11 +25,15 @@ html {
     max-width: 1000px;
     margin: 0 auto;
 }
+.footer-info > p{
+    margin: 5px 0;
+}
 .footer-nav > div > div{
     display: inline-block;
     width: 30%;
     height: 100%;
     vertical-align: top;
+    margin-top: 20px;
 }
 .footer-nav .foot-nav-title{
     font-size: 20px;

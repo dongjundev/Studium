@@ -42,6 +42,8 @@
 }
 .thum-group-member-image img{
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 100px;
 }
 .thum-group-member-name p{

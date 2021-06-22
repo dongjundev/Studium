@@ -49,9 +49,8 @@ function Footer(){
             </div>
         </div>
         <div className="footer-info">
-                <h1>STUDIUM</h1>
+                <h2>STUDIUM</h2>
                 <p>대구 동구 동내로 70 302호</p>
-                <p>studium@gmail.com</p>
                 <p>copyright(c) STUDIUM. All rights reserved.</p>
         </div>
     </div>
