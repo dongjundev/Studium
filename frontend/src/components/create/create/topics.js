@@ -11,6 +11,9 @@ class topics extends Component{
 
   constructor(props) {
     super(props);
+    if (this.state===1){
+      
+    }
     this.state = {
       options: [], // 현재 topics의 저장할 데이터
       location: this.props.location.state.location //start에서 지역 데이터 뽑기
@@ -51,7 +54,7 @@ class topics extends Component{
             <h2>만드실 그룹의 주제 혹은 관심사 몇가지를 선택해 주세요</h2>
             <div className="topics-contents-sub">
               <p id="topics-subbox">선택하신 주제와 관심사가 구체적이면 비슷한 관심사를 가진
-                사람들에게 더욱 노출되기 쉬워집니다. <br /> 주제는 최대 3개 까지 선택이 가능합니다.</p>
+                사람들에게 더욱 노출되기 쉬워집니다.</p>
             </div>
             <div className="topics-contents-wrap">
               <ul className="topics-subjectKinds">
@@ -64,49 +67,61 @@ class topics extends Component{
                 <li>
                   <div className="input-group">
                     <input name="option2" type="checkbox" value={2} onChange={this.onChange.bind(this)}/>
-                    <label for="option2">운동&nbsp;&nbsp;</label>
+                    <label for="option2">자격증&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
                     <input name="option3" type="checkbox" value={3} onChange={this.onChange.bind(this)}/>
-                    <label for="option3">경제&nbsp;&nbsp;</label>
+                    <label for="option3">취업&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
                     <input name="option4" type="checkbox" value={4} onChange={this.onChange.bind(this)}/>
-                    <label for="option4">학습&nbsp;&nbsp;</label>
+                    <label for="option4">기술&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
                     <input name="option5" type="checkbox" value={5} onChange={this.onChange.bind(this)}/>
-                    <label for="option5">취미&nbsp;&nbsp;</label>
+                    <label for="option5">과학&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
                     <input name="option5" type="checkbox" value={6} onChange={this.onChange.bind(this)}/>
-                    <label for="option5">자격증&nbsp;&nbsp;</label>
+                    <label for="option5">경제&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
                     <input name="option5" type="checkbox" value={7} onChange={this.onChange.bind(this)}/>
-                    <label for="option5">취업&nbsp;&nbsp;</label>
+                    <label for="option5">독서&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
                     <input name="option5" type="checkbox" value={8} onChange={this.onChange.bind(this)}/>
-                    <label for="option5">기술&nbsp;&nbsp;</label>
+                    <label for="option5">미술&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
                     <input name="option5" type="checkbox" value={9} onChange={this.onChange.bind(this)}/>
-                    <label for="option5">기타&nbsp;&nbsp;</label>
+                    <label for="option5">음악&nbsp;&nbsp;</label>
+                  </div>
+                </li>
+                <li>
+                  <div className="input-group">
+                    <input name="option6" type="checkbox" value={10} onChange={this.onChange.bind(this)}/>
+                    <label for="option6">기타&nbsp;&nbsp;</label>
+                  </div>
+                </li>
+                <li>
+                  <div className="input-group">
+                    <input name="option7" type="checkbox" value={11} onChange={this.onChange.bind(this)}/>
+                    <label for="option7">취미&nbsp;&nbsp;</label>
                   </div>
                 </li>
               </ul>

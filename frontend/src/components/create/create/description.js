@@ -21,10 +21,10 @@ import Swal from 'sweetalert2'
       this.handleRequest = this.handleRequest.bind(this);
     }
 
-    // sendStudyData = (e) =>{
-    //   this.handleChange(e);
-    //   this.handleRequest();
-    // }
+    sendStudyData = (e) =>{
+      this.opensweetalert();
+      this.handleRequest();
+    }
 
     handleChange = (e) =>{
       var textlength = e.target.value.length;
@@ -55,7 +55,7 @@ import Swal from 'sweetalert2'
   opensweetalert(){
     Swal.fire({
       title: 'Done!',
-      text: "create group!",
+      text: "스터디 생성 완료!",
       type: 'success',
     })
   }
@@ -111,7 +111,7 @@ import Swal from 'sweetalert2'
           <div className="description-Footer">
             <div className="description-Footer-box">
               <Link to="../">
-                <button className="save-btn" disabled={this.state.inputarea.length<50}  onClick={this.handleRequest}>다음</button>
+                <button className="save-btn" disabled={this.state.inputarea.length<50}  onClick={this.sendStudyData}>다음</button>
                 {/* disabled={this.state.inputarea.length<50} */}
               </Link>
             </div>

@@ -396,6 +396,42 @@ public class ReactController {
 // 		LoginDto mem=(LoginDto) session.getAttribute("loginUser");
 // 		System.out.println("멤버 정보 "+mem);
  		
+ 		String[] list=studyDto.getStudyTag().split(",");
+ 		
+ 		String result="";
+ 		System.out.println("들어온 리스트 :: "+Arrays.toString(list));
+ 		glo_memberId="hong";
+ 		for(int i=0;i<list.length; i++) {
+ 			System.out.println("잘린 값 :: "+list[i]);
+ 			if(Integer.parseInt(list[i])==1) {
+ 				result+="외국어";
+ 			}else if(Integer.parseInt(list[i])==2) {
+ 				result+="자격증";
+ 			}else if(Integer.parseInt(list[i])==3) {
+ 				result+="취업";
+ 			}else if(Integer.parseInt(list[i])==4) {
+ 				result+="기술";
+ 			}else if(Integer.parseInt(list[i])==5) {
+ 				result+="과학";
+ 			}else if(Integer.parseInt(list[i])==6) {
+ 				result+="경제";
+ 			}else if(Integer.parseInt(list[i])==7) {
+ 				result+="독서";
+ 			}else if(Integer.parseInt(list[i])==8) {
+ 				result+="미술";
+ 			}else if(Integer.parseInt(list[i])==9) {
+ 				result+="음악";
+ 			}else if(Integer.parseInt(list[i])==10) {
+ 				result+="기타";
+ 			}else if(Integer.parseInt(list[i])==11) {
+ 				result+="취미";
+ 			}
+ 			if(i!=list.length-1) {
+ 				result+=",";
+ 			}
+ 		}
+ 		System.out.println("result :: "+result);
+ 		
  		try {
  			//String memberId=mem.getMemberId();
  			String memberId=glo_memberId;
@@ -404,7 +440,7 @@ public class ReactController {
  			String memberId="cho";
  			studyDto.setMemberId(memberId);
  		}
-    	
+    	studyDto.setStudyTag(result);
  		//System.out.println("멤버 세션 "+mem.getMemberId());
  		System.out.println("받은 스터디 내용들 "+studyDto);
     	studyService.insertStudy(studyDto);

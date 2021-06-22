@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'MapoHongdaeFreedom';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoHongdaeFreedomA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .nav {
     background-color: #fff;    
     overflow: hidden; 
@@ -19,13 +26,18 @@
     display: block;
     width: 100%;
     position: absolute;
-    top: 15%;
-    left: 5%;
+    top: 11%;
+    left: 15%;
     padding: 10px;
-    font-size: 25px;
-    text-decoration: none;
+    font-size: 30px;
+    text-decoration:none;
     color: #000;
-    font-family: 'SLEIGothicTTF';
+    font-family: 'MapoHongdaeFreedom';
+   
+}
+.nav .nav-logo a span{
+    border-bottom: 3px solid #febe00af;
+    box-shadow:inset 0 -4px 0 #febe00af;
 }
 .nav .nav-login{
     float: right; 
@@ -35,7 +47,7 @@
 }
 .nav .nav-login .member-name{
     color: #000;
-    text-decoration: underline;
+    text-decoration: none;
     cursor: pointer;
 }
 .nav-login button{
@@ -79,4 +91,11 @@
     text-decoration: none;
     color: #000;
 }
-.nav > div > a:hover{text-decoration: underline;}
+.highlight:hover {
+    background: linear-gradient(to top, #febe0071 50%, transparent 50%);
+}
+
+.highlight2:hover{
+    background: linear-gradient(to top, #e810345b 50%, transparent 50%);
+}
+.nav > div > a:hover{ text-decoration:none;}

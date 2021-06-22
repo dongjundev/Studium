@@ -29,7 +29,7 @@ function Navigation(){
             </Link>
         </div>
         <div className="create-group">
-                <button onClick={loginCheck}>새 그룹 시작하기</button>
+                <button onClick={loginCheck}><span className="highlight2">새 그룹 시작하기</span></button>
         </div>
         <div className="nav-login">
             {sessionStorage.getItem('memberName') !== null ? 
@@ -37,12 +37,12 @@ function Navigation(){
                     <Link to="/mypage">
                     <span className="member-name">{sessionStorage.getItem('memberName')}</span>
                     </Link>
-                    님 안녕하세요 <button onClick={doLogout}>로그아웃</button>
+                    님 안녕하세요 <button onClick={doLogout}><span className="highlight">로그아웃</span></button>
                 </div>
                 :
                 <div>
-                    <Link to="/login">로그인</Link>
-                    <Link to="/signup">회원가입</Link>
+                    <Link to="/login"><span className="highlight">로그인</span></Link>
+                    <Link to="/signup"><span className="highlight">회원가입</span></Link>
                 </div>
             // {/* <Link to="/login">로그인</Link>
             // <Link to="/signup">회원가입</Link> */}
