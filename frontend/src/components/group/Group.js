@@ -47,9 +47,14 @@ function Group ( {image, name, description, memberCnt, tag, display, members, ev
                         <p><FontAwesomeIcon icon={faUsers} /> 회원 {memberCnt}명</p>
                         {members.some(member => (
                             member.memberId === "test"
-                        )) ? <button id="create-event">이벤트 만들기</button> : <button id="join">스터디 가입하기</button>}
+                        )) ? <button id="create-event">이벤트 만들기</button> :  
+                        <button id="join" class="button">스터디 가입</button>}
                     </div>
                 </div>
+                <div id="join" class="btn">
+                        <span>스터디 가입 &#x261D;</span>
+                        <div class="dot"></div>
+                    </div>
                 {/* <div className="group-detail-tabs">
                     <ul>
                         <li id="inof" className="on" onClick={this.showInfo}><a href="#">정보</a></li>

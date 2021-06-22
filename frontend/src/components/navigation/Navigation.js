@@ -3,6 +3,13 @@ import { Link } from "react-router-dom"
 import './Navigation.css'
 
 function Navigation(){
+    function loginCheck(){
+        if (sessionStorage.getItem('memberName') == null){
+            console.log("값 찍힘");
+            return alert("로그인이 필요합니다!");
+        } 
+        document.location.href = "http://localhost:3000/start";
+    }
     return (
     <div className="nav">
         <div className="nav-logo">
@@ -11,7 +18,7 @@ function Navigation(){
             </Link>
         </div>
         <div className="create-group">
-                <Link to="/start">새 그룹 시작하기</Link>
+                <button onClick={loginCheck}>새 그룹 시작하기</button>
         </div>
         <div className="nav-login">
             {sessionStorage.getItem('memberName') !== null ? 

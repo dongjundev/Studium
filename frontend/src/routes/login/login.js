@@ -76,23 +76,27 @@ class Login extends Component{
   render() {
     return (
       <div className="container">
+        <div class="login-box">
         <div className="login-form">
-          <div id="login-header">
-            <h1><span className="login-title">Stadium</span></h1>
-            
-            <h3 className="logintext-center">Login</h3>
+        <div class="login">
+          <div id="login-header"> 
+            <h1 className="logintext-center">로그인</h1>
+            <div>
+              <Link to="/signup" class="h"> 
+              아직 회원이 아니신가요?
+              </Link>
+              </div>
           </div>
-
           <div>
             <div className="login-inputarea">
-              <input id="login-id-area" type="ID" placeholder="Enter your Id" name={'memberId'} 
+              <input id="login-id-area" type="ID" placeholder="아이디" name={'memberId'} 
                     value={this.state.memberId} 
                     onChange={(e) => this.setState({memberId : e.target.value})} ></input>
             </div>
           </div>
           <div>
             <div className="login-inputarea">
-              <input id="login-password-area" type="Password" placeholder="Enter your Password" name={'memberPassword'} 
+              <input id="login-password-area" type="Password" placeholder="비밀번호" name={'memberPassword'} 
                     value={this.state.memberPassword} 
                     onChange={(e) => this.setState({memberPassword : e.target.value})}
               ></input>
@@ -100,20 +104,14 @@ class Login extends Component{
           </div>
           <div>
             <div className="login-btn-login-area">
-              <button className="btn-lg" onClick={this.handleRequest}>Log in</button>
+              <button className="login-btn button" onClick={this.handleRequest}>로그인</button>
             </div>
           </div>
-            <div className="login-text-center"> 
-                or continue with your social account
-            </div>
+          </div>
           {/* <FacebookLoginButton className="mt-3 mb-3">
             
           </FacebookLoginButton> */}
-          <div className="text-center">
-            <a href="/sign-up">Sign up</a>
-            <span className="p-2">|</span>
-            <a href="/forgot-password">Forgot Password</a>
-          </div>
+        </div>
         </div>
       </div>
     );

@@ -49,7 +49,7 @@
 			<when test="searchCondition=='study'">
 				<![CDATA[
 				FROM t_study
-				WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_description LIKE CONCAT('%', #{searchKeyword} , '%'))
+				WHERE (study_name LIKE CONCAT('%', #{searchKeyword} , '%') OR study_description LIKE CONCAT('%', #{searchKeyword} , '%') OR study_tag LIKE CONCAT('%', #{searchKeyword} , '%'))
 				]]>
 			</when>
 			<when test="searchCondition=='event'">
@@ -162,5 +162,12 @@
 			FROM t_event
 		]]>
 	</select>
+	
+	<insert id="insertEvent" parameterType="board.dto.StudyDto">
+		<![CDATA[
+			INSERT INTO t_study(study_id, event_name,event_description, event_date, event_location,event_host_id,event_attandent_id)
+			VALUES(#{studyId}, #{eventName}, #{eventDescription}, #{eventDate}, #{eventLocation}, #{eventHostId},#{eventAttandentId})
+		]]>
+	</insert>
 
 </mapper>

@@ -113,4 +113,11 @@ public class StudyServiceImpl implements StudyService {
 		// TODO Auto-generated method stub
 		return studyMapper.selectEventList();
 	}
+	
+	// ----------------------------------스터디 만들기
+	@Override
+	public void insertEvent(StudyDto study) throws Exception {
+		// TODO Auto-generated method stub
+		studyMapper.insertEvent(study);
+	} 
 }

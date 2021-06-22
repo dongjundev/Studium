@@ -34,14 +34,29 @@ body{
 .login-form #login-id-area{
   width: 50%;
   height: 50px;
-  border: 3px solid #febf00;
+  border: 1px solid #febf00;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.017);
+  background: #fff;
+  padding:10px;
 }
 
 .login-form #login-password-area{
   width: 50%;
   height: 50px;
-  border: 3px solid #febf00;
+  border: 1px solid #febf00;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.017);
+  background: #fff;
+  padding:10px;
 }
+input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+	 transition: background-color 5000s ease-in-out 0s;
+	 -webkit-transition: background-color 9999s ease-out;
+     -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+     -webkit-text-fill-color: #000 !important;
+   }
 
 .login-form .login-inputarea{
   display: block;
@@ -79,3 +94,49 @@ body{
   margin-left: 10px;
   margin-right: 10px;
 }
+
+/* 로그인 */
+.login-box{padding: 20px;}
+.login-box h1{text-align: center; margin-bottom: 15px;}	
+.login-box .login{max-width:1200px; margin:0 auto; border: 1px solid #e1e1e1; border-radius:25px; padding: 30px; background: #fff; box-shadow:0px 0px 11px 0px rgb(0 0 0 / 5%);}
+.login-box .login li{margin: 5px;}
+.login-box .login li input{width: 100%; height: 40px; padding: 5px; border: 1px solid #ccc; border-radius:25px;}
+.login-box .login li button{width: 100%; height: 40px; background: #26649e; color: #fff; border: 0; border-radius:25px; transition:all 0.3s;}
+.login-box .login li button:hover{background: #000; border-radius:0;}
+.login-box .login-btn{text-align: center; margin-top:20px; margin-bottom:15px;}
+
+#login-header p{font-size:small;}
+#login-header h1{font-size:2rem;}
+
+.button {
+  border: 1px solid rgba(0, 0, 0, 0.032);
+  margin-left: 20px;
+  margin-top: 80px;
+  width: 140px;
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  /* border: none; */
+  border-radius: 15px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+.button:hover {
+  background-color: #febf00;
+  box-shadow: 0px 15px 20px rgba(230, 184, 35, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+
+a { text-decoration:none;} 
+a:visited { text-decoration:none; color:rgb(87, 87, 87);}
+a:active {text-decoration:none; color:rgb(87, 87, 87); }
+a:hover { text-decoration:none; color:#EDA900;}
