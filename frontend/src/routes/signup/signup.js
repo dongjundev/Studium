@@ -121,7 +121,7 @@ class signup extends Component {
     }) //사용자가 입력한 값을 setState함수를 통해 업데이트
     if (e.target.value !== this.state.memberRepassWord) {
       this.setState({
-        pMessage: "❌ 비밀번호가 일치하지 않습니다 :("
+        pMessage: "❌ 비밀번호가 일치하지 않습니다 ❌"
       }) //사용자가 입력한 값이 재확인 비번과 일치하지 않을 경우
     }
     else if (e.target.value === '') {
@@ -131,7 +131,7 @@ class signup extends Component {
     }
     else if (e.target.value === this.state.memberRepassWord) {
       this.setState({
-        pMessage: "✅ 비밀번호가 일치합니다 :)"
+        pMessage: "✅ 비밀번호가 일치합니다 ✅"
         
       }) // 사용자가 입력한 비밀번호가 두개 다 일치하면 보여주는 메시지.
     }
@@ -143,7 +143,7 @@ class signup extends Component {
     })
     if (e.target.value !== this.state.memberPassword) {
       this.setState({
-        pMessage: "❌ 비밀번호가 일치하지 않습니다 :("
+        pMessage: "❌ 비밀번호가 일치하지 않습니다 ❌"
       })
     }
     else if (e.target.value === '') {
@@ -153,7 +153,7 @@ class signup extends Component {
     }
     else if (e.target.value === this.state.memberPassword) {
       this.setState({
-        pMessage: "✅비밀번호가 일치합니다 :)"
+        pMessage: "✅ 비밀번호가 일치합니다 ✅"
       })
     }
   } 
@@ -171,12 +171,12 @@ class signup extends Component {
             <div className="signup-inputarea">
               <input id="signup-id-area" type="ID" placeholder="아이디"  name={'memberId'}
                   value={this.state.memberId} 
-                  onChange={(e) => this.setState({memberId : e.target.value})}></input>
+                  onChange={(e) => this.setState({memberId : e.target.value})} autocomplete="off"></input>
           </div>
             <div className="signup-inputarea">
               <input id="signup-password-area" type="Password" placeholder="비밀번호" name={'memberPassword'} 
                   value={this.state.memberPassword}
-				          onChange={this.handleConfirmPassword} onChange={(e) => this.setState({memberPassword : e.target.value})}></input>
+				          onChange={this.handleConfirmPassword} onChange={(e) => this.setState({memberPassword : e.target.value})} autocomplete="off"></input>
                   {/* onChange={this.handleConfirmPassword} onChange={(e) => this.setState({memberPassword : e.target.value}) */}
             </div>
           </div>
@@ -184,7 +184,7 @@ class signup extends Component {
             <div className="signup-inputarea">
               <input id="signup-passwordCheck-area" type="Password" placeholder="비밀번호 확인" name={'memberRepassWord'} 
                   value={this.state.memberRepassWord}
-				          onChange={this.handleConfirmrePassword}></input>
+				          onChange={this.handleConfirmrePassword} autocomplete="off"></input>
                   <p className="checktext">{this.state.pMessage}</p>
             </div>
           </div>
@@ -192,7 +192,7 @@ class signup extends Component {
             <div className="signup-inputarea">
               <input id="signup-name" type="text" placeholder="이름" name={'memberName'}
                       value ={this.state.memberName}
-                      onChange={(e) => this.setState({memberName : e.target.value})}></input>
+                      onChange={(e) => this.setState({memberName : e.target.value})} autocomplete="off"></input>
             </div>
           </div>
           <div>
@@ -200,7 +200,7 @@ class signup extends Component {
               <input id="signup-address" type="text" placeholder="지역" name={'memberAddress'}
                       value ={this.state.memberAddress}
                       onChange={(e) => this.setState({memberAddress : e.target.value})}
-              ></input>
+                      autocomplete="off" ></input>
             </div>
           </div>
           <div>
