@@ -6,8 +6,34 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faMapMarkedAlt, faSearch, faThumbtack } from "@fortawesome/free-solid-svg-icons";
 import Group from '../group/Group'
 import Member from '../member/Member'
+import axios from "axios";
 
 function Event( {image, title, description, date, location, attendants, study, display} ) {
+
+    let isMemberInEvent = false;
+    if(attendants !== undefined){
+        attendants.some(attendant => (attendant.memberId === sessionStorage.getItem('memberId'))) ?
+        isMemberInEvent = true :
+        isMemberInEvent = false;
+    }
+
+    async function joinEvent(){
+        if(study.memberId.split(",").some(memberId => memberId === sessionStorage.getItem('memberId'))){
+            const url = "http://localhost:8080" + window.location.pathname + "/join.do";
+            if(window.confirm("참석하시겠습니까?")){
+                const data = await axios.get(url)
+                data.data === "ok" ? alert("참석이 완료되었습니다.") : alert("로그인이 필요합니다.") ;
+                data.data === "ok" ?  isMemberInEvent = true : isMemberInEvent = false ;
+                window.location.replace(window.location.pathname);
+            }
+        } else {
+            if(window.confirm("참석전 스터디 가입이 필요합니다")){
+                console.log("가입할래요");
+            } else{
+                console.log("싫어요");
+            }
+        }
+    }
     if(display === "thum-main") {
         return (
             <div>
@@ -108,7 +134,7 @@ function Event( {image, title, description, date, location, attendants, study, d
                                 <h3>{title}</h3>
                             </div>
                             <div className="main-join-right">
-                                <button>참석하기</button>
+                                {isMemberInEvent ? "" : <button onClick={joinEvent}>참석하기</button>}
                             </div>
                         </div>
                     </div>

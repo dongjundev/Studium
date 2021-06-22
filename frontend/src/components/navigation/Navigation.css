@@ -1,5 +1,5 @@
 .nav {
-    background-color: #000;    
+    background-color: #fff;    
     overflow: hidden; 
     height: 80px;
 }
@@ -22,17 +22,18 @@
 .nav .nav-login{
     float: right; 
     margin-top: 30px; 
-    color:#fff;
+    color:#000;
     width: 25%;
 }
 .nav .nav-login .member-name{
+    color: #000;
     text-decoration: underline;
     cursor: pointer;
 }
 .nav-login button{
     border-style: none;
-    background-color: #000;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
     float: right;
     cursor: pointer;
 }
@@ -42,23 +43,23 @@
 .nav-login button::before{
     padding: 10px;
     content: "|";
-    color: #fff;
+    color: #000;
 }
 .nav-login button::after{
     padding: 10px;
     content: "|";
-    color: #fff;
+    color: #000;
 }
 .nav .create-group{float: right; margin-top: 30px;}
 .nav .create-group a{
     padding: 10px; 
-    color: #bfbfff; 
+    color: #5858f1; 
     text-decoration: none;
 }
 .nav .nav-login a{
     padding: 10px;
     font-size: 15px;
     text-decoration: none;
-    color: #fff;
+    color: #000;
 }
 .nav > div > a:hover{text-decoration: underline;}

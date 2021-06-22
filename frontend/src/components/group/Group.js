@@ -25,7 +25,7 @@ function Group ( {image, name, description, memberCnt, tag, display, members, ev
             console.log(url);
             if(window.confirm("가입하시겠습니까?")){
                 const data = await axios.get(url);
-                data.data === "ok" ? alert("가입이 완료되었습니다.") : alert("가입에 실패하였습니다.") ;
+                data.data === "ok" ? alert("가입이 완료되었습니다.") : alert("로그인이 필요합니다.") ;
                 data.data === "ok" ? isMemberInStudy = true : isMemberInStudy = false ;
                 window.location.replace(window.location.pathname);
             }

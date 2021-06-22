@@ -15,8 +15,11 @@ function Navigation(){
         </div>
         <div className="nav-login">
             {sessionStorage.getItem('memberName') !== null ? 
-                <div style={{color: "white"}}>
-                    <span className="member-name">{sessionStorage.getItem('memberName')}</span> 님 안녕하세요 <button>로그아웃</button>
+                <div>
+                    <Link to="/mypage">
+                    <span className="member-name">{sessionStorage.getItem('memberName')}</span>
+                    </Link>
+                    님 안녕하세요 <button>로그아웃</button>
                 </div>
                 :
                 <div>

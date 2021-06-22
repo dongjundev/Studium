@@ -21,6 +21,7 @@
     left: 0;
     margin: auto;
     color: #000;
+    font-weight: 600;
     text-shadow: 2px 2px 5px #fff;
 }
 .main-letter button{
@@ -89,7 +90,7 @@
     cursor: pointer;
 } */
 .container{
-    background-color: #fffaeb;
+    background-color: #fff;
 }
 .content-area{
     max-width: 1000px; 
