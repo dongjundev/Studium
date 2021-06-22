@@ -19,7 +19,36 @@
     text-decoration: none;
     color: #fff700;
 }
-.nav .nav-login{float: right; margin-top: 30px;}
+.nav .nav-login{
+    float: right; 
+    margin-top: 30px; 
+    color:#fff;
+    width: 25%;
+}
+.nav .nav-login .member-name{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.nav-login button{
+    border-style: none;
+    background-color: #000;
+    color: #fff;
+    float: right;
+    cursor: pointer;
+}
+.nav-login button:hover{
+    text-decoration: underline;
+}
+.nav-login button::before{
+    padding: 10px;
+    content: "|";
+    color: #fff;
+}
+.nav-login button::after{
+    padding: 10px;
+    content: "|";
+    color: #fff;
+}
 .nav .create-group{float: right; margin-top: 30px;}
 .nav .create-group a{
     padding: 10px; 
