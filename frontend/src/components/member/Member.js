@@ -10,7 +10,7 @@ function Member( {image, name, city, gender, display} ){
     }
     if(display === "thum-event"){
         return (
-            <div>
+            <div className="container">
                 <div className="thum-event-member-image">
                         <img src={image}></img>
                 </div>
@@ -22,7 +22,7 @@ function Member( {image, name, city, gender, display} ){
         )
     } else if(display === "thum-group"){
         return (
-            <div>
+            <div className="container">
                 <div className="thum-group-member-image">
                         <img src={image}></img>
                 </div>
@@ -33,7 +33,7 @@ function Member( {image, name, city, gender, display} ){
         )
     } else if(display === "detail-inGroup"){
         return (
-            <div className="detail-inGroup">
+            <div className="detail-inGroup container">
                 <h2>스터디 회원 정보</h2>
                 <div className="detail-inGroup-image">
                     <img src={image} arl="" />
@@ -47,7 +47,7 @@ function Member( {image, name, city, gender, display} ){
         )
     } else if(display === "mypage") {
         return (
-            <div>
+            <div className="container">
                  <div className="detail-inGroup">
                     <h2>스터디 회원 정보</h2>
                     <div className="detail-inGroup-image">

@@ -1,7 +1,14 @@
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+.jejugothic * { 
+font-family: 'Jeju Gothic', sans-serif;
+}
+
 .createEvent{
+    font-family: 'Jeju Gothic', sans-serif;
     max-width: 100%;
     text-align: center;
-    background-color: #fffaeb;
+    background-color: #fff;
 }
 
 .createEvent .createEvent-row-step{
@@ -26,22 +33,24 @@
 }
 
 #creatEvent-subtitle{
-    font-size: 15px;
+    font-size: 23px;
     font-weight: bold;
 }
 
 #createEvent-event_name{
     width: 400px;
-    height: 2.5rem;
-    border: 3px solid #febf00;
-    border-radius: 15px;
+    height: 3rem;
+    border: 1px solid #febf00;
+    border-radius: 10px;
 }
 
 #createEvent-location{
-    width: 400px;
-    height: 2.5rem;
-    border: 3px solid #febf00;
-    border-radius: 15px;
+    margin-top: 20px;
+    width: 500px;
+    height: 3rem;
+    border: 1px solid #febf00;
+    border-radius: 10px;
+    padding:10px;
 }
 
 .createEvent-contents-all{
@@ -74,7 +83,7 @@
     padding-bottom: 30px;
 }
 
-.createEvent-Footer .createEvent-Footer-box .save-btn{
+/* .createEvent-Footer .createEvent-Footer-box .save-btn{
     width: 150px;
     height: 50px;
     color: black;
@@ -92,7 +101,7 @@
     background-color: #febf00;
     border-radius: 50px;
     border: 1px solid #febf00;
-}
+} */
 
 .createEvent-contents-wrap .createEvent-subjectKinds{
     list-style: none;
@@ -111,8 +120,9 @@
     margin: 0;
     width: 100%;
     border-radius: 4px;
-    border: 3px solid #febf00;
+    border: 1px solid #febf00;
     box-sizing: border-box;
+    padding: 20px;
     color: black;
 }
 
@@ -132,3 +142,31 @@
 
 
 
+.create-event-button {
+    border: 1px solid rgba(0, 0, 0, 0.032);
+    margin-left: 20px;
+    margin-top: 20px;
+    width: 140px;
+    height: 45px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    /* border: none; */
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    }
+  
+  .create-event-button:hover {
+    background-color: #febf00;
+    box-shadow: 0px 15px 20px rgba(230, 184, 35, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
+  

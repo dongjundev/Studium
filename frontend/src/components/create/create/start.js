@@ -4,7 +4,6 @@ import './start.css';
 import { Link } from 'react-router-dom'
 //import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 
-
  class start extends Component{
    constructor(){
     super();
@@ -22,19 +21,19 @@ import { Link } from 'react-router-dom'
    render() {
     
     return(
-      <div className='start'>
+      <div className='start creat-study'>
         <div className="start-row-step">
           <div classNam="start-stepbox">
               <p id="start-step">1/4단계</p>
               
           </div>
-          <form className="start-contents-all">
+          <form className="start-contents-all" autocomplete="off">
             <div className="start-contents-box">
               <h2 className="start-title">그룹의 지역을 설정해 주세요</h2>
               <div className="start-contents-sub">
               </div>
               <div className="start-contents-wrap">
-                <input type="serach" name="venue" id="start-venueSearch" placeholder="지역 입력" onChange={this.onChangeLocation.bind(this)}/>
+                <input type="serach" name="venue" id="start-venueSearch" placeholder="ex) 대구광역시 동구" onChange={this.onChangeLocation.bind(this)}/>
               </div>
             </div>
           </form>
@@ -46,7 +45,7 @@ import { Link } from 'react-router-dom'
                 state: {
                     location: this.state.locationValue
                 }
-              }}><button>다음</button>
+              }}><button className="creat-button">다음</button>
               </Link>
             </div>
           </div>

@@ -91,7 +91,7 @@ class Login extends Component{
             <div className="login-inputarea">
               <input id="login-id-area" type="ID" placeholder="아이디" name={'memberId'} 
                     value={this.state.memberId} 
-                    onChange={(e) => this.setState({memberId : e.target.value})} ></input>
+                    onChange={(e) => this.setState({memberId : e.target.value})} autocomplete="off"></input>
             </div>
           </div>
           <div>

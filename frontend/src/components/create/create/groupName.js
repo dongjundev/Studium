@@ -26,14 +26,14 @@ class groupName extends Component{
     const {location, selectedTopics} = this.state;
     console.log(location, selectedTopics);
     return (
-      <div className='groupName'>
+      <div className='groupName creat-study'>
         <div className="groupName-row-step">
           <div classNam="groupName-stepbox">
               <p id="groupName-step">3/4단계</p>
           </div>
           <form className="groupName-contents-all">
             <div className="groupName-contents-box">
-              <h2>그룹의 이름을 설정해 주세요.</h2>
+              <h2>그룹의 이름을 설정해 주세요 🤔</h2>
               <div className="groupName-contents-sub">
                 <p id="groupName-subbox">사람들이 그룹의 성격과 내용을 파악할 수 있는 이름을 지어주세요. <br />
                   떠오르는 기발한 이름이 있나요? 마음이 바뀌면 나중에 다시 변경할 수 있습니다.</p>
@@ -55,7 +55,7 @@ class groupName extends Component{
                   selectedTopics : selectedTopics,
                   studyName:this.state.studyName
                 }
-              }}><button>다음</button>
+              }}><button className="creat-button">다음</button>
               </Link>
             </div>
           </div>

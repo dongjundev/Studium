@@ -1,5 +1,15 @@
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+.jejugothic * { 
+font-family: 'Jeju Gothic', sans-serif;
+}
+
+.creat-study{
+    font-family: 'Jeju Gothic';
+}
+
 .topics{
-    background-color: #fffaeb;
+    background-color: #fff;
 }
 
 h2{
@@ -57,8 +67,8 @@ h2{
     padding: 10px;
 }
 
-.topics-btn{
-    border-radius: 5px;
+/* .topics-btn{ */
+    /* border-radius: 5px;
     margin: 10px;
     position: relative;
     overflow: hidden;
@@ -81,7 +91,7 @@ h2{
     background-color: #febf00;
     color: black;
     border: 1px solid #febf00;
-}
+} */
 
 /* .blackButton{
     background-color: black;
@@ -93,3 +103,6 @@ h2{
     color: black;
 } */
 
+#option1:after {
+    background: #000;
+}

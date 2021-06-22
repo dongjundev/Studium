@@ -3,7 +3,7 @@
 .description{
     max-width: 100%;
     text-align: center;
-    background-color: #fffaeb;
+    background-color: #fff;
 }
 
 .description .description-row-step{
@@ -29,8 +29,11 @@
 }
 
 .description-contents-all .description-contents-box .description-contents-wrap{
-    padding: 30px 20px;
-    margin: 30px 20px;
+    padding: 10px 30px;
+    margin: 10px 20px;
+}
+.description-contents-all .description-contents-box .description-contents-wrap > ul > li{
+    padding:5px;
 }
 
 #description-venueSearch{
@@ -52,7 +55,7 @@
     padding-bottom: 30px;
 }
 
-.description-Footer .description-Footer-box .save-btn{
+/* .description-Footer .description-Footer-box .save-btn{
     width: 150px;
     height: 50px;
     color: black;
@@ -70,7 +73,7 @@
     background-color: #febf00;
     border-radius: 50px;
     border: 1px solid #febf00;
-}
+} */
 
 .description-contents-wrap .description-subjectKinds{
     list-style: none;
@@ -81,7 +84,7 @@
 
 .description-text-error{
     list-style: none;
-    text-align: left;
+    text-align: right;
 }
 
 .description-inputContainer #description-textarea{
@@ -92,6 +95,7 @@
     border: 3px solid red;
     box-sizing: border-box;
     color: black;
+    padding:20px;
 }
 
 .description-text-error{
@@ -107,5 +111,30 @@
 }
 
 
-
-
+.creat-button2 {
+    border: 1px solid rgba(0, 0, 0, 0.032);
+    margin-left: 20px;
+    margin-top: -20px;
+    width: 140px;
+    height: 45px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    /* border: none; */
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    }
+  
+  .creat-button2:hover {
+    background-color: #febf00;
+    box-shadow: 0px 15px 20px rgba(230, 184, 35, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }

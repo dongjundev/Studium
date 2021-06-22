@@ -54,8 +54,8 @@ import Swal from 'sweetalert2'
 
   opensweetalert(){
     Swal.fire({
-      title: 'Done!',
-      text: "스터디 생성 완료!",
+      title: '생성 완료',
+      text: "축하합니다! 스터디 생성이 완료되었습니다",
       type: 'success',
     })
   }
@@ -74,23 +74,23 @@ import Swal from 'sweetalert2'
     const {location, selectedTopics, studyName} = this.state;
     console.log(location, selectedTopics, studyName);
     return(
-      <div className='description'>
+      <div className='description creat-study'>
         <div className="description-row-step">
           <div classNam="description-stepbox">
               <p id="description-step">4/4단계</p>
           </div>
           <form className="description-contents-all">
             <div className="description-contents-box">
-              <h2>이제 그룹에 관한 설명을 작성해 주세요</h2>
+              <h2>&#127881;마지막으로 그룹에 관한 설명을 작성해 주세요&#127881;</h2>
               <div className="description-contents-sub">
                 <p id="description-subbox">설명글은 회원들에게 그룹을 홍보할 때 표시됩니다. <br />
                 변경사항이 있다면 나중에 언제든지 업데이트가 가능합니다.</p>
               </div>
               <div className="description-contents-wrap">
                 <ul className="description-subjectKinds">
-                    <li>1. 그룹의 목적은 무엇인가요?</li>
-                    <li>2. 어떠한 회원을 모집하나요?</li>
-                    <li>3. 이 그룹에선 어떠한 이벤트가 진행되나요?</li>
+                    <li>그룹의 목적은 무엇인가요?</li>
+                    <li>어떠한 회원을 모집하나요?</li>
+                    <li>이 그룹에선 어떠한 이벤트가 진행되나요?</li>
                 </ul>
               </div>
             </div>
@@ -98,7 +98,7 @@ import Swal from 'sweetalert2'
               <div className="description-inputContainer">
                 <form>
                     <textarea value={this.state.inputarea} id="description-textarea" minLength="50" name="inputarea" 
-                      onChange={this.handleChange} cols="70" rows="10" placeholder="최소 50자 이상 작성해 주세요.">
+                      onChange={this.handleChange} cols="70" rows="15" placeholder="최소 50자 이상 작성해 주세요." style={{resize: 'none'}} >
                     </textarea>
                 </form>
               </div>
@@ -111,7 +111,7 @@ import Swal from 'sweetalert2'
           <div className="description-Footer">
             <div className="description-Footer-box">
               <Link to="../">
-                <button className="save-btn" disabled={this.state.inputarea.length<50}  onClick={this.sendStudyData}>다음</button>
+                <button className="save-btn creat-button2" disabled={this.state.inputarea.length<50} onClick={this.sendStudyData}>생성</button>
                 {/* disabled={this.state.inputarea.length<50} */}
               </Link>
             </div>

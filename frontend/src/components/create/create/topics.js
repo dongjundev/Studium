@@ -25,9 +25,11 @@ class topics extends Component{
     let index
     
     if(e.target.checked){
+      alert(e.target.name+" 선택");
       options.push(+e.target.value)
     }
     else{
+      alert(e.target.name+" 선택 취소");
       index = options.indexOf(+e.target.value)
       options.splice(index, 1)
     }
@@ -41,9 +43,10 @@ class topics extends Component{
   render() {
     const {location} = this.state;
     console.log(location);
+
     return (
       
-      <div className='topics'>
+      <div className='topics creat-study'>
         <div className="topics-row-step">
           <div classNam="topics-stepbox">
             <p id="topics-step">2/4단계</p>
@@ -60,80 +63,79 @@ class topics extends Component{
               <ul className="topics-subjectKinds">
               <li>
                   <div className="input-group" >
-                    <input name="option1" type="checkbox" value={1} onChange={this.onChange.bind(this)}/>
-                    <label for="option1">외국어&nbsp;&nbsp;</label>
+                    <input style={{display:"none"}} id="option1" name="외국어" type="checkbox" value={1} onChange={this.onChange.bind(this)} />
+                    <label for="option1">&nbsp;&nbsp;#외국어&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
-                    <input name="option2" type="checkbox" value={2} onChange={this.onChange.bind(this)}/>
-                    <label for="option2">자격증&nbsp;&nbsp;</label>
+                    <input style={{display:"none"}} id="option2" name="자격증" type="checkbox" value={2} onChange={this.onChange.bind(this)}/>
+                    <label for="option2">&nbsp;&nbsp;#자격증&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
-                    <input name="option3" type="checkbox" value={3} onChange={this.onChange.bind(this)}/>
+                    <input id="option3" name="취업" type="checkbox" value={3} onChange={this.onChange.bind(this)}/>
                     <label for="option3">취업&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
-                    <input name="option4" type="checkbox" value={4} onChange={this.onChange.bind(this)}/>
+                    <input id="option4" name="기술" type="checkbox" value={4} onChange={this.onChange.bind(this)}/>
                     <label for="option4">기술&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
-                    <input name="option5" type="checkbox" value={5} onChange={this.onChange.bind(this)}/>
+                    <input id="option5" name="과학" type="checkbox" value={5} onChange={this.onChange.bind(this)}/>
                     <label for="option5">과학&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
-                    <input name="option5" type="checkbox" value={6} onChange={this.onChange.bind(this)}/>
-                    <label for="option5">경제&nbsp;&nbsp;</label>
+                    <input id="option6" name="경제" type="checkbox" value={6} onChange={this.onChange.bind(this)}/>
+                    <label for="option6">경제&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
-                    <input name="option5" type="checkbox" value={7} onChange={this.onChange.bind(this)}/>
-                    <label for="option5">독서&nbsp;&nbsp;</label>
+                    <input id="option7" name="독서" type="checkbox" value={7} onChange={this.onChange.bind(this)}/>
+                    <label for="option7">독서&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
-                    <input name="option5" type="checkbox" value={8} onChange={this.onChange.bind(this)}/>
-                    <label for="option5">미술&nbsp;&nbsp;</label>
+                    <input id="option8" name="option8" type="checkbox" value={8} onChange={this.onChange.bind(this)}/>
+                    <label for="option8">미술&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
-                    <input name="option5" type="checkbox" value={9} onChange={this.onChange.bind(this)}/>
-                    <label for="option5">음악&nbsp;&nbsp;</label>
+                    <input id="option9" name="음악" type="checkbox" value={9} onChange={this.onChange.bind(this)}/>
+                    <label for="option9">음악&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
-                    <input name="option6" type="checkbox" value={10} onChange={this.onChange.bind(this)}/>
-                    <label for="option6">기타&nbsp;&nbsp;</label>
+                    <input id="option10" name="기타" type="checkbox" value={10} onChange={this.onChange.bind(this)}/>
+                    <label for="option10">기타&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
-                    <input name="option7" type="checkbox" value={11} onChange={this.onChange.bind(this)}/>
-                    <label for="option7">취미&nbsp;&nbsp;</label>
+                    <input id="option11" name="취미" type="checkbox" value={11} onChange={this.onChange.bind(this)}/>
+                    <label for="option11">취미&nbsp;&nbsp;</label>
                   </div>
                 </li>
               </ul>
             </div>
           </div>
-          
         </form>
         
         <div className="topics-Footer">
           <div className="topics-Footer-box">
             <Link to="./start">
-              <button className="topics-btn">이전</button>
+              <button className="topics-btn creat-button">이전</button>
             </Link>
             <Link to={{
                 pathname: '/groupName',
@@ -141,7 +143,7 @@ class topics extends Component{
                     location: location,
                     selectedTopics : this.state.options
                 }
-              }}><button className="topics-btn">다음</button></Link>
+              }}><button className="topics-btn creat-button">다음</button></Link>
             
           </div>
         </div>
