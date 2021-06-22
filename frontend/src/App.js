@@ -15,6 +15,7 @@ import start from "./components/create/create/start";
 import description from "./components/create/create/description";
 import groupName from "./components/create/create/groupName";
 import topics from "./components/create/create/topics";
+import createEvent  from "./components/createEvent/createEvent";
 
 //npm install sweetalert2
 
@@ -37,6 +38,7 @@ function App(){
         <Route path="/description" component={description} />
         <Route path="/groupName" component={groupName} />
         <Route path="/topics" component={topics} />
+        <Route path="/createEvent" component={createEvent} />
       </Switch>
       <Footer />
     </BrowserRouter>

@@ -30,10 +30,8 @@ import { Link } from 'react-router-dom'
           </div>
           <form className="start-contents-all">
             <div className="start-contents-box">
-              <h2 className="start-title">먼저, 그룹의 지역을 설정해 주세요.</h2>
+              <h2 className="start-title">그룹의 지역을 설정해 주세요</h2>
               <div className="start-contents-sub">
-                <p id="start-subbox">Stadium groups meet locally, in person and online. 
-                  We'll connect you with people in your area, and more can join you online.</p>
               </div>
               <div className="start-contents-wrap">
                 <input type="serach" name="venue" id="start-venueSearch" placeholder="지역 입력" onChange={this.onChangeLocation.bind(this)}/>

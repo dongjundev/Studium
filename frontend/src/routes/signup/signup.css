@@ -1,7 +1,7 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap'); */
 
 .container input{
-  border: 2px solid #febf00;
+  border: 1px solid #febf00;
   border-radius: 10px;
 }
 
@@ -45,42 +45,31 @@
 .signup-form #signup-id-area{
   width: 50%;
   height: 50px;
+  padding: 10px;
 }
 
 .signup-form #signup-password-area{
   width: 50%;
   height: 50px;
+  padding: 10px;
 }
 .signup-form #signup-passwordCheck-area{
   width: 50%;
   height: 50px;
+  padding: 10px;
 }
 
 .signup-form #signup-name{
   width: 50%;
   height: 50px;
+  padding: 10px;
 }
 
 .signup-form #signup-address{
   width: 50%;
   height: 50px;
+  padding: 10px;
 }
-
-.signup-form #signup-birthday{
-  width: 50%;
-  height: 50px;
-}
-
-.signup-form #signup-email{
-  width: 50%;
-  height: 50px;
-}
-
-.signup-form #signup-account{
-  width: 50%;
-  height: 50px;
-}
-
 .signup-form #signup-checkGender{
   display: inline-block;
   overflow: hidden;
@@ -108,7 +97,7 @@
   left: 45px;
 }
 
-
+/* 
 .signup-form .btn-lg{
   position: relative;
   overflow: hidden;
@@ -130,13 +119,13 @@
   background-color: #febf00;
   border: 1px solid #febf00;
   border-radius: 50px;
-}
+} */
 
 .id-check{
   display: inline-block;
   padding: 10px;
 }
-.btn-id-check{
+/* .btn-id-check{
   color: black;
   background-color: #febf00;
   border: 1px solid #febf00;
@@ -150,5 +139,87 @@
   border: 1px solid #febf00;
   transition: 400ms;
   border-radius: 50px;
+} */
+
+/* 로그인 */
+.login-box{padding: 20px;}
+.login-box h1{text-align: center; margin-bottom: 15px;}	
+.login-box .login{max-width:1200px; margin:0 auto; border: 1px solid #e1e1e1; border-radius:25px; padding: 30px; background: #fff; box-shadow:0px 0px 11px 0px rgb(0 0 0 / 5%);}
+.login-box .login li{margin: 5px;}
+.login-box .login li input{width: 100%; height: 40px; padding: 5px; border: 1px solid #ccc; border-radius:25px;}
+.login-box .login li button{width: 100%; height: 40px; background: #26649e; color: #fff; border: 0; border-radius:25px; transition:all 0.3s;}
+.login-box .login li button:hover{background: #000; border-radius:0;}
+.login-box .login-btn{text-align: center; margin-top:20px; margin-bottom:15px;}
+
+.signup-button {
+  border: 1px solid rgba(0, 0, 0, 0.032);
+  margin-top: 40px;
+  margin-bottom:30px;
+  width: 140px;
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  /* border: none; */
+  border-radius: 15px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+.signup-button:hover {
+  background-color: #febf00;
+  box-shadow: 0px 15px 20px rgba(230, 184, 35, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
 }
 
+.switch-field {
+	display: flex;
+	margin-bottom: 36px;
+	overflow: hidden;
+}
+
+.switch-field input {
+	position: absolute !important;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	border: 0;
+	overflow: hidden;
+}
+
+.switch-field label {
+	background-color: #e4e4e4;
+	color: rgba(0, 0, 0, 0.6);
+	font-size: 14px;
+	line-height: 1;
+	text-align: center;
+	padding: 8px 16px;
+	margin-right: -1px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+	transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+	cursor: pointer;
+}
+
+.switch-field input:checked + label {
+	background-color: #febe00af;
+	box-shadow: none;
+}
+
+.switch-field label:first-of-type {
+	border-radius: 4px 0 0 4px;
+}
+
+.switch-field label:last-of-type {
+	border-radius: 0 4px 4px 0;
+}

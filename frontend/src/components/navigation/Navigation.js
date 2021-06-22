@@ -25,7 +25,7 @@ function Navigation(){
     <div className="nav">
         <div className="nav-logo">
             <Link to="/">
-                <img src="/images/studium_logo.png"></img>
+                <span>Studium</span>
             </Link>
         </div>
         <div className="create-group">

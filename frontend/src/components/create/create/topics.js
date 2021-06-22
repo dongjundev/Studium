@@ -55,34 +55,58 @@ class topics extends Component{
             </div>
             <div className="topics-contents-wrap">
               <ul className="topics-subjectKinds">
-                <li>
+              <li>
                   <div className="input-group" >
                     <input name="option1" type="checkbox" value={1} onChange={this.onChange.bind(this)}/>
-                    <label for="option1">Option1&nbsp;&nbsp;</label>
+                    <label for="option1">외국어&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
                     <input name="option2" type="checkbox" value={2} onChange={this.onChange.bind(this)}/>
-                    <label for="option2">Option2&nbsp;&nbsp;</label>
+                    <label for="option2">운동&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
                     <input name="option3" type="checkbox" value={3} onChange={this.onChange.bind(this)}/>
-                    <label for="option3">Option3&nbsp;&nbsp;</label>
+                    <label for="option3">경제&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
                     <input name="option4" type="checkbox" value={4} onChange={this.onChange.bind(this)}/>
-                    <label for="option4">Option4&nbsp;&nbsp;</label>
+                    <label for="option4">학습&nbsp;&nbsp;</label>
                   </div>
                 </li>
                 <li>
                   <div className="input-group">
                     <input name="option5" type="checkbox" value={5} onChange={this.onChange.bind(this)}/>
-                    <label for="option5">Option5&nbsp;&nbsp;</label>
+                    <label for="option5">취미&nbsp;&nbsp;</label>
+                  </div>
+                </li>
+                <li>
+                  <div className="input-group">
+                    <input name="option5" type="checkbox" value={6} onChange={this.onChange.bind(this)}/>
+                    <label for="option5">자격증&nbsp;&nbsp;</label>
+                  </div>
+                </li>
+                <li>
+                  <div className="input-group">
+                    <input name="option5" type="checkbox" value={7} onChange={this.onChange.bind(this)}/>
+                    <label for="option5">취업&nbsp;&nbsp;</label>
+                  </div>
+                </li>
+                <li>
+                  <div className="input-group">
+                    <input name="option5" type="checkbox" value={8} onChange={this.onChange.bind(this)}/>
+                    <label for="option5">기술&nbsp;&nbsp;</label>
+                  </div>
+                </li>
+                <li>
+                  <div className="input-group">
+                    <input name="option5" type="checkbox" value={9} onChange={this.onChange.bind(this)}/>
+                    <label for="option5">기타&nbsp;&nbsp;</label>
                   </div>
                 </li>
               </ul>

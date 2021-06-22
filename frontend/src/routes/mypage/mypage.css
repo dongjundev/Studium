@@ -6,7 +6,9 @@
     display: inline-block;
     padding: 10px;
     margin: 0 25px;
-    background-color: #fde9ac;
+    background-color: #fff;
+    border: 1px solid rgba(167, 167, 167, 0.363);
+    border-radius: 5px;
     box-shadow: 5px 5px 5px #e1e1e1;
     font-weight: 600;
     transition: all, 0.3s;
@@ -16,7 +18,7 @@
 }
 .mypage-study a{
     text-decoration: none;
-    color: #000;
+    color: #505050;
 }
 .mypage-events{
     max-width: 1000px;
@@ -24,12 +26,13 @@
 }
 .mypage-event{
     /* border: 1px solid red; */
-    background-color: #fde9ac;
+    background-color: #fff;
     box-shadow: 5px 5px 5px #e1e1e1;
+    border: 1px solid rgba(167, 167, 167, 0.363);
     padding: 10px;
     overflow: hidden;
     margin: 20px 0;
-    border-radius: 3px;
+    border-radius: 10px;
     transition: all, 0.3s;
 }
 .mypage-event:hover{
@@ -41,6 +44,7 @@
 }
 .mypage-event a p{
     margin: 0;
+    color: #000;
 }
 .myevent-date{
     color: #525252;

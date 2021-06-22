@@ -165,7 +165,7 @@
 	
 	<insert id="insertEvent" parameterType="board.dto.StudyDto">
 		<![CDATA[
-			INSERT INTO t_study(study_id, event_name,event_description, event_date, event_location,event_host_id,event_attandent_id)
+			INSERT INTO t_event(study_id, event_name,event_description, event_date, event_location,event_host_id,event_attandent_id)
 			VALUES(#{studyId}, #{eventName}, #{eventDescription}, #{eventDate}, #{eventLocation}, #{eventHostId},#{eventAttandentId})
 		]]>
 	</insert>

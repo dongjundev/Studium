@@ -136,7 +136,7 @@ input:-webkit-autofill,
   transform: translateY(-7px);
 }
 
-a { text-decoration:none;} 
-a:visited { text-decoration:none; color:rgb(87, 87, 87);}
-a:active {text-decoration:none; color:rgb(87, 87, 87); }
-a:hover { text-decoration:none; color:#EDA900;}
+.h { text-decoration:none;} 
+.h:visited { text-decoration:none; color:rgb(87, 87, 87);}
+.h:active {text-decoration:none; color:rgb(87, 87, 87); }
+.h:hover { text-decoration:none; color:#EDA900;}

@@ -34,15 +34,21 @@ class signup extends Component {
       data: {
         memberId : this.state.memberId,
         memberPassword : this.state.memberPassword,
-        memberBirth : this.state.memberBirth,
         memberName : this.state.memberName,
         memberAddress : this.state.memberAddress,
-        memberBirth : this.state.memberBirth,
-        memberGender : this.state.memberGender,
-        memberAccount : this.state.memberAccount
+        memberGender : this.state.memberGender
       }
     });
     console.log(response);
+    console.log(response.data);
+
+    if (response.data=="no-id"){
+      alert("중복된 아이디입니다!");
+    }else{
+      alert("회원가입 완료!");
+
+      document.location.href = "http://localhost:3000/login";
+    }
   }
 
   inputId = (e) => {
@@ -158,24 +164,17 @@ class signup extends Component {
       <div className="container">
         <div className="signup-form">
           <div id="signup-header">
-            <h1><span className="signup-title">Stadium</span></h1>
-            <h3 className="text-center">Signup</h3>
+            <h1 className="text-center">회원가입</h1>
           </div>
         <div className="signup-container">
           <div>
-            <div className="signup-inputarea-id">
-              <input id="signup-id-area" type="ID" placeholder="Enter your Id"  name={'memberId'}
+            <div className="signup-inputarea">
+              <input id="signup-id-area" type="ID" placeholder="아이디"  name={'memberId'}
                   value={this.state.memberId} 
                   onChange={(e) => this.setState({memberId : e.target.value})}></input>
-              {/* <input id="signup-id-area" type="ID" placeholder="Enter your Id" onChange={this.inputId} name="memberId"></input> */}
-                <div className="id-check">
-                  <button className="btn-id-check">중복체크</button>
-                </div>
-              <div>
-            </div>
           </div>
             <div className="signup-inputarea">
-              <input id="signup-password-area" type="Password" placeholder="Enter your Password" name={'memberPassword'} 
+              <input id="signup-password-area" type="Password" placeholder="비밀번호" name={'memberPassword'} 
                   value={this.state.memberPassword}
 				          onChange={this.handleConfirmPassword} onChange={(e) => this.setState({memberPassword : e.target.value})}></input>
                   {/* onChange={this.handleConfirmPassword} onChange={(e) => this.setState({memberPassword : e.target.value}) */}
@@ -183,7 +182,7 @@ class signup extends Component {
           </div>
           <div>
             <div className="signup-inputarea">
-              <input id="signup-passwordCheck-area" type="Password" placeholder="Enter your Password one more" name={'memberRepassWord'} 
+              <input id="signup-passwordCheck-area" type="Password" placeholder="비밀번호 확인" name={'memberRepassWord'} 
                   value={this.state.memberRepassWord}
 				          onChange={this.handleConfirmrePassword}></input>
                   <p className="checktext">{this.state.pMessage}</p>
@@ -191,14 +190,14 @@ class signup extends Component {
           </div>
           <div>
             <div className="signup-inputarea">
-              <input id="signup-name" type="text" placeholder="Enter your Name" name={'memberName'}
+              <input id="signup-name" type="text" placeholder="이름" name={'memberName'}
                       value ={this.state.memberName}
                       onChange={(e) => this.setState({memberName : e.target.value})}></input>
             </div>
           </div>
           <div>
             <div className="signup-inputarea">
-              <input id="signup-address" type="text" placeholder="Enter your Address" name={'memberAddress'}
+              <input id="signup-address" type="text" placeholder="지역" name={'memberAddress'}
                       value ={this.state.memberAddress}
                       onChange={(e) => this.setState({memberAddress : e.target.value})}
               ></input>
@@ -206,43 +205,17 @@ class signup extends Component {
           </div>
           <div>
             <div className="signup-inputarea">
-              <input id="signup-birthday" type="text" placeholder="Enter your birthday" name={'memberBirth'}
-                      value ={this.state.memberBirth}
-                      onChange={(e) => this.setState({memberBirth : e.target.value})}
-              ></input>
-            </div>
-          </div>
-          <div>
-            <div className="signup-inputarea">
-              <label id="signup-checkGender">
-                <input  type="radio" value="M" name={'memberGender'} onChange={(e) => this.setState({memberGender : e.target.value})}></input>
-                   Man
-              </label>
-              <label id="signup-checkGender">
-                <input  type="radio" value="F" name={'memberGender'} onChange={(e) => this.setState({memberGender : e.target.value})}></input>
-                   Woman
-              </label>
-            </div>
-          </div>
-          <div>
-            <div className="signup-inputarea">
-              <input id="signup-email" type="text" placeholder="Enter your email" name={'memberEmail'}
-                      value ={this.state.memberEmail}
-                      onChange={(e) => this.setState({memberEmail : e.target.value})}
-              ></input>
-            </div>
-          </div>
-          <div>
-            <div className="signup-inputarea">
-              <input id="signup-account" type="text" placeholder="Enter your account" name={'memberAccount'}
-                      value ={this.state.memberAccount}
-                      onChange={(e) => this.setState({memberAccount : e.target.value})}
-              ></input>
+              <div className="switch-field">
+                <input type="radio" value="M" name={'memberGender'} id="radio-one" name="switch-one" onChange={(e) => this.setState({memberGender : e.target.value})} checked></input>
+                <label id="signup-checkGender" for="radio-one">남성</label>
+                <input type="radio" value="F" name={'memberGender'} id="radio-two" name="switch-one" onChange={(e) => this.setState({memberGender : e.target.value})}></input>
+                <label id="signup-checkGender" for="radio-two">여성</label>
+              </div>
             </div>
           </div>
           <div>
             <div className="signup-btn-login-area">
-              <button className="btn-lg" onClick={this.handleRequest}>Sign up</button>
+              <button className="btn-lg signup-button" onClick={this.handleRequest}>가입</button>
             </div>
           </div>
             {/* <div className="text-center"> 

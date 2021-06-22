@@ -4,6 +4,10 @@ import './Member.css'
 
 
 function Member( {image, name, city, gender, display} ){
+    let memberGender = "";
+    if(gender !== undefined) {
+        {gender === "F" ? memberGender="여성" : memberGender="남성"}
+    }
     if(display === "thum-event"){
         return (
             <div>
@@ -36,7 +40,7 @@ function Member( {image, name, city, gender, display} ){
                 </div>
                 <div className="detail-inGroup-info">
                     <span>이름 : {name}</span>
-                    <span>성별 : {gender}</span>
+                    <span>성별 : {memberGender}</span>
                     <span>지역 : {city}</span>
                 </div>
             </div>
@@ -51,7 +55,7 @@ function Member( {image, name, city, gender, display} ){
                     </div>
                     <div className="detail-inGroup-info">
                         <span>이름 : {name}</span>
-                        <span>성별 : {gender}</span>
+                        <span>성별 : {memberGender}</span>
                         <span>지역 : {city}</span>
                     </div>
                 </div>

@@ -1,0 +1,134 @@
+.createEvent{
+    max-width: 100%;
+    text-align: center;
+    background-color: #fffaeb;
+}
+
+.createEvent .createEvent-row-step{
+    display: block;
+    padding:15px 10px;
+    position: relative;
+    min-width: auto;
+    margin: 0 auto;
+    width: 680px;
+}
+
+#createEvent-step{
+    display: inline-block;
+    overflow: hidden;
+    color: black;
+    margin: 30px;
+}
+
+.createEvent-line{
+    margin: 10px;
+    padding : 10px;
+}
+
+#creatEvent-subtitle{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#createEvent-event_name{
+    width: 400px;
+    height: 2.5rem;
+    border: 3px solid #febf00;
+    border-radius: 15px;
+}
+
+#createEvent-location{
+    width: 400px;
+    height: 2.5rem;
+    border: 3px solid #febf00;
+    border-radius: 15px;
+}
+
+.createEvent-contents-all{
+    display: block;
+    overflow: hidden;
+    padding: 30px;
+}
+
+.createEvent-contents-all .createEvent-contents-box .createEvent-contents-wrap{
+    padding: 0px 20px;
+    margin: 30px 20px;
+}
+
+#createEvent-venueSearch{
+    width: 50%;
+    height: 3.5rem;
+    border-radius: 15px;
+}
+
+.createEvent-text-error{
+    margin: 0;
+    padding: 0;
+}
+
+#createEvent-subbox{
+    padding: 20px;
+}
+
+.createEvent-Footer .createEvent-Footer-box{
+    padding-bottom: 30px;
+}
+
+.createEvent-Footer .createEvent-Footer-box .save-btn{
+    width: 150px;
+    height: 50px;
+    color: black;
+    transition: 400ms;
+    background-color: #febf00;
+    border-radius: 5px;
+    border: 1px solid #febf00;
+}
+
+.createEvent-Footer .createEvent-Footer-box .save-btn:hover{
+    width: 150px;
+    height: 50px;
+    color: black;
+    transition: 400ms;
+    background-color: #febf00;
+    border-radius: 50px;
+    border: 1px solid #febf00;
+}
+
+.createEvent-contents-wrap .createEvent-subjectKinds{
+    list-style: none;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.createEvent-text-error{
+    list-style: none;
+    text-align: left;
+}
+
+.createEvent-inputContainer #createEvent-event_description{
+    resize: auto;
+    margin: 0;
+    width: 100%;
+    border-radius: 4px;
+    border: 3px solid #febf00;
+    box-sizing: border-box;
+    color: black;
+}
+
+.createEvent-text-error{
+    color: black;
+    font-weight: bold;
+}
+
+.onColor {
+    background-color: #febf00;
+}
+
+.offColor {
+    background-color: #ffefb8;
+}
+
+
+
+

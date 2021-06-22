@@ -85,10 +85,10 @@ class Main extends React.Component{
                         <strong>Your browser does not support the video tag.</strong>
                     </video>
                     <div className="main-letter">
-                        <h3>저희가 도와드릴게요.</h3>
+                        <p>결승선까지 함께 할 당신의 러닝메이트</p>
                         <p>원하는 스터디 그룹을 찾아 함께 공부하는 경험을 즐겨보세요.</p>
                         {/* <Link to="/register"> */}
-                            <button onClick={this.doAction}>STUDIUM 가입하기</button>
+                            {/* <button onClick={this.doAction}>STUDIUM 가입하기</button> */}
                         {/* </Link> */}
                     </div>
                 </div>

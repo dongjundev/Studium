@@ -27,7 +27,7 @@ function Event( {image, title, description, date, location, attendants, study, d
                 window.location.replace(window.location.pathname);
             }
         } else {
-            if(window.confirm("참석전 스터디 가입이 필요합니다")){
+            if(window.confirm("참석전 스터디 가입이 필요합니다")){
                 console.log("가입할래요");
             } else{
                 console.log("싫어요");
@@ -42,7 +42,7 @@ function Event( {image, title, description, date, location, attendants, study, d
                     <p className="event-title">{title}</p>
                     <p className="event-description">{description}</p>
                     <p className="event-location">
-                        <FontAwesomeIcon icon={faThumbtack} /> {location}
+                        <FontAwesomeIcon className="location-icon" icon={faThumbtack} /> {location}
                     </p>
                 </div>
             </div>
@@ -134,19 +134,27 @@ function Event( {image, title, description, date, location, attendants, study, d
                                 <h3>{title}</h3>
                             </div>
                             <div className="main-join-right">
-                                {isMemberInEvent ? "" : <button onClick={joinEvent}>참석하기</button>}
+                                {isMemberInEvent ? "" : <button onClick={joinEvent} className="event-button">참석하기</button>}
                             </div>
                         </div>
                     </div>
                     <div className="content-bd-side">
                         <div className="side-group">
-                            <Group
-                                image = {study.studyImage}
-                                name = {study.studyName}
-                                memberCnt = {study.memberCnt}
-                                tags = {study.studyTag}
-                                display = {"thum-event"}
-                            />
+                            <Link to={{
+                                    pathname: '/study/'+ (study.studyId),
+                                     
+                                    state: {
+                                        display : "group-detail"
+                                    }
+                            }}>
+                                <Group
+                                    image = {study.studyImage}
+                                    name = {study.studyName}
+                                    memberCnt = {study.memberCnt}
+                                    tags = {study.studyTag}
+                                    display = {"thum-event"}
+                                />
+                            </Link>
                         </div>
                         <div className="side-summary">
                             <div className="summary-date">

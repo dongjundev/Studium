@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import axios from "axios";
 import Member from '../../components/member/Member'
 import Calendar from '../../components/calendar/Calendar'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbtack } from "@fortawesome/free-solid-svg-icons";
 import './mypage.css'
 
 class Mypage extends React.Component{
@@ -79,7 +81,7 @@ class Mypage extends React.Component{
                                         <p className="myevent-description">{(event.eventDescription).substring(0,30)}...</p> :
                                         <p className="myevent-description">{(event.eventDescription)}</p>
                                     }
-                                    <p className="myevent-location">{event.eventLocation}</p>
+                                    <p className="myevent-location"><FontAwesomeIcon className="location-icon" icon={faThumbtack} /> {event.eventLocation}</p>
                                     <p className="myevent-count">
                                         {(event.eventAttandentId.split(",")).length}명 참석 예정
                                     </p>

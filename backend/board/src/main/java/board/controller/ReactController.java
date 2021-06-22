@@ -642,15 +642,16 @@ public class ReactController {
   	@ResponseBody
  	@PostMapping(value="/create-event.do")
  	public String MakeEvent(@RequestBody StudyDto studyDto,HttpSession session) throws Exception{
-  		
+  		System.out.println("요청 들어옴");
 //  		StudyDto studyDto=null;
 //  		studyDto = new StudyDto();
 //  		LoginDto mem=(LoginDto) session.getAttribute("loginUser");
 //  		System.out.println("멤버 정보 "+mem);
-  		
+  		System.out.println("들어온 이름"+studyDto.getEventName());
   		try {
   			//String memberId=mem.getMemberId();
   			String memberId=glo_memberId;
+  			System.out.println("로그인 정보"+memberId);
   			studyDto.setEventHostId(memberId);
   			studyDto.setEventAttandentId(memberId);
   		}catch(Exception e){
