@@ -367,21 +367,13 @@ public class ReactController {
 	
 	// 이벤트 참석 EventJoin------------------------------
     @RequestMapping("/event/{eventId}/join.do")
-    public String EventJoin(@PathVariable(name = "eventId") int eventId,HttpSession session) throws Exception{   
+    public String EventJoin(@PathVariable(name = "eventId") int eventId,HttpSession session) throws Exception{	
    
-    	if (glo_memberId==null) {
-    		System.out.println("로그인 해주세요.");
-    		return "404";
-    	} 
-    	else {
-    		String memberId=glo_memberId;
-    	      
-    	    studyService.eventJoin(eventId,memberId);
-    	    return "ok";
-    	}
+		String memberId=glo_memberId;
+		
+		studyService.eventJoin(eventId,memberId);
+		return "ok";
     }
-    
-	
     
     // 멤버 상세 MemberDetail----------------------------
  	@GetMapping("/member")
@@ -494,7 +486,9 @@ public class ReactController {
  		
  		if (searchCondition.equals("study")) {
  			for (int i=0; i<searchList.size(); i++) {
- 	 			searchList.get(i).setMemberCnt(searchList.get(i).getMemberId().length());
+ 				String[] arr=searchList.get(i).getMemberId().split(",");
+ 				//System.out.println("인원수"+arr.length);
+ 	 			searchList.get(i).setMemberCnt(arr.length);
  	 		}
  		}
 		
@@ -643,5 +637,87 @@ public class ReactController {
      	
      	return myPage;
      }
+    
+ // 이벤트 생성 만들기 -----------------------------------------------------------------------
+  	@ResponseBody
+ 	@PostMapping(value="/create-event.do")
+ 	public String MakeEvent(@RequestBody StudyDto studyDto,HttpSession session) throws Exception{
+  		
+//  		StudyDto studyDto=null;
+//  		studyDto = new StudyDto();
+//  		LoginDto mem=(LoginDto) session.getAttribute("loginUser");
+//  		System.out.println("멤버 정보 "+mem);
+  		
+  		try {
+  			//String memberId=mem.getMemberId();
+  			String memberId=glo_memberId;
+  			studyDto.setEventHostId(memberId);
+  			studyDto.setEventAttandentId(memberId);
+  		}catch(Exception e){
+  			String memberId="cho";
+  			studyDto.setEventHostId(memberId);
+  			studyDto.setEventAttandentId(memberId);
+  		}
+     	
+  		//System.out.println("멤버 세션 "+mem.getMemberId());
+  		System.out.println("받은 이벤트 내용들 "+studyDto);
+     	studyService.insertEvent(studyDto);
+     	studyDto = null;
+     	
+     	return "ok";
+     }
 
+  	
+  	
+  	
+//  	@RequestMapping("/event/{eventId}/join.do")
+//    public String EventJoin(@PathVariable(name = "eventId") int eventId,HttpSession session) throws Exception{	
+//    	
+//    	//MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+//    	//System.out.println("member확인:: "+mem);
+//    	
+//    	if (glo_memberId==null) {
+//    		System.out.println("로그인 해주세요.");
+//    		return "404";
+//    	}
+//    	else {
+//        	//String memberId=mem.getMemberId();
+//    		String memberId=glo_memberId;
+//    		
+//        	//이벤트 정보
+//    		StudyDto event = studyService.selectEventDetail(eventId);
+//
+//    		//이벤트가 속한 스터디 정보
+//    		StudyDto study=studyService.selectStudyDetail(event.getStudyId());
+//    		String[] study_member_list=study.getMemberId().split(",");
+//    		System.out.println("study_member_list :: "+Arrays.toString(study_member_list));
+//    		
+//    		//이벤트 참석자 리스트
+//        	String[] event_attendent_list=studyService.eventJoinChk(eventId).split(",");
+//        	System.out.println("event_attendent_list :: "+Arrays.toString(event_attendent_list));
+//        	
+//        	//1.이벤트가 속한 스터디의 참여자인지 확인
+//        	//1-1.만약 참여자라면, 이 이벤트에 참여해있는지 확인
+//        	//2.이벤트에 참여되어있는지 확인
+//        	//2-1.이벤트에 참여되어있지 않다면 event_attendant_id에 memberId 추가
+//        	
+//	    	for (int i=0; i<study_member_list.length; i++) {
+//	    		System.out.println("for문 :: "+i);
+//	    		if (study_member_list[i].equals(memberId)) {
+//	    			System.out.println("스터디에 속해 있습니다.");
+//	    			
+//	    			for (int j=0; j<event_attendent_list.length; j++) {
+//	    				if (event_attendent_list[j].equals(memberId)) {
+//	    					System.out.println("이미 이벤트에 참여중입니다.");
+//	    					return "404";
+//	    				}
+//	    			}
+//	    			studyService.eventJoin(eventId,memberId);
+//	        		return "ok";
+//	    		}
+//	    	}
+//	    	System.out.println("스터디에 가입해주세요!");
+//	    	return "studyJoin";
+//    	}
+//    }
 }

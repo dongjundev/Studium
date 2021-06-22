@@ -11,6 +11,12 @@ import Mypage from './routes/mypage/mypage'
 import GroupMemberDetail from "./routes/group-member-detail/group-member-detail";
 import Login from "./routes/login/login";
 import signup from "./routes/signup/signup";
+import start from "./components/create/create/start";
+import description from "./components/create/create/description";
+import groupName from "./components/create/create/groupName";
+import topics from "./components/create/create/topics";
+
+//npm install sweetalert2
 
 function App(){
   return (
@@ -26,7 +32,11 @@ function App(){
         <Route path="/search" component={Search} />
         <Route path="/mypage" component={Mypage} />
         <Route path="/login" component={Login} />
-        <Route paht="/signup" component={signup} />
+        <Route path="/signup" component={signup} />
+        <Route path="/start" component={start} />
+        <Route path="/description" component={description} />
+        <Route path="/groupName" component={groupName} />
+        <Route path="/topics" component={topics} />
       </Switch>
       <Footer />
     </BrowserRouter>

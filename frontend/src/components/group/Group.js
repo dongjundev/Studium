@@ -1,37 +1,13 @@
 import React from "react"
 import PropTypes from "prop-types"
-import axios from "axios"
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faAlignCenter, faTags, faUsers } from "@fortawesome/free-solid-svg-icons";
+import {faTags, faUsers } from "@fortawesome/free-solid-svg-icons";
 import Member from '../member/Member'
 import Event from '../event/Event'
 import './Group.css'
 
 function Group ( {image, name, description, memberCnt, tag, display, members, events} ) {
-
-    let isMemberInStudy = false;
-    if(members !== undefined) {
-        members.some(member => (member.memberId === sessionStorage.getItem('memberId'))) ?
-        isMemberInStudy = true :
-        isMemberInStudy = false;
-    }
-
-    async function doAction(){
-        if(isMemberInStudy){
-            console.log("이벤트만들기 호출");
-        } else{
-            const url = "http://localhost:8080" + window.location.pathname + "/join.do";
-            console.log(url);
-            if(window.confirm("가입하시겠습니까?")){
-                const data = await axios.get(url);
-                data.data === "ok" ? alert("가입이 완료되었습니다.") : alert("로그인이 필요합니다.") ;
-                data.data === "ok" ? isMemberInStudy = true : isMemberInStudy = false ;
-                window.location.replace(window.location.pathname);
-            }
-        }
-    }
-
     if(display === "thum-main") {
         return (
             <div>
@@ -69,11 +45,16 @@ function Group ( {image, name, description, memberCnt, tag, display, members, ev
                         <h1>{name}</h1>
                         <p><FontAwesomeIcon icon={faTags} /> {tag}</p>
                         <p><FontAwesomeIcon icon={faUsers} /> 회원 {memberCnt}명</p>
-                        {isMemberInStudy ? 
-                            <button id="create-event" onClick={doAction}>이벤트 만들기</button> :
-                             <button id="join" onClick={doAction}>스터디 가입하기</button>}
+                        {members.some(member => (
+                            member.memberId === "test"
+                        )) ? <button id="create-event">이벤트 만들기</button> :  
+                        <button id="join" class="button">스터디 가입</button>}
                     </div>
                 </div>
+                <div id="join" class="btn">
+                        <span>스터디 가입 &#x261D;</span>
+                        <div class="dot"></div>
+                    </div>
                 {/* <div className="group-detail-tabs">
                     <ul>
                         <li id="inof" className="on" onClick={this.showInfo}><a href="#">정보</a></li>

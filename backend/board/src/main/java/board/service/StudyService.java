@@ -27,4 +27,6 @@ public interface StudyService {
 	void eventJoin(int eventId,String memberId) throws Exception; //이벤트 참석
 	
 	List<StudyDto> selectEventList() throws Exception; //이벤트 리스트
+	
+	void insertEvent(StudyDto studyDto) throws Exception; 
 }
