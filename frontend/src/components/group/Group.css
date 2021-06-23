@@ -45,6 +45,7 @@
     font-size: 25px;
     font-weight: 600;
     margin: 10px 0;
+    font-family: 'NEXON Lv2 Gothic';
 }
 .group-numbers{
     color: #000;
@@ -105,6 +106,7 @@
 }
 .content-head-summary > h1{
     margin: 10px 0 0 30px;
+    font-family: 'NEXON Lv2 Gothic';
 }
 .study-button{
     position: absolute;

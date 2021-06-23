@@ -82,8 +82,8 @@
 	
 	<insert id="insertStudy" parameterType="board.dto.StudyDto">
 		<![CDATA[
-			INSERT INTO t_study(study_name, study_description, study_tag, member_id,study_location)
-			VALUES(#{studyName}, #{studyDescription}, #{studyTag}, #{memberId}, #{studyLocation})
+			INSERT INTO t_study(study_name, study_description, study_tag, member_id,study_location,study_image)
+			VALUES(#{studyName}, #{studyDescription}, #{studyTag}, #{memberId}, #{studyLocation},#{studyImage})
 		]]>
 	</insert>
 	

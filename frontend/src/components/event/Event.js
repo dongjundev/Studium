@@ -78,7 +78,7 @@ function Event( {image, title, description, date, location, attendants, study, d
                 <div className="content-bd">
                     <div className="content-bd-main">
                         <div className="main-image">
-                            <img src="https://kung.kr/files/attach/images/3830964/814/596/007/bec42d29f1665ebc059ea81ada6b4611.jpg"></img>
+                            <img src={image}></img>
                         </div>
                         <div className="main-description">
                             <h3>세부사항</h3>

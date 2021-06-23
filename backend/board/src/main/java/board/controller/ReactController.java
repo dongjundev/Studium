@@ -400,7 +400,7 @@ public class ReactController {
  		
  		String result="";
  		System.out.println("들어온 리스트 :: "+Arrays.toString(list));
- 		glo_memberId="hong";
+// 		glo_memberId="cho";
  		for(int i=0;i<list.length; i++) {
  			System.out.println("잘린 값 :: "+list[i]);
  			if(Integer.parseInt(list[i])==1) {
@@ -441,6 +441,8 @@ public class ReactController {
  			studyDto.setMemberId(memberId);
  		}
     	studyDto.setStudyTag(result);
+    	studyDto.setStudyImage("https://cdn.pixabay.com/photo/2017/07/31/11/21/people-2557396_1280.jpg");
+    	System.out.println("studyDto :: "+studyDto);
  		//System.out.println("멤버 세션 "+mem.getMemberId());
  		System.out.println("받은 스터디 내용들 "+studyDto);
     	studyService.insertStudy(studyDto);

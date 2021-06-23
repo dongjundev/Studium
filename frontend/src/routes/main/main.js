@@ -80,13 +80,13 @@ class Main extends React.Component{
             <div className="container">
                 <div className="main-image">
                     <video autoPlay muted loop id="myVideo">
-                        <source src="/images/video.mp4" type="video/mp4" />
-                        <source src="/images/video.webm" type="video/webm" />
+                        <source src="/images/video1.mp4" type="video/mp4" />
+                        {/* <source src="/images/video.webm" type="video/webm" /> */}
                         <strong>Your browser does not support the video tag.</strong>
                     </video>
                     <div className="main-letter">
-                        <p>결승선까지 함께 할 당신의 러닝메이트</p>
-                        <p>원하는 스터디 그룹을 찾아 함께 공부하는 경험을 즐겨보세요.</p>
+                        <p className="main-letter-1">결승선까지 함께 할 당신의 러닝메이트 <span className="main-letter-2">Studium</span></p>
+                        <p className="main-letter-3">원하는 스터디 그룹을 찾아 함께 공부하는 경험을 즐겨보세요.</p>
                         {/* <Link to="/register"> */}
                             {/* <button onClick={this.doAction}>STUDIUM 가입하기</button> */}
                         {/* </Link> */}

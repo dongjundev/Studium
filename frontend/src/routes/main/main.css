@@ -17,6 +17,13 @@ font-family: 'Jeju Gothic', sans-serif;
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'MapoHongdaeFreedom';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoHongdaeFreedomA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .container{
     font-family: 'NEXON Lv2 Gothic';
 }
@@ -37,18 +44,33 @@ font-family: 'Jeju Gothic', sans-serif;
 .main-letter{
     position: absolute;
     text-align: center;
-    top: 45%;
+    top: 40%;
     right: 0;
     bottom: 0;
     left: 0;
     margin: auto;
     color: #000;
     font-weight: 600;
-    text-shadow: 2px 2px 5px #fff;
+    text-shadow: 4px 1px 20px #fff;
 }
 .main-letter p{
     font-size: 25px;
     font-weight: 600;
+    color:#000;
+}
+
+.main-letter .main-letter-1{
+    font-size: 20px;
+    font-weight: 600;
+}
+.main-letter .main-letter-2{
+    font-family: 'MapoHongdaeFreedom';
+    font-size: 36px;
+    font-weight: 600;
+    border-bottom: 3px solid #febe005e;
+    box-shadow:inset 0 -4px 0 #febe005e;
+    text-shadow: 4px 1px 20px rgba(255, 255, 255, 0.685);
+    color:#000;
 }
 .main-letter button{
     background-color: #febf00;
