@@ -20,6 +20,6 @@ public interface MemberService {
 	
 	MemberDto selectStudyMemberDetail(String memberId) throws Exception; //스터디 멤버 상세보기
 	
-	String loginName(String memberId) throws Exception;
+	String loginName(String memberId) throws Exception; //로그인 된 유저의 이름 가져오기
 
 }

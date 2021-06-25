@@ -39,23 +39,23 @@ public class StudyController {
 	
 	// ---------------------------------스터디 검색
 	
-    //스터디 검색 결과
-    @RequestMapping("/studySearchResult.do")		
-    public ModelAndView searchStudy(@RequestParam(defaultValue="searchCondition") String searchCondition,@RequestParam(defaultValue="searchKeyword") String searchKeyword) throws Exception{
-    	
-    	List<StudyDto> list = studyService.searchStudy(searchCondition,searchKeyword);
-    	ModelAndView mv  = new ModelAndView("studySearchResult");
-    	
-    	/*
-    	Map<String,Object> map = new HashMap<String,Object>();
-    	map.put("list", list);
-    	mv.addObject("map",map);
-		System.out.println(map);
-    	*/
-		mv.addObject("list", list);
-		
-		return mv;
-    }
+//    //스터디 검색 결과
+//    @RequestMapping("/studySearchResult.do")		
+//    public ModelAndView searchStudy(@RequestParam(defaultValue="searchCondition") String searchCondition,@RequestParam(defaultValue="searchKeyword") String searchKeyword) throws Exception{
+//    	
+//    	List<StudyDto> list = studyService.searchStudy(searchCondition,searchKeyword);
+//    	ModelAndView mv  = new ModelAndView("studySearchResult");
+//    	
+//    	/*
+//    	Map<String,Object> map = new HashMap<String,Object>();
+//    	map.put("list", list);
+//    	mv.addObject("map",map);
+//		System.out.println(map);
+//    	*/
+//		mv.addObject("list", list);
+//		
+//		return mv;
+//    }
     
     // 스터디 상세보기
 //    @RequestMapping("/studyDetail.do")
@@ -119,34 +119,34 @@ public class StudyController {
     
     //-----------------------------------
     // 스터디 장소 예약 화면
-    @RequestMapping("/studyLocation.do")		//kakao map api 출력
-    public ModelAndView testMap(@RequestParam(defaultValue="studyId")int studyId, HttpSession session) throws Exception{
-    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
-    	
-    	if (mem==null) {
-    		System.out.println("로그인 해주세요.");
-    		ModelAndView mv = new ModelAndView("login");
-    		return mv;
-    	}
-    	else {
-    		ModelAndView mv = new ModelAndView("studyLocation");		
-        	mv.addObject("studyId", studyId);
-        	System.out.println("확인:: "+mv);
-        	
-        	return mv;
-    	}
-    }
-    
-    // 장소 예약 
-    @RequestMapping("/insertLocation.do")		//지도에서 주소 값 반환
-    public String insertLocation(@ModelAttribute StudyDto study) throws Exception{
-    	System.out.println("insertLoaction StudyId 확인:: "+study.getStudyId());
-    	studyService.insertLocation(study);
-    	
-    	System.out.println("::장소 등록 완료::");
-    	return "redirect:/studyDetail.do?studyId="+study.getStudyId();
-    }
-    
+//    @RequestMapping("/studyLocation.do")		//kakao map api 출력
+//    public ModelAndView testMap(@RequestParam(defaultValue="studyId")int studyId, HttpSession session) throws Exception{
+//    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+//    	
+//    	if (mem==null) {
+//    		System.out.println("로그인 해주세요.");
+//    		ModelAndView mv = new ModelAndView("login");
+//    		return mv;
+//    	}
+//    	else {
+//    		ModelAndView mv = new ModelAndView("studyLocation");		
+//        	mv.addObject("studyId", studyId);
+//        	System.out.println("확인:: "+mv);
+//        	
+//        	return mv;
+//    	}
+//    }
+//    
+//    // 장소 예약 
+//    @RequestMapping("/insertLocation.do")		//지도에서 주소 값 반환
+//    public String insertLocation(@ModelAttribute StudyDto study) throws Exception{
+//    	System.out.println("insertLoaction StudyId 확인:: "+study.getStudyId());
+//    	studyService.insertLocation(study);
+//    	
+//    	System.out.println("::장소 등록 완료::");
+//    	return "redirect:/studyDetail.do?studyId="+study.getStudyId();
+//    }
+//    
     //-----------------------------------
     // 스터디 멤버 상세보기
 //    @RequestMapping("/studyMemberDetail.do")

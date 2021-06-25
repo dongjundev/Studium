@@ -28,5 +28,5 @@ public interface StudyService {
 	
 	List<StudyDto> selectEventList() throws Exception; //이벤트 리스트
 	
-	void insertEvent(StudyDto studyDto) throws Exception; 
+	void insertEvent(StudyDto studyDto) throws Exception; //이벤트 추가
 }

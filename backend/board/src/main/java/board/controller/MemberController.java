@@ -118,17 +118,17 @@ public class MemberController {
 //	}
 //	
 	// ---------------------------------로그아웃
-	@RequestMapping("/user/logout.do")
-	public String logout(MemberDto member,HttpServletRequest request) throws Exception {
-		//RequestAttributes requestAttribute = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-		//requestAttribute.setAttribute("loginUser", null, RequestAttributes.SCOPE_SESSION);
-		
-		HttpSession session = (HttpSession)request.getSession();
-		session.setAttribute("loginUser", null);
-		
-		System.out.println("로그아웃 성공");
-		
-		return "redirect:/home";
-	}
+//	@RequestMapping("/user/logout.do")
+//	public String logout(MemberDto member,HttpServletRequest request) throws Exception {
+//		//RequestAttributes requestAttribute = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+//		//requestAttribute.setAttribute("loginUser", null, RequestAttributes.SCOPE_SESSION);
+//		
+//		HttpSession session = (HttpSession)request.getSession();
+//		session.setAttribute("loginUser", null);
+//		
+//		System.out.println("로그아웃 성공");
+//		
+//		return "redirect:/home";
+//	}
 
 }

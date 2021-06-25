@@ -51,6 +51,8 @@ public class ReactController {
 	String glo_memberId;
 	int glo_studyId;
 	
+	//spring boot session 수정해야 함
+	
 	@Autowired
 	private BoardService boardService;
 	
@@ -586,42 +588,42 @@ public class ReactController {
     	}
     }
     
-    // 스터디 신고
-    @ResponseBody
-	@PostMapping(value="/report-study.do")
-	public String reportStudy(@RequestBody StudyDto studyDto,@RequestBody ReportDto reportDto,HttpServletRequest request,HttpSession session) throws Exception{	
-    	// 스터디 아이디, 신고자 신원, 신고 이유 
-    	System.out.println("들어옴 :: ");
-//    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
-//    	System.out.println("member확인:: "+mem);
-    	
-    	System.out.println("스터디 아이디 :: "+studyDto.getStudyId());
-    	//System.out.println("신고자 신원 :: "+mem.getMemberId());
-    	System.out.println("신고 이유 :: "+reportDto.getReportDescription());
-    	
-    	//reportService.reportStudy(studyDto.getStudyId(),mem.getMemberId(),reportDto.getReportDescription());
-    	reportService.reportStudy(studyDto.getStudyId(),glo_memberId,reportDto.getReportDescription());
-    	
-     	return "ok";
-     }
-    
-    // 멤버 신고
-    @ResponseBody
-	@PostMapping(value="/report-member.do")
-	public String reportMember(@RequestBody MemberDto memberDto,@RequestBody ReportDto reportDto,HttpServletRequest request,HttpSession session) throws Exception{	
-    	// 멤버 아이디, 신고자 신원, 신고 이유  
-//    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
-//    	System.out.println("member확인:: "+mem);
-    	
-    	System.out.println("멤버 아이디 :: "+memberDto.getMemberId());
-    	//System.out.println("신고자 신원 :: "+mem.getMemberId());
-    	System.out.println("신고 이유 :: "+reportDto.getReportDescription());
-    	
-    	//reportService.reportMember(memberDto.getMemberId(),mem.getMemberId(),reportDto.getReportDescription());
-    	reportService.reportMember(memberDto.getMemberId(),glo_memberId,reportDto.getReportDescription());
-     	
-    	return "ok";
-     }
+//    // 스터디 신고
+//    @ResponseBody
+//	@PostMapping(value="/report-study.do")
+//	public String reportStudy(@RequestBody StudyDto studyDto,@RequestBody ReportDto reportDto,HttpServletRequest request,HttpSession session) throws Exception{	
+//    	// 스터디 아이디, 신고자 신원, 신고 이유 
+//    	System.out.println("들어옴 :: ");
+////    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+////    	System.out.println("member확인:: "+mem);
+//    	
+//    	System.out.println("스터디 아이디 :: "+studyDto.getStudyId());
+//    	//System.out.println("신고자 신원 :: "+mem.getMemberId());
+//    	System.out.println("신고 이유 :: "+reportDto.getReportDescription());
+//    	
+//    	//reportService.reportStudy(studyDto.getStudyId(),mem.getMemberId(),reportDto.getReportDescription());
+//    	reportService.reportStudy(studyDto.getStudyId(),glo_memberId,reportDto.getReportDescription());
+//    	
+//     	return "ok";
+//     }
+//    
+//    // 멤버 신고
+//    @ResponseBody
+//	@PostMapping(value="/report-member.do")
+//	public String reportMember(@RequestBody MemberDto memberDto,@RequestBody ReportDto reportDto,HttpServletRequest request,HttpSession session) throws Exception{	
+//    	// 멤버 아이디, 신고자 신원, 신고 이유  
+////    	MemberDto mem=(MemberDto) session.getAttribute("loginUser");
+////    	System.out.println("member확인:: "+mem);
+//    	
+//    	System.out.println("멤버 아이디 :: "+memberDto.getMemberId());
+//    	//System.out.println("신고자 신원 :: "+mem.getMemberId());
+//    	System.out.println("신고 이유 :: "+reportDto.getReportDescription());
+//    	
+//    	//reportService.reportMember(memberDto.getMemberId(),mem.getMemberId(),reportDto.getReportDescription());
+//    	reportService.reportMember(memberDto.getMemberId(),glo_memberId,reportDto.getReportDescription());
+//     	
+//    	return "ok";
+//     }
     
     // 마이페이지 Mypage
     @GetMapping(value="/mypage")
