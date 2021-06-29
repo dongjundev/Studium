@@ -61,7 +61,7 @@ class topics extends Component{
               <ul className="topics-subjectKinds">
               <li>
                   <div className="input-group" >
-                    <input style={{display:"none"}} id="option1" name="외국어" type="checkbox" value={1} onChange={this.onChange.bind(this)} />
+                    <input id="option1" name="외국어" type="checkbox" value={1} onChange={this.onChange.bind(this)} />
                     <label for="option1">#외국어&nbsp;&nbsp;</label>
                   </div>
                 </li>

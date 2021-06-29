@@ -40,7 +40,7 @@ class groupName extends Component{
               </div>
               <div className="groupName-contents-wrap">
                 <input type="serach" name="venue" id="groupName-venueSearch" onChange={this.onChangeStudyName.bind(this)}
-                      placeholder="ex) 휴스타3기 자격증 취득반"/>
+                      placeholder="ex) 정보처리기사 스터디"/>
               </div>
             </div>
             
