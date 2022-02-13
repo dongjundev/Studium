@@ -10,5 +10,5 @@
 ![image](https://user-images.githubusercontent.com/60119368/153762161-ad09ef36-ea52-4a1e-8952-f97e387476da.png)
 
 ## 기술
-* Springboot, Java, React, MariaDB
+* Springboot, Java, React, MariaDB, Mybatis
 
